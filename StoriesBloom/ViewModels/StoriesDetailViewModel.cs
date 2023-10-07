@@ -4,5 +4,5 @@
 public partial class StoriesDetailViewModel : BaseViewModel
 {
 	[ObservableProperty]
-	SampleItem item;
+    StoryDetail item;
 }

@@ -2,15 +2,15 @@
 
 public partial class StoriesViewModel : BaseViewModel
 {
-	readonly SampleDataService dataService;
+	readonly StoryDataService dataService;
 
 	[ObservableProperty]
 	bool isRefreshing;
 
 	[ObservableProperty]
-	ObservableCollection<SampleItem> items;
+	ObservableCollection<StoryDetail> items;
 
-	public StoriesViewModel(SampleDataService service)
+	public StoriesViewModel(StoryDataService service)
 	{
 		dataService = service;
 	}
@@ -33,7 +33,7 @@ public partial class StoriesViewModel : BaseViewModel
 	[RelayCommand]
 	public async Task LoadMore()
 	{
-		var items = await dataService.GetItems();
+		var items = await dataService.GetStories();
 
 		foreach (var item in items)
 		{
@@ -43,11 +43,11 @@ public partial class StoriesViewModel : BaseViewModel
 
 	public async Task LoadDataAsync()
 	{
-		Items = new ObservableCollection<SampleItem>(await dataService.GetItems());
+		Items = new ObservableCollection<StoryDetail>(await dataService.GetStories());
 	}
 
 	[RelayCommand]
-	private async void GoToDetails(SampleItem item)
+	private async void GoToDetails(StoryDetail item)
 	{
 		await Shell.Current.GoToAsync(nameof(StoriesDetailPage), true, new Dictionary<string, object>
 		{

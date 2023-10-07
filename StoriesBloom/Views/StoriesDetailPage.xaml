@@ -18,7 +18,7 @@
                        VerticalOptions="Center"
                        TextColor="{StaticResource Gray400}"/>
             </StackLayout>
-            <Label Text="{Binding Item.Description}"
+            <Label Text="{Binding Item.Chapter1}"
                    Margin="20,0"
                    FontSize="16"/>
         </VerticalStackLayout>

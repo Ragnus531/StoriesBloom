@@ -8,36 +8,36 @@ namespace StoriesBloom.Services;
 
 public class SampleDataService
 {
-    public async Task<IEnumerable<SampleItem>> GetItems()
+    public async Task<IEnumerable<StoryDetail>> GetItems()
     {
         //await Task.Delay(1000); // Artifical delay to give the impression of work
 
-        var listToReturn = new List<SampleItem>();
+        var listToReturn = new List<StoryDetail>();
         var das = StoriesResources.Romance;
 
-        using (MemoryStream ms = new MemoryStream(das))
-        {
-            // Open the MemoryStream with a StreamReader.
-            using (StreamReader sr = new StreamReader(ms, Encoding.UTF8))
-            {
-                string line;
+        //using (MemoryStream ms = new MemoryStream(das))
+        //{
+        //    // Open the MemoryStream with a StreamReader.
+        //    using (StreamReader sr = new StreamReader(ms, Encoding.UTF8))
+        //    {
+        //        string line;
 
-                // Read the MemoryStream line by line.
-                while ((line = sr.ReadLine()) != null)
-                {
-                    var splittedText = line.Split('\t');
-                    if(splittedText.Count() > 1)
-                    {
-                        listToReturn.Add(new SampleItem()
-                        {
-                            Title = splittedText[0],Description = splittedText[1]
-                        });
-                    }
-                    // Add each line to the list.
-                    //lines.Add(line);
-                }
-            }
-        }
+        //        // Read the MemoryStream line by line.
+        //        while ((line = sr.ReadLine()) != null)
+        //        {
+        //            var splittedText = line.Split('\t');
+        //            if(splittedText.Count() > 1)
+        //            {
+        //                listToReturn.Add(new SampleItem()
+        //                {
+        //                    Title = splittedText[0],Description = splittedText[1]
+        //                });
+        //            }
+        //            // Add each line to the list.
+        //            //lines.Add(line);
+        //        }
+        //    }
+        //}
 
         Console.WriteLine("ygyugyug");
 
