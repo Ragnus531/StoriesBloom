@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesBloom", "StoriesBloom\StoriesBloom.csproj", "{74CD03FF-2C37-45E1-B861-82274061560B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoriesBloom.Tests", "StoriesBloom.Tests\StoriesBloom.Tests.csproj", "{5A73CC5A-7EE1-4AAD-A05D-3F45E004D914}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74CD03FF-2C37-45E1-B861-82274061560B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74CD03FF-2C37-45E1-B861-82274061560B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74CD03FF-2C37-45E1-B861-82274061560B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{74CD03FF-2C37-45E1-B861-82274061560B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74CD03FF-2C37-45E1-B861-82274061560B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74CD03FF-2C37-45E1-B861-82274061560B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5A73CC5A-7EE1-4AAD-A05D-3F45E004D914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A73CC5A-7EE1-4AAD-A05D-3F45E004D914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A73CC5A-7EE1-4AAD-A05D-3F45E004D914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A73CC5A-7EE1-4AAD-A05D-3F45E004D914}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92EC3797-4DD1-49E4-A249-C96DD42D0807}
+	EndGlobalSection
+EndGlobal
