@@ -4,6 +4,7 @@
 			 xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
 			 x:Class="StoriesBloom.Views.StoriesDetailPage"
 			 x:DataType="vm:StoriesDetailViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title=""
              >
 	<ScrollView>
@@ -13,14 +14,192 @@
                    FontFamily="NotoSerifBold"
                    FontSize="26"
                    Margin="20,10"/>
-            <StackLayout Orientation="Horizontal" Margin="20,0" Spacing="10">
-                <Label Text="20.10.2023 10:20"
-                       VerticalOptions="Center"
-                       TextColor="{StaticResource Gray400}"/>
-            </StackLayout>
-            <Label Text="{Binding Item.Chapter1}"
+
+
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label Text="Prologue"
+               FontAttributes="Bold"
+               FontSize="Medium"
+                           TextColor="#555"/>
+
+
+                        <Image Source="arrow_down" HeightRequest="25"  />
+
+                    </HorizontalStackLayout>
+                    
+                </toolkit:Expander.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Item.Prologue}"
                    Margin="20,0"
-                   FontSize="16"/>
+                   FontSize="16"
+                           TextColor="#666" 
+                           />
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label Text="Chapter 1"
+               FontAttributes="Bold"
+               FontSize="Medium"
+                           TextColor="#555"/>
+
+
+                        <Image Source="arrow_down" HeightRequest="25"  />
+
+                    </HorizontalStackLayout>
+
+                </toolkit:Expander.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Item.Chapter1}"
+                   Margin="20,0"
+                   FontSize="16"
+                           TextColor="#666" 
+                           />
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label Text="Chapter 2"
+               FontAttributes="Bold"
+               FontSize="Medium"
+                           TextColor="#555"/>
+
+
+                        <Image Source="arrow_down" HeightRequest="25"  />
+
+                    </HorizontalStackLayout>
+
+                </toolkit:Expander.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Item.Chapter2}"
+                   Margin="20,0"
+                   FontSize="16"
+                           TextColor="#666" 
+                           />
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label Text="Chapter 3"
+               FontAttributes="Bold"
+               FontSize="Medium"
+                           TextColor="#555"/>
+
+
+                        <Image Source="arrow_down" HeightRequest="25"  />
+
+                    </HorizontalStackLayout>
+
+                </toolkit:Expander.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Item.Chapter3}"
+                   Margin="20,0"
+                   FontSize="16"
+                           TextColor="#666" 
+                           />
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label Text="Chapter 4"
+               FontAttributes="Bold"
+               FontSize="Medium"
+                           TextColor="#555"/>
+
+
+                        <Image Source="arrow_down" HeightRequest="25"  />
+
+                    </HorizontalStackLayout>
+
+                </toolkit:Expander.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Item.Chapter4}"
+                   Margin="20,0"
+                   FontSize="16"
+                           TextColor="#666" 
+                           />
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label Text="Chapter 5"
+               FontAttributes="Bold"
+               FontSize="Medium"
+                           TextColor="#555"/>
+
+
+                        <Image Source="arrow_down" HeightRequest="25"  />
+
+                    </HorizontalStackLayout>
+
+                </toolkit:Expander.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Item.Chapter5}"
+                   Margin="20,0"
+                   FontSize="16"
+                           TextColor="#666" 
+                           />
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label Text="Epilogue"
+               FontAttributes="Bold"
+               FontSize="Medium"
+                           TextColor="#555"/>
+
+
+                        <Image Source="arrow_down" HeightRequest="25"  />
+
+                    </HorizontalStackLayout>
+
+                </toolkit:Expander.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Item.Epilogue}"
+                   Margin="20,0"
+                   FontSize="16"
+                           TextColor="#666" 
+                           />
+                </VerticalStackLayout>
+            </toolkit:Expander>
+
+            <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander.Header>
+                    <HorizontalStackLayout>
+                        <Label Text="Unexpected Twist"
+               FontAttributes="Bold"
+               FontSize="Medium"
+                           TextColor="#555"/>
+
+
+                        <Image Source="arrow_down" HeightRequest="25"  />
+
+                    </HorizontalStackLayout>
+
+                </toolkit:Expander.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Item.UnexpectedTwist}"
+                   Margin="20,0"
+                   FontSize="16"
+                           TextColor="#666" 
+                           />
+                </VerticalStackLayout>
+            </toolkit:Expander>
+            
         </VerticalStackLayout>
 	</ScrollView>
 </ContentPage>

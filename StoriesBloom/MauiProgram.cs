@@ -1,4 +1,6 @@
-﻿namespace StoriesBloom;
+﻿using CommunityToolkit.Maui;
+
+namespace StoriesBloom;
 
 public static class MauiProgram
 {
@@ -7,7 +9,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
+            .UseMauiCommunityToolkit()
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("FontAwesome6FreeBrands.otf", "FontAwesomeBrands");
 				fonts.AddFont("FontAwesome6FreeRegular.otf", "FontAwesomeRegular");

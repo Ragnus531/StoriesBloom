@@ -25,10 +25,13 @@ namespace StoriesBloom.Services
             {
                 string title = item.Title;
                 string story = item.Content;
-                ParseText(story);
-
+                var ele = ParseText(story,title);
+                if(ele!= null)
+                {
+                    listToReturn.Add(ele);
+                }
             }
-
+            return listToReturn;
 
             //using (MemoryStream ms = new MemoryStream(das))
             //{
@@ -60,9 +63,9 @@ namespace StoriesBloom.Services
             //    }
             //}
 
-            Console.WriteLine("ygyugyug");
+            //Console.WriteLine("ygyugyug");
 
-            return listToReturn;
+            //return listToReturn;
             //    var lines = mm.Split(
             //    new string[] { Environment.NewLine },
             //    StringSplitOptions.None
@@ -93,10 +96,14 @@ namespace StoriesBloom.Services
             //return result;
         }
 
-        private  void ParseText(string inputText)
+        private  StoryDetail ParseText(string inputText,string title)
         {
-            string prologue, chapter1, chapter2, chapter3, chapter4, chapter5, epilogue, twistedEnding;
+            string prologue = "", chapter1 = "", chapter2 = "", chapter3 = "", chapter4 = "", chapter5 = "" , epilogue = "", twistedEnding = "";
             string pattern = @"(Prologue|Chapter 1|Chapter 2|Chapter 3|Chapter 4|Chapter 5|Epilogue|Twisted Ending|Unexpected Twist)\s+(.*?)(?=(Prologue|Chapter 1|Chapter 2|Chapter 3|Chapter 4|Chapter 5|Epilogue|Twisted Ending|Unexpected Twist|$))";
+            
+            if (inputText == null)
+                return null;
+
             MatchCollection matches = Regex.Matches(inputText, pattern, RegexOptions.Singleline);
 
             foreach (Match match in matches)
@@ -136,7 +143,7 @@ namespace StoriesBloom.Services
                 }
             }
 
-            Console.WriteLine("dasdsa");
+            return new StoryDetail(title, prologue, chapter1, chapter2, chapter3, chapter4, chapter5, epilogue, twistedEnding);
         }
     }
 }
