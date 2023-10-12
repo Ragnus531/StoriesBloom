@@ -9,11 +9,11 @@
              >
 	<ScrollView>
 		<VerticalStackLayout Margin="10">
-            <Image Source="https://aka.ms/campus.jpg" HeightRequest="300" Aspect="AspectFill"/>
+            <!--<Image Source="https://aka.ms/campus.jpg" HeightRequest="300" Aspect="AspectFill"/>-->
             <Label Text="{Binding Item.Title}"
                    FontFamily="NotoSerifBold"
                    FontSize="26"
-                   Margin="20,10"/>
+                   Margin="20,10,20,25"/>
 
 
             <toolkit:Expander IsExpanded="True">

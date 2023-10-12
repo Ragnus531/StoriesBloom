@@ -17,7 +17,6 @@
 
                             <Grid ColumnSpacing="16">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
@@ -25,14 +24,14 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <Frame Padding="0"
+                                <!--<Frame Padding="0"
                                    Grid.Column="0"
                                    Grid.RowSpan="3"
                                    BorderColor="Transparent"
                                    IsClippedToBounds="True">
                                     <Image Source="https://aka.ms/campus.jpg"
                                        Aspect="AspectFill"/>
-                                </Frame>
+                                </Frame>-->
 
                                 <Label Text="{Binding Title}"
                                    Grid.Row="0"
@@ -47,11 +46,11 @@
                                              >
                                     <Label Text="Romance"
                                        TextColor="{StaticResource Primary}"/>
-                                    <Label Text="·"
+                                    <!--<Label Text="·"
                                        FontAttributes="Bold"
                                        TextColor="{StaticResource Gray200}"/>
                                     <Label Text="01.01.2022 12:48"
-                                   TextColor="{StaticResource Gray200}"/>
+                                   TextColor="{StaticResource Gray200}"/>-->
                                 </StackLayout>
 
                             </Grid>
