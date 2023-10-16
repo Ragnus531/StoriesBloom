@@ -1,0 +1,9 @@
+Home: This tab could contain a list of all the stories available in the app. You could also add a search bar to help users find stories based on keywords.
+
+My Library: This tab could contain a list of all the stories that the user has downloaded or marked as favorites.
+
+Categories: This tab could contain a list of categories such as horror, romance, sci-fi, etc. Users can browse stories based on their preferred genre.
+
+Settings: This tab could contain settings such as font size, background color, and language preference.
+
+About: This tab could contain information about the app, such as the developer’s name, version number, and contact information.

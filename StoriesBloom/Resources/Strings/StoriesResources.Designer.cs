@@ -63,9 +63,39 @@ namespace StoriesBloom.Resources.Strings {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] Fantasy {
+            get {
+                object obj = ResourceManager.GetObject("Fantasy", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Religious {
+            get {
+                object obj = ResourceManager.GetObject("Religious", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] Romance {
             get {
                 object obj = ResourceManager.GetObject("Romance", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] ScienceFiction {
+            get {
+                object obj = ResourceManager.GetObject("ScienceFiction", resourceCulture);
                 return ((byte[])(obj));
             }
         }
