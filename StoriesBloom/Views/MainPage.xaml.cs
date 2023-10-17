@@ -2,9 +2,19 @@
 
 public partial class MainPage : ContentPage
 {
-	public MainPage(MainViewModel viewModel)
+	MainViewModel ViewModel;
+
+    public MainPage(MainViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = viewModel;
-	}
+
+        BindingContext = ViewModel = viewModel;
+    }
+
+    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+
+        await ViewModel.LoadDataAsync();
+    }
 }

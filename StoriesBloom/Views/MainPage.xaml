@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
-			 x:Class="StoriesBloom.Views.MainPage"
+			  xmlns:m="clr-namespace:StoriesBloom.Models"
+             x:Class="StoriesBloom.Views.MainPage"
 			 x:DataType="vm:MainViewModel"
              Title="Home"
              >
@@ -30,5 +31,103 @@
             <Setter Property="Margin" Value="0,10,0,0"/>
         </Style>
     </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid Margin="20" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout Grid.Row="0" Spacing="5" >
+                <Label x:Name="LblUserName"
+                   FontSize="Large" 
+                       Text="Stories Bloom"
+                   ></Label>
+            </VerticalStackLayout>
+
+            <SearchBar Grid.Row="1" Placeholder="Search items..." />
+
+            <!--<Border Grid.Row="1" Margin="3,3,3,3"  Padding="15" StrokeShape="RoundRectangle 5,5,5,5">
+                <HorizontalStackLayout Spacing="20">
+                    <Image Source="search_icon" 
+                       Aspect="AspectFit"
+                       HeightRequest="25"
+                       WidthRequest="25"
+                       />                                                                   
+                    <Label Text="Search..."
+                       VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="TapSearch" />
+                </Border.GestureRecognizers>
+            </Border>-->
+
+            <!--ADD VIEWMODEL and add all sections from here not tested!-->
+            <VerticalStackLayout Grid.Row="2" Spacing="20">
+                <Label Text="Stories"
+                   FontSize="Large"/>
+                <CollectionView ItemsSource="{Binding Items}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:SampleItem">
+                            <Border StrokeThickness="0.5">
+                                <ContentView Padding="16">
+                                    <ContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel }}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}" />
+                                    </ContentView.GestureRecognizers>
+
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!--<Frame Padding="0"
+                                   Grid.Column="0"
+                                   Grid.RowSpan="3"
+                                   BorderColor="Transparent"
+                                   IsClippedToBounds="True">
+                                    <Image Source="https://aka.ms/campus.jpg"
+                                       Aspect="AspectFill"/>
+                                </Frame>-->
+
+                                        <Label Text="{Binding Title}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontFamily="PoppinsSemibold"
+                                   FontSize="15"></Label>
+
+                                        <StackLayout Orientation="Horizontal"
+                                         Spacing="4"
+                                         Grid.Row="2"
+                                         Grid.Column="1"
+                                             >
+                                            <Label Text="Romance"
+                                       TextColor="{StaticResource Primary}"/>
+                                            <!--<Label Text="·"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource Gray200}"/>
+                                    <Label Text="01.01.2022 12:48"
+                                   TextColor="{StaticResource Gray200}"/>-->
+                                        </StackLayout>
+
+                                    </Grid>
+                                </ContentView>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.Footer>
+                        <!-- For some reason, last item is hidden behind bottom bar. Add blank footer to compensate. -->
+                        <BoxView HeightRequest="100" Color="White"/>
+                    </CollectionView.Footer>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
     
 </ContentPage>
