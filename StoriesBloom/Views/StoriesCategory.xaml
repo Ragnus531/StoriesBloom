@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
+			 xmlns:m="clr-namespace:StoriesBloom.Models"
+             xmlns:local="clr-namespace:StoriesBloom.ViewModels"
+             x:Class="StoriesBloom.Views.StoriesCategory"
+             Title="StoriesCategory">
+
+    <ContentPage.BindingContext>
+        <local:StoriesCategoryViewModel />
+    </ContentPage.BindingContext>
+    
+    <CollectionView ItemsSource="{Binding Categories}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Border StrokeThickness="0.5">
+                    <ContentView Padding="16">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToDetails}" />
+                        </ContentView.GestureRecognizers>
+
+                        <Grid ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!--<Frame Padding="0"
+                                   Grid.Column="0"
+                                   Grid.RowSpan="3"
+                                   BorderColor="Transparent"
+                                   IsClippedToBounds="True">
+                                    <Image Source="https://aka.ms/campus.jpg"
+                                       Aspect="AspectFill"/>
+                                </Frame>-->
+
+                            <Label Text="{Binding .}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontFamily="PoppinsSemibold"
+                                   FontSize="15"></Label>
+
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="4"
+                                         Grid.Row="2"
+                                         Grid.Column="1"
+                                             >
+                                <Label Text="Romance"
+                                       TextColor="{StaticResource Primary}"/>
+                            </StackLayout>
+
+                        </Grid>
+                    </ContentView>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        <CollectionView.Footer>
+            <!-- For some reason, last item is hidden behind bottom bar. Add blank footer to compensate. -->
+            <BoxView HeightRequest="100" Color="White"/>
+        </CollectionView.Footer>
+    </CollectionView>
+</ContentPage>

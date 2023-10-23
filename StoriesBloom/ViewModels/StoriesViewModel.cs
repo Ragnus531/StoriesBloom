@@ -4,7 +4,10 @@ public partial class StoriesViewModel : BaseViewModel
 {
 	readonly StoryDataService dataService;
 
-	[ObservableProperty]
+    [ObservableProperty]
+    string category;
+
+    [ObservableProperty]
 	bool isRefreshing;
 
 	[ObservableProperty]

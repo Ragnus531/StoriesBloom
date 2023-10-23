@@ -21,5 +21,10 @@
 			Title="Localization"
 			Icon="iconlocalization.png"
 			ContentTemplate="{DataTemplate views:LocalizationPage}" />
-	</TabBar>
+
+        <ShellContent
+			Title="Categories"
+			Icon="iconlocalization.png"
+			ContentTemplate="{DataTemplate views:StoriesCategory}" />
+    </TabBar>
 </Shell>

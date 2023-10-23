@@ -25,7 +25,6 @@ public static class MauiProgram
             });
 
 		builder.Services.AddSingleton<MainViewModel>();
-
 		builder.Services.AddSingleton<MainPage>();
 
 		builder.Services.AddTransient<SampleDataService>();
@@ -41,6 +40,9 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<LocalizationPage>();
 
-		return builder.Build();
+		builder.Services.AddSingleton<StoriesCategory>();
+		builder.Services.AddSingleton<StoriesCategoryViewModel>();
+
+        return builder.Build();
 	}
 }
