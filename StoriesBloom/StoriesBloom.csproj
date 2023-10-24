@@ -46,6 +46,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Epilogue-Medium.ttf" />
+	  <None Remove="Resources\Fonts\fontello.ttf" />
 	  <None Remove="Resources\Fonts\MaterialIconsOutlined-Regular.otf" />
 	  <None Remove="Resources\Fonts\NotoSerif-Bold.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-Bold.ttf" />

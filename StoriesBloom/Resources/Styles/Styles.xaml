@@ -147,7 +147,7 @@
 
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource White}}" />
-        <Setter Property="FontFamily" Value="Poppins" />
+        <Setter Property="FontFamily" Value="Epilogue" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>

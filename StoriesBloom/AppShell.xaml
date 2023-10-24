@@ -6,9 +6,11 @@
 	xmlns:views="clr-namespace:StoriesBloom.Views"
 	xmlns:local="clr-namespace:StoriesBloom"
     Shell.FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False"
+    BackgroundColor="AliceBlue"
     >
 
-	<TabBar>
+	<TabBar >
 		<ShellContent
 			Title="Main"
 			Icon="iconblank.png"
