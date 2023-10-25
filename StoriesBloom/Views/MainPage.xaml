@@ -32,8 +32,8 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <Grid BackgroundColor="#0D0118" RowDefinitions=".05*,.1*,.45*,.05*,.05*,.3*">
-            <Label FontSize="16" HorizontalOptions="Center" Text="Fairy Tales" TextColor="White" VerticalOptions="Center"/>
+        <Grid BackgroundColor="#0D0118" RowDefinitions=".05*,.1*,.55*,.05*,.05*,.2*">
+            <Label FontSize="16" HorizontalOptions="Center" Text="Stories Bloom" TextColor="White" VerticalOptions="Center"/>
 
             <Grid Grid.Row="1" Margin="25,10,25,10">
                 <RoundRectangle CornerRadius="25" Fill="#311B45" HeightRequest="45" />
@@ -44,9 +44,58 @@
                            VerticalOptions="Center"/>
             </Grid>
 
-            <CarouselView Grid.Row="2" ItemsSource="{Binding StoriesInfo}">
+            <CarouselView IndicatorView="indicatorView" Grid.Row="2"  ItemsSource="{Binding StoriesInfo}" PeekAreaInsets="17">
+
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" SnapPointsAlignment="Center"
+                                       SnapPointsType="MandatorySingle" />
+                </CarouselView.ItemsLayout>
                 
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="m:StoryInfo">
+                        <Grid >
+                            <Border Grid.RowSpan="3" BackgroundColor="#311B45" HeightRequest="300" Stroke="#6E557C"
+                                    StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2" WidthRequest="300">
+                                <Grid RowDefinitions=".2*,.6*,.2*">
+                                    <Image Aspect="AspectFill" Source="{Binding Image}" Grid.RowSpan="3" />
+
+                                    <RoundRectangle Grid.RowSpan="3" CornerRadius="30" HeightRequest="300" WidthRequest="300"
+                                                    Opacity=".7">
+                                        <RoundRectangle.Fill>
+                                            <LinearGradientBrush EndPoint="0,1">
+                                                <GradientStop Offset="0" Color="Transparent"></GradientStop>
+                                                <GradientStop Offset="1" Color="#030005"/>
+                                            </LinearGradientBrush>
+                                        </RoundRectangle.Fill>
+                                    </RoundRectangle>
+                                    
+                                    <VerticalStackLayout Grid.Row="2" Margin="20,0,0,0">
+                                        <Label Text="{Binding ReadTime,StringFormat='Read time: {0:%m} mins' }"
+                                       TextColor="White"
+                                       />
+                                        <Label FontSize="Large" Text="{Binding Name}"
+                                       TextColor="White"/>
+                                    </VerticalStackLayout>
+
+                                    <Label Margin="0,20,20,0" FontFamily="Icons" FontSize="25" HorizontalOptions="End" 
+                                           Text="&#xF097;" TextColor="White"/>
+                                </Grid>
+                                <Border.Shadow>
+                                    <Shadow Brush="#C283FD"
+                                            Opacity=".7"
+                                            Radius="100"
+                                            Offset="0,0"/> 
+                                </Border.Shadow>
+                            </Border>
+
+  
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
             </CarouselView>
+
+            <IndicatorView x:Name="indicatorView" Grid.Row="3" HorizontalOptions="Center" IndicatorColor="#616161" 
+                            IndicatorSize="8" SelectedIndicatorColor="White" VerticalOptions="Center" />
         </Grid>
 
       
