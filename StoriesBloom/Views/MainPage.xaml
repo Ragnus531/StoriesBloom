@@ -7,38 +7,16 @@
 			 x:DataType="vm:MainViewModel"
              >
 
-    <ContentPage.Resources>
-        <Style TargetType="StackLayout" x:Key="HeaderStack">
-            <Setter Property="Margin" Value="20,16,20,14"/>
-            <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="Padding" Value="20,0"/>
-        </Style>
-        <Style TargetType="Label" x:Key="SectionHeading">
-            <Setter Property="FontFamily" Value="NotoSerifBold"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
-        </Style>
-        <Style TargetType="Label" x:Key="ShowAll">
-            <Setter Property="HorizontalOptions" Value="End"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="TextColor" Value="{StaticResource Primary}"/>
-            <Setter Property="VerticalOptions" Value="End"/>
-        </Style>
-        <Style TargetType="BoxView">
-            <Setter Property="HeightRequest" Value="1"/>
-            <Setter Property="Color" Value="#eee"/>
-            <Setter Property="Margin" Value="0,10,0,0"/>
-        </Style>
-    </ContentPage.Resources>
+
 
     <ScrollView>
-        <Grid BackgroundColor="#0D0118" RowDefinitions=".05*,.1*,.55*,.05*,.05*,.2*">
+        <Grid BackgroundColor="#0D0118" RowDefinitions="Auto,Auto,Auto,Auto,Auto,*">
             <Label FontSize="16" HorizontalOptions="Center" Text="Stories Bloom" TextColor="White" VerticalOptions="Center"/>
 
             <Grid Grid.Row="1" Margin="25,10,25,10">
                 <RoundRectangle CornerRadius="25" Fill="#311B45" HeightRequest="45" />
                 <SearchBar CancelButtonColor="White" 
-                           Placeholder="Search by name" 
+                           Placeholder="Szukaj..." 
                            PlaceholderColor="#AC9DB9"
                            TextColor="White"
                            VerticalOptions="Center"/>
@@ -70,7 +48,7 @@
                                     </RoundRectangle>
                                     
                                     <VerticalStackLayout Grid.Row="2" Margin="20,0,0,0">
-                                        <Label Text="{Binding ReadTime,StringFormat='Read time: {0:%m} mins' }"
+                                        <Label Text="{Binding ReadTime,StringFormat='Czas czytania: {0:%m} minut' }"
                                        TextColor="White"
                                        />
                                         <Label FontSize="Large" Text="{Binding Name}"
@@ -95,7 +73,29 @@
             </CarouselView>
 
             <IndicatorView x:Name="indicatorView" Grid.Row="3" HorizontalOptions="Center" IndicatorColor="#616161" 
-                            IndicatorSize="8" SelectedIndicatorColor="White" VerticalOptions="Center" />
+                            IndicatorSize="8" SelectedIndicatorColor="White" VerticalOptions="Center" Margin="25,10,25,0" />
+
+            <Label Grid.Row="4" FontSize="16" TextColor="White" Margin="25,10,25,10" VerticalOptions="Center" 
+                   Text="Polecane dla ciebie"/>
+
+            <CollectionView Grid.Row="5" ItemsSource="{Binding StoriesInfo2}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="25" Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:StoryInfo">
+                        <Grid HeightRequest="200" WidthRequest="200">
+                            <Border  HorizontalOptions="Center" Stroke="#6E557C" 
+                                    StrokeShape="RoundRectangle 20,20,20,20" StrokeThickness="2" WidthRequest="200" >
+
+                                <Image Aspect="AspectFill" Source="{Binding Image}" />
+                            </Border>
+
+                        </Grid>
+                            
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
 
       

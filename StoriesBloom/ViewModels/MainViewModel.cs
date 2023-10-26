@@ -25,19 +25,19 @@ public partial class MainViewModel : BaseViewModel
     {
         StoriesInfo = new ObservableCollection<StoryInfo>
                {
-                   new StoryInfo { Name = "Cinderella", ReadTime = new TimeSpan(0, 30, 0), Image = "cinderella.jpg" },
-                   new StoryInfo { Name = "Snow White", ReadTime = new TimeSpan(0, 25, 0),  Image = "snow.jpg" },
-                   new StoryInfo { Name = "Rapunzel", ReadTime = new TimeSpan(0, 20, 0),  Image = "rapunzel.jpg" },
-                   new StoryInfo { Name = "Little Red Riding Hood", ReadTime = new TimeSpan(0, 15, 0),  Image = "hood.jpg" },
-                   new StoryInfo { Name = "Beauty and the Beast", ReadTime = new TimeSpan(0, 35, 0),  Image = "beauty.jpg" }
+                   new StoryInfo { Name = "Kopciuszek", ReadTime = new TimeSpan(0, 30, 0), Image = "cinderella.jpg" },
+                   new StoryInfo { Name = "Królewna Śnieżka", ReadTime = new TimeSpan(0, 25, 0),  Image = "snow.jpg" },
+                   new StoryInfo { Name = "Roszpunka", ReadTime = new TimeSpan(0, 20, 0),  Image = "rapunzel.jpg" },
+                   new StoryInfo { Name = "Czerwony Kapturek", ReadTime = new TimeSpan(0, 15, 0),  Image = "hood.jpg" },
+                   new StoryInfo { Name = "Piękna i Bestia", ReadTime = new TimeSpan(0, 35, 0),  Image = "beauty.jpg" }
                };
         StoriesInfo2 = new ObservableCollection<StoryInfo>
                {
-                   new StoryInfo { Name = "Snow White", ReadTime = new TimeSpan(0, 25, 0),  Image = "snow.jpg" },
-                   new StoryInfo { Name = "Rapunzel", ReadTime = new TimeSpan(0, 20, 0),  Image = "rapunzel.jpg" },
-                   new StoryInfo { Name = "Little Red Riding Hood", ReadTime = new TimeSpan(0, 15, 0),  Image = "hood.jpg" },
-                   new StoryInfo { Name = "Beauty and the Beast", ReadTime = new TimeSpan(0, 35, 0),  Image = "beauty.jpg" },
-                   new StoryInfo { Name = "Cinderella", ReadTime = new TimeSpan(0, 30, 0),  Image = "cinderella.jpg" }
+                   new StoryInfo { Name = "Królewna Śnieżka", ReadTime = new TimeSpan(0, 25, 0),  Image = "snow.jpg" },
+                   new StoryInfo { Name = "Roszpunka", ReadTime = new TimeSpan(0, 20, 0),  Image = "rapunzel.jpg" },
+                   new StoryInfo { Name = "Czerwony Kapturek", ReadTime = new TimeSpan(0, 15, 0),  Image = "hood.jpg" },
+                   new StoryInfo { Name = "Piękna i Bestia", ReadTime = new TimeSpan(0, 35, 0),  Image = "beauty.jpg" },
+                   new StoryInfo { Name = "Kopciuszek", ReadTime = new TimeSpan(0, 30, 0),  Image = "cinderella.jpg" }
                };
 
     }
