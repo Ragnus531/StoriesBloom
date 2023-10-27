@@ -5,7 +5,42 @@
 			 xmlns:m="clr-namespace:StoriesBloom.Models"
 			 x:Class="StoriesBloom.Views.StoriesPage"
 			 x:DataType="vm:StoriesViewModel">
-	<RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshingCommand}">
+    <Grid RowDefinitions="Auto,*">
+        <Picker  x:Name="picker"
+        Title="Select a monkey">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Baboon</x:String>
+                    <x:String>Capuchin Monkey</x:String>
+                    <x:String>Blue Monkey</x:String>
+                    <x:String>Squirrel Monkey</x:String>
+                    <x:String>Golden Lion Tamarin</x:String>
+                    <x:String>Howler Monkey</x:String>
+                    <x:String>Japanese Macaque</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <ScrollView Grid.Row="1">
+            <FlexLayout BackgroundColor="#0D0118" x:Name="flexLayout" Wrap="Wrap" JustifyContent="SpaceAround">
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
+            </FlexLayout>
+        </ScrollView>
+    </Grid>
+	<!--<RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshingCommand}">
 		<CollectionView ItemsSource="{Binding Items}" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
 			<CollectionView.ItemTemplate>
 				<DataTemplate x:DataType="m:SampleItem">
@@ -24,14 +59,14 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <!--<Frame Padding="0"
+                                --><!--<Frame Padding="0"
                                    Grid.Column="0"
                                    Grid.RowSpan="3"
                                    BorderColor="Transparent"
                                    IsClippedToBounds="True">
                                     <Image Source="https://aka.ms/campus.jpg"
                                        Aspect="AspectFill"/>
-                                </Frame>-->
+                                </Frame>--><!--
 
                                 <Label Text="{Binding Title}"
                                    Grid.Row="0"
@@ -46,11 +81,11 @@
                                              >
                                     <Label Text="Romance"
                                        TextColor="{StaticResource Primary}"/>
-                                    <!--<Label Text="·"
+                                    --><!--<Label Text="·"
                                        FontAttributes="Bold"
                                        TextColor="{StaticResource Gray200}"/>
                                     <Label Text="01.01.2022 12:48"
-                                   TextColor="{StaticResource Gray200}"/>-->
+                                   TextColor="{StaticResource Gray200}"/>--><!--
                                 </StackLayout>
 
                             </Grid>
@@ -59,9 +94,9 @@
                 </DataTemplate>
 			</CollectionView.ItemTemplate>
             <CollectionView.Footer>
-                <!-- For some reason, last item is hidden behind bottom bar. Add blank footer to compensate. -->
+                --><!-- For some reason, last item is hidden behind bottom bar. Add blank footer to compensate. --><!--
                 <BoxView HeightRequest="100" Color="White"/>
             </CollectionView.Footer>
         </CollectionView>
-	</RefreshView>
+	</RefreshView>-->
 </ContentPage>

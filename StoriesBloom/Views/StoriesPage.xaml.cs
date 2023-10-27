@@ -9,7 +9,7 @@ public partial class StoriesPage : ContentPage
 		InitializeComponent();
 
 		BindingContext = ViewModel = viewModel;
-	}
+    }
 
 	protected override async void OnNavigatedTo(NavigatedToEventArgs args)
 	{
