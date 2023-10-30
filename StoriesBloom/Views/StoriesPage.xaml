@@ -10,8 +10,8 @@
         Title="Select a monkey">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
-                    <x:String>Baboon</x:String>
-                    <x:String>Capuchin Monkey</x:String>
+                    <x:String>Romance</x:String>
+                    <x:String>Horro</x:String>
                     <x:String>Blue Monkey</x:String>
                     <x:String>Squirrel Monkey</x:String>
                     <x:String>Golden Lion Tamarin</x:String>
