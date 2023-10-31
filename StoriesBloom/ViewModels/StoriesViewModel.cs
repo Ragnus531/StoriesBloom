@@ -57,4 +57,10 @@ public partial class StoriesViewModel : BaseViewModel
 			{ "Item", item }
 		});
 	}
+
+	[RelayCommand]
+	private async void ChangeElements(string category)
+	{
+		Console.WriteLine("dasds");
+	}
 }

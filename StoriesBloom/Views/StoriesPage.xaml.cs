@@ -17,4 +17,11 @@ public partial class StoriesPage : ContentPage
 
 		await ViewModel.LoadDataAsync();
 	}
+
+    private void picker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+		flexLayout.Clear();
+		flexLayout.Add(new Label() { Text = "nnn" }); 
+		flexLayout.Add(new Label() { Text = "nnn222" });
+    }
 }

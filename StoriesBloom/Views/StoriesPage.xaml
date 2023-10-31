@@ -4,22 +4,36 @@
 			 xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
 			 xmlns:m="clr-namespace:StoriesBloom.Models"
 			 x:Class="StoriesBloom.Views.StoriesPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 			 x:DataType="vm:StoriesViewModel">
     <Grid RowDefinitions="Auto,*">
-        <Picker  x:Name="picker"
-        Title="Select a monkey">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Romance</x:String>
-                    <x:String>Horro</x:String>
-                    <x:String>Blue Monkey</x:String>
-                    <x:String>Squirrel Monkey</x:String>
-                    <x:String>Golden Lion Tamarin</x:String>
-                    <x:String>Howler Monkey</x:String>
-                    <x:String>Japanese Macaque</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+
+        <Grid ColumnDefinitions=".3*,.7*" BackgroundColor="#0D0118">
+
+            <Label TextColor="White">Yey</Label>
+
+            <Picker BackgroundColor="Black"
+                    TitleColor="#FEFEFE"                      
+                    TextColor="White"
+                    x:Name="picker"
+                    SelectedIndexChanged="picker_SelectedIndexChanged"
+                    
+        Title="Select a monkey" FontFamily="Epilogue" Grid.Column="1" >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Romance</x:String>
+                        <x:String>Horro</x:String>
+                        <x:String>Blue Monkey</x:String>
+                        <x:String>Squirrel Monkey</x:String>
+                        <x:String>Golden Lion Tamarin</x:String>
+                        <x:String>Howler Monkey</x:String>
+                        <x:String>Japanese Macaque</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            
+        </Grid>
+
 
         <ScrollView Grid.Row="1">
             <FlexLayout BackgroundColor="#0D0118" x:Name="flexLayout" Wrap="Wrap" JustifyContent="SpaceAround">
