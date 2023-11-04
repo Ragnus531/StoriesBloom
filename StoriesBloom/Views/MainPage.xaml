@@ -7,19 +7,11 @@
 			 x:DataType="vm:MainViewModel"
              >
 
-
-
     <ScrollView>
         <Grid BackgroundColor="#0D0118" RowDefinitions="Auto,Auto,Auto,Auto,Auto,*">
-            <Label FontSize="16" HorizontalOptions="Center" Text="Stories Bloom" TextColor="White" VerticalOptions="Center"/>
-
             <Grid Grid.Row="1" Margin="25,10,25,10">
-                <RoundRectangle CornerRadius="25" Fill="#311B45" HeightRequest="45" />
-                <SearchBar CancelButtonColor="White" 
-                           Placeholder="Szukaj..." 
-                           PlaceholderColor="#AC9DB9"
-                           TextColor="White"
-                           VerticalOptions="Center"/>
+                <Button CornerRadius="25" BackgroundColor="#6E557C" HeightRequest="45" 
+                        Text="Get more stories"  />
             </Grid>
 
             <CarouselView IndicatorView="indicatorView" Grid.Row="2"  ItemsSource="{Binding StoriesInfo}" PeekAreaInsets="17">
