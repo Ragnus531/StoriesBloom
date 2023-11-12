@@ -6,6 +6,13 @@
 			 x:Class="StoriesBloom.Views.StoriesPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 			 x:DataType="vm:StoriesViewModel">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:SelectedItemEventArgsConverter x:Key="ItemIndexChanged" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <Grid RowDefinitions="Auto,*">
 
         <Grid ColumnDefinitions=".5*,.5*" BackgroundColor="#0D0118">
@@ -34,8 +41,8 @@
                     TextColor="White"
                     x:Name="picker"
                     HorizontalTextAlignment="Center"
-                    SelectedIndexChanged="picker_SelectedIndexChanged"  Title="Select category:" FontFamily="Epilogue" 
-                    
+                     Title="Select category:" FontFamily="Epilogue" 
+                    SelectedItem="{Binding Category}"
                     SelectedIndex="0"
                      >
                     <Picker.ItemsSource>
@@ -49,6 +56,15 @@
                             <x:String>Japanese Macaque</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
+
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            EventName="SelectedIndexChanged"
+                            Command="{Binding IncrementCounterCommand}"
+                            EventArgsConverter="{StaticResource ItemIndexChanged}"
+                            CommandParameter="{ Binding .}"
+                            />
+                    </Picker.Behaviors>
                 </Picker>
 
             </Border>
@@ -59,7 +75,7 @@
 
         <!-- List of Novels -->
         <ScrollView Grid.Row="1" BackgroundColor="#0D0118">
-            <CollectionView SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView SelectionMode="Single" SelectionChangedCommand="{Binding GoToNovelDetailsCommand}">
                 <CollectionView.ItemsSource >
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Romance</x:String>
