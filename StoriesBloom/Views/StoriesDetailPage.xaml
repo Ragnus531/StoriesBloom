@@ -9,7 +9,17 @@
              BackgroundColor="#0D0118"
              >
 	<ScrollView>
-        <VerticalStackLayout Margin="10" >
+        <VerticalStackLayout>
+
+            <Border >
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20,20,20,20" />
+                </Border.StrokeShape>
+                
+                <Image Aspect="AspectFill"  Source="rapunzel.jpg" />
+            </Border>
+
+            <VerticalStackLayout Margin="10">
             <!--<Image Source="https://aka.ms/campus.jpg" HeightRequest="300" Aspect="AspectFill"/>-->
             <Label Text="{Binding Item.Title}"
                    FontFamily="NotoSerifBold"
@@ -200,7 +210,7 @@
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
-            
+            </VerticalStackLayout>
         </VerticalStackLayout>
 	</ScrollView>
 </ContentPage>
