@@ -15,14 +15,14 @@
     
     <Grid RowDefinitions="Auto,*">
 
-        <Grid ColumnDefinitions=".5*,.5*" BackgroundColor="#0D0118">
+        <Grid ColumnDefinitions=".5*,.5*" BackgroundColor="{StaticResource ThirdColor}">
 
             <Grid Grid.Column="0">
-                <Border Grid.Column="1" Stroke="#311B45"
+                <Border Grid.Column="1" Stroke="{StaticResource MainColor}"
          StrokeThickness="1"
          StrokeShape="RoundRectangle 10,10,10,10"
          HeightRequest="45">
-                    <SearchBar  BackgroundColor="#311B45" CancelButtonColor="White" 
+                    <SearchBar  BackgroundColor="{StaticResource MainColor}" CancelButtonColor="White" 
                            Placeholder="Szukaj..." 
                            PlaceholderColor="#AC9DB9"
                            TextColor="White"
@@ -31,12 +31,12 @@
 
             </Grid>
 
-            <Border Grid.Column="1" Stroke="#311B45"
+            <Border Grid.Column="1" Stroke="{StaticResource MainColor}"
          StrokeThickness="1"
          StrokeShape="RoundRectangle 10,10,10,10"
          HeightRequest="45">
 
-                <Picker BackgroundColor="#311B45"
+                <Picker BackgroundColor="{StaticResource MainColor}"
                     TitleColor="#FEFEFE"                      
                     TextColor="White"
                     x:Name="picker"
@@ -74,7 +74,7 @@
         </Grid>
 
         <!-- List of Novels -->
-        <ScrollView Grid.Row="1" BackgroundColor="#0D0118">
+        <ScrollView Grid.Row="1" BackgroundColor="{StaticResource ThirdColor}">
             <CollectionView SelectionMode="None">
                 <CollectionView.ItemsSource >
                     <x:Array Type="{x:Type x:String}">
@@ -96,7 +96,7 @@
                     <DataTemplate >
                         <Grid Margin="15,5,15,5"
                       HeightRequest="75" >
-                            <Border BackgroundColor="#6E557C" Stroke="White" StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2">
+                            <Border BackgroundColor="{StaticResource SecondaryColor}" Stroke="White" StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2">
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=GoToNovelDetailsCommand}" />
                                 </Border.GestureRecognizers>
