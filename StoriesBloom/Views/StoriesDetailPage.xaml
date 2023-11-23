@@ -10,62 +10,47 @@
              >
     <ScrollView>
 
-        <Grid Margin="15" RowDefinitions=".4*,.1*,.1*,.4*">
+        <Grid Margin="15" RowDefinitions="4*,6*">
 
-            <Border Grid.RowSpan="2">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="20,20,20,20"/>
-                </Border.StrokeShape>
+            <Grid Grid.Column="0" RowDefinitions=".4*,.6*,.2*">
+                <Border Grid.RowSpan="3">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10" />
+                    </Border.StrokeShape>
 
-                <Grid RowDefinitions=".3*,.7*">
-                    <Image Grid.RowSpan="2" Aspect="AspectFill"  Source="rapunzel.jpg" />
+                    <Image Aspect="Fill" Source="rapunzel.jpg"  />
+                </Border>
 
-                    <Grid ColumnDefinitions="*,*">
-                        <Border Margin="15,35,0,0" BackgroundColor="Black" Opacity="0.80" HeightRequest="50" HorizontalOptions="Start"
+                <VerticalStackLayout Grid.Row="2" Margin="20,0,0,0">
+                    <Label FontSize="Large" Text="{Binding Item.Title}"
+                                       TextColor="White"/>
+                </VerticalStackLayout>
+
+                <Border Margin="0,20,20,0" BackgroundColor="Black" Opacity="0.80" HeightRequest="50" HorizontalOptions="End"
                                 WidthRequest="50" StrokeThickness="0.5" VerticalOptions="Start">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10,10,10,10"/>
-                            </Border.StrokeShape>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10,10,10,10"/>
+                    </Border.StrokeShape>
 
-                            <Image Source="left_arrow_icon.png" WidthRequest="25" HeightRequest="25" HorizontalOptions="Center" 
-                                   VerticalOptions="Center"/>
+                    <Label  FontFamily="Icons" FontSize="25" Text="&#xF097;" TextColor="White" HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                </Border>
 
-                            <!--<Label FontFamily="Icons" FontSize="25" HorizontalOptions="Center" Text="&#xE801;"
-                                   TextColor="{StaticResource Gray400}" VerticalOptions="Center" />-->
-                        </Border>
+                <Border Margin="20,20,0,0" BackgroundColor="Black" Opacity="0.80" HeightRequest="50" HorizontalOptions="Start"
+                                WidthRequest="50" StrokeThickness="0.5" VerticalOptions="Start">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10,10,10,10"/>
+                    </Border.StrokeShape>
 
-                        <Border Grid.Column="1"
-                            Margin="0,35,15,0" BackgroundColor="Black" Opacity="0.80" HeightRequest="50" HorizontalOptions="End"
-                                VerticalOptions="Start"
-                                WidthRequest="50" StrokeThickness="0.5">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10,10,10,10"/>
-                            </Border.StrokeShape>
+                    <Image Aspect="AspectFill" Source="left_arrow_icon.png" WidthRequest="25" HeightRequest="25" 
+                       HorizontalOptions="Center" VerticalOptions="Center"   />
+                </Border>
 
-                            <Label FontFamily="Icons" FontSize="25" HorizontalOptions="Center" Text="&#xF097;"
-                                   TextColor="{StaticResource Gray400}" VerticalOptions="Center" />
-                        </Border>
 
-                    </Grid>
-                </Grid>
-            </Border>
 
-            <Grid Grid.Row="1" Grid.RowSpan="2" Padding="20">
-                <Label Text="{Binding Item.Title}" TextColor="White" />
             </Grid>
 
-            <!--<Border Grid.Row="1" Grid.RowSpan="2" Stroke="{StaticResource Gray900}">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="30,30,30,30" />
-                </Border.StrokeShape>
-
-                <Grid Padding="20" BackgroundColor="{StaticResource Gray900}"
-                      >
-                    <Label Text="{Binding Item.Title}" TextColor="White" />
-                </Grid>
-            </Border>-->
-
-            <VerticalStackLayout Grid.Row="3" >
+            <VerticalStackLayout Grid.Row="1" Margin="0,5,0,0" >
                 <toolkit:Expander IsExpanded="True">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
