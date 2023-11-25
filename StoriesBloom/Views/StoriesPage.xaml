@@ -48,12 +48,17 @@
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Romance</x:String>
-                            <x:String>Horro</x:String>
-                            <x:String>Blue Monkey</x:String>
-                            <x:String>Squirrel Monkey</x:String>
-                            <x:String>Golden Lion Tamarin</x:String>
-                            <x:String>Howler Monkey</x:String>
-                            <x:String>Japanese Macaque</x:String>
+                            <x:String>Thriller</x:String>
+                            <x:String>Science Fiction</x:String>
+                            <x:String>Fantasy</x:String>
+                            <x:String>Religious</x:String>
+                            <x:String>Humor</x:String>
+                            <x:String>Historical Fiction</x:String>
+                            <x:String>Non Fiction</x:String>
+                            <x:String>Young Adult</x:String>
+                            <x:String>Adventure</x:String>
+                            <x:String>Dystopian</x:String>
+                            <x:String>Horror</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
 
