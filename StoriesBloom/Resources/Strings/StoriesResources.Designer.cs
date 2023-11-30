@@ -63,9 +63,59 @@ namespace StoriesBloom.Resources.Strings {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] Adventure {
+            get {
+                object obj = ResourceManager.GetObject("Adventure", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Dystopian {
+            get {
+                object obj = ResourceManager.GetObject("Dystopian", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] Fantasy {
             get {
                 object obj = ResourceManager.GetObject("Fantasy", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] HistoricalFiction {
+            get {
+                object obj = ResourceManager.GetObject("HistoricalFiction", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Horror {
+            get {
+                object obj = ResourceManager.GetObject("Horror", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Humor {
+            get {
+                object obj = ResourceManager.GetObject("Humor", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -106,6 +156,16 @@ namespace StoriesBloom.Resources.Strings {
         public static byte[] Thriller {
             get {
                 object obj = ResourceManager.GetObject("Thriller", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] YoungAdult {
+            get {
+                object obj = ResourceManager.GetObject("YoungAdult", resourceCulture);
                 return ((byte[])(obj));
             }
         }
