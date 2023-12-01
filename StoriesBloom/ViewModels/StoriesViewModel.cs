@@ -22,8 +22,8 @@ public partial class StoriesViewModel : BaseViewModel
     public StoriesViewModel(StoryDataService service)
 	{
 		dataService = service;
-        IncrementCounterCommand = new RelayCommand(ChangeElements);
-        GoToNovelDetailsCommand = new AsyncRelayCommand(GoToDetail);
+        IncrementCounterCommand = new AsyncRelayCommand(ChangeElements);
+        GoToNovelDetailsCommand = new AsyncRelayCommand<StoryDetail>(GoToDetail);
     }
 
     [RelayCommand]
@@ -66,18 +66,16 @@ public partial class StoriesViewModel : BaseViewModel
 		});
 	}
 
-	private void ChangeElements()
+	private async Task ChangeElements()
 	{
-		var mm = Category;
-		//Change elements to specific category
-		Console.WriteLine("dasds");
+        Items = new ObservableCollection<StoryDetail>(await dataService.GetStories(Category));
 	}
 
-	private async Task GoToDetail()
+	private async Task GoToDetail(StoryDetail novelDetail)
 	{
         await Shell.Current.GoToAsync(nameof(StoriesDetailPage), true, new Dictionary<string, object>
         {
-            { "Item", new StoryDetail("f","f","f","f","f","f","f","f","d") }
+            { "Item", novelDetail }
         });
     }
 }

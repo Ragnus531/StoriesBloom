@@ -1,4 +1,5 @@
-﻿using StoriesBloom.Resources.Strings;
+﻿using StoriesBloom.Factories;
+using StoriesBloom.Resources.Strings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,17 @@ namespace StoriesBloom.Services
 {
     public class StoryDataService
     {
-        public async Task<IEnumerable<StoryDetail>> GetStories()
-        {
-     
-            //await Task.Delay(1000); // Artifical delay to give the impression of work
+        private IStoriesFactory _storiesFactory;
 
+        public StoryDataService(IStoriesFactory storiesFactory)
+        {
+            _storiesFactory = storiesFactory;
+        }
+
+        public async Task<IEnumerable<StoryDetail>> GetStories(string category = "Romance")
+        {
             var listToReturn = new List<StoryDetail>();
-            var das = StoriesResources.Romance;
+            var das = _storiesFactory.GetStories(category);
 
 
             JsonParser jsonParser = new JsonParser();
@@ -25,8 +30,9 @@ namespace StoriesBloom.Services
             {
                 string title = item.Title;
                 string story = item.Content;
-                var ele = ParseText(story,title);
-                if(ele!= null)
+                //var ele = ParseText(story,title);
+                var ele = SplitTextIntoChapters(story,title);
+                if (ele != null)
                 {
                     listToReturn.Add(ele);
                 }
@@ -96,10 +102,28 @@ namespace StoriesBloom.Services
             //return result;
         }
 
+        public StoryDetail SplitTextIntoChapters(string text,string title)
+        {
+            string prologue = "", chapter1 = "", chapter2 = "", chapter3 = "", chapter4 = "", chapter5 = "", epilogue = "", twistedEnding = "";
+
+            List<string> chapters = new List<string>();
+            string pattern = @"(\$[A-Za-z0-9\s]*\$)";
+            string[] substrings = Regex.Split(text, pattern);
+            for (int i = 1; i < substrings.Length; i += 2)
+            {
+                string chapterText = substrings[i + 1].Trim();
+                chapters.Add(chapterText);
+            }
+
+            prologue = chapters[0]; chapter1 = chapters[1]; chapter2 = chapters[2]; chapter3 = chapters[3];
+            chapter4 = chapters[4]; chapter5 = chapters[5]; epilogue = chapters[6]; twistedEnding = chapters.Count() >= 8 ? chapters[7] : string.Empty;
+            return new StoryDetail(title, prologue, chapter1, chapter2, chapter3, chapter4, chapter5, epilogue, twistedEnding);
+        }
+
         private  StoryDetail ParseText(string inputText,string title)
         {
             string prologue = "", chapter1 = "", chapter2 = "", chapter3 = "", chapter4 = "", chapter5 = "" , epilogue = "", twistedEnding = "";
-            string pattern = @"(Prologue|Chapter 1|Chapter 2|Chapter 3|Chapter 4|Chapter 5|Epilogue|Twisted Ending|Unexpected Twist)\s+(.*?)(?=(Prologue|Chapter 1|Chapter 2|Chapter 3|Chapter 4|Chapter 5|Epilogue|Twisted Ending|Unexpected Twist|$))";
+            string pattern = @"(Prologue|Chapter 1|Chapter 2|Chapter 3|Chapter 4|Chapter 5|Epilogue|Twisted Ending|Unexpected Twist)\s+(.*?)(?=($Prologue$|$Chapter1$|$Chapter2$|$Chapter3$|$Chapter4$|$Chapter5$|$Epilogue$|$Twisted Ending$|$UnexpectedTwist$|$))";
             
             if (inputText == null)
                 return null;
