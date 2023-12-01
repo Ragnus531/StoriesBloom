@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using StoriesBloom.Factories;
 
 namespace StoriesBloom;
 
@@ -31,7 +32,8 @@ public static class MauiProgram
 
 		builder.Services.AddTransient<SampleDataService>();
         builder.Services.AddTransient<StoryDataService>();
-		builder.Services.AddTransient<StoriesDetailViewModel>();
+        builder.Services.AddSingleton<IStoriesFactory,StoriesByCategoryFactory>();
+        builder.Services.AddTransient<StoriesDetailViewModel>();
 		builder.Services.AddTransient<StoriesDetailPage>();
 
 		builder.Services.AddSingleton<StoriesViewModel>();
