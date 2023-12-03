@@ -9,6 +9,7 @@ public partial class StoriesDetailViewModel : BaseViewModel
 	[ObservableProperty]
     StoryDetail item;
 
+    
     public ICommand GoBackCommand { get; }
 
 	public StoriesDetailViewModel()

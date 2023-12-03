@@ -5,9 +5,15 @@
 			 x:Class="StoriesBloom.Views.StoriesDetailPage"
 			 x:DataType="vm:StoriesDetailViewModel"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:StoriesBloom"
              Title=""
              BackgroundColor="{StaticResource ThirdColor}"
              >
+
+    <ContentPage.Resources>
+        <local:IntToBoolConverter x:Key="intToBool" />
+    </ContentPage.Resources>
+    
     <ScrollView>
 
         <Grid Margin="15" RowDefinitions="Auto,*">
@@ -209,7 +215,7 @@
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0">
+                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0" IsVisible="{Binding Item.UnexpectedTwist.Length, Converter={local:IntToBoolConverter}}">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Unexpected Twist"
