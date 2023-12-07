@@ -14,11 +14,14 @@ public partial class MainViewModel : BaseViewModel
     [ObservableProperty]
     ObservableCollection<StoryInfo> storiesInfo2;
 
-    public MainViewModel(StoryDataService dataService)
+    [ObservableProperty]
+    ObservableCollection<Category> storiesCategories;
+
+    public MainViewModel(StoryDataService dataService, ICategoriesService categoriesService)
     {
         _dataService= dataService;
         InitializeTales();
-
+        StoriesCategories = new ObservableCollection<Category>(categoriesService.Categories);
     }
 
     private void InitializeTales()

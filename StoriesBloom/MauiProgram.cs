@@ -47,6 +47,10 @@ public static class MauiProgram
 		builder.Services.AddSingleton<StoriesCategory>();
 		builder.Services.AddSingleton<StoriesCategoryViewModel>();
 
+		CategoriesService categoriesService = new CategoriesService();
+		categoriesService.InitCategories();
+		builder.Services.AddSingleton<ICategoriesService>(categoriesService);
+
         return builder.Build();
 	}
 }
