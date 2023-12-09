@@ -90,47 +90,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <!--<VerticalStackLayout Grid.Row="5">
-                <Button CornerRadius="25" BackgroundColor="{StaticResource SecondaryColor}" HeightRequest="45" 
-                        Text="Get more stories"  />
-
-                <CollectionView ItemsSource="{Binding StoriesCategories}">
-
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal">
-                        </LinearItemsLayout>
-                    </CollectionView.ItemsLayout>
-
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="m:Category">
-                            <Grid ColumnDefinitions=".35*, .65*"
-                                  HeightRequest="60" WidthRequest="160">
-                                <RoundRectangle Grid.ColumnSpan="2"
-                                                CornerRadius="45"
-                                                Fill="#1F262A"/>
-                                <Border Grid.RowSpan="2" Margin="5,0,0,0" 
-                                        HeightRequest="50" HorizontalOptions="Start"
-                                        StrokeShape="RoundRectangle 80,80,80,80" StrokeThickness="0"
-                                        WidthRequest="50">
-                                    <Image HeightRequest="50" Source="{Binding ProfileImage}" />
-                                </Border>
-                                
-                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                    <Label Margin="10,0,0,0" FontFamily="OpenSansRegular"
-                                            HorizontalTextAlignment="Start" Text="{Binding Name}"
-                                           TextColor="White" VerticalTextAlignment="Center" />
-
-                                    <Label Grid.Column="1" Margin="10,0,0,0" FontFamily="FontAwesomeRegular"
-                                           FontSize="12" Text="{Binding StoriesAmount, StringFormat='{0} pictures'}"
-                                           TextColor="#869CBD" VerticalOptions="Start"
-                                           />
-                                </VerticalStackLayout>
-                                
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>-->
+           
            
         </Grid>
 
