@@ -26,6 +26,7 @@ public partial class MainViewModel : BaseViewModel
 
     private void InitializeTales()
     {
+        //Collect user activity and propose stories based on activy so if user clicks only on adventure show 5 adventures
         StoriesInfo = new ObservableCollection<StoryInfo>
                {
                    new StoryInfo { Name = "Kopciuszek", ReadTime = new TimeSpan(0, 30, 0), Image = "cinderella.jpg" },
@@ -34,6 +35,7 @@ public partial class MainViewModel : BaseViewModel
                    new StoryInfo { Name = "Czerwony Kapturek", ReadTime = new TimeSpan(0, 15, 0),  Image = "hood.jpg" },
                    new StoryInfo { Name = "Piękna i Bestia", ReadTime = new TimeSpan(0, 35, 0),  Image = "beauty.jpg" }
                };
+        //Random 5 stories 
         StoriesInfo2 = new ObservableCollection<StoryInfo>
                {
                    new StoryInfo { Name = "Królewna Śnieżka", ReadTime = new TimeSpan(0, 25, 0),  Image = "snow.jpg" },

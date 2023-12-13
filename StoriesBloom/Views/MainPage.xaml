@@ -70,7 +70,7 @@
                             IndicatorSize="8" SelectedIndicatorColor="White" VerticalOptions="Center" Margin="25,10,25,0" />
 
             <Label Grid.Row="4" FontSize="16" TextColor="White" Margin="25,10,25,10" VerticalOptions="Center" 
-                   Text="Co powiesz na"/>
+                   Text="Moze również ci sie spodobaja"/>
 
             <CollectionView Grid.Row="5" ItemsSource="{Binding StoriesInfo2}">
                 <CollectionView.ItemsLayout>
