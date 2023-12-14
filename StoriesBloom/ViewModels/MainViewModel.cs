@@ -17,6 +17,7 @@ public partial class MainViewModel : BaseViewModel
     [ObservableProperty]
     ObservableCollection<Category> storiesCategories;
 
+    //Add a cache or a await while await we are loading those stories maybe and saving them in cache?
     public MainViewModel(StoryDataService dataService, ICategoriesService categoriesService)
     {
         _dataService= dataService;
