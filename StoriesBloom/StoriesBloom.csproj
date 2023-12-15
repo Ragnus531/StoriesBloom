@@ -119,6 +119,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Popups\LoadingStoriesPopupPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\StoriesCategory.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.Handlers;
+﻿using CommunityToolkit.Maui.Views;
+using Microsoft.Maui.Handlers;
+using StoriesBloom.Views.Popups;
 
 namespace StoriesBloom.Views;
 
