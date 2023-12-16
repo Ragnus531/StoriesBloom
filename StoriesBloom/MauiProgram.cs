@@ -29,8 +29,9 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<MainViewModel>();
 		builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddTransient<IPopupService, PopupService>();
 
-		builder.Services.AddTransient<SampleDataService>();
+        builder.Services.AddTransient<SampleDataService>();
         builder.Services.AddTransient<StoryDataService>();
         builder.Services.AddSingleton<IStoriesFactory,StoriesByCategoryFactory>();
         builder.Services.AddTransient<StoriesDetailViewModel>();

@@ -3,8 +3,7 @@
 public partial class MainViewModel : BaseViewModel
 {
     readonly StoryDataService _dataService;
-
-
+    private readonly IPopupService _popupService;
     [ObservableProperty]
     ObservableCollection<StoryDetail> items;
 
@@ -18,9 +17,11 @@ public partial class MainViewModel : BaseViewModel
     ObservableCollection<Category> storiesCategories;
 
     //Add a cache or a await while await we are loading those stories maybe and saving them in cache?
-    public MainViewModel(StoryDataService dataService, ICategoriesService categoriesService)
+    public MainViewModel(StoryDataService dataService, ICategoriesService categoriesService,
+        IPopupService popupService)
     {
         _dataService= dataService;
+        _popupService = popupService;
         InitializeTales();
         StoriesCategories = new ObservableCollection<Category>(categoriesService.Categories);
     }

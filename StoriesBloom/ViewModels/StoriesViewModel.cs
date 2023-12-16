@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using StoriesBloom.Views.Popups;
 
 namespace StoriesBloom.ViewModels;
 
@@ -15,15 +16,17 @@ public partial class StoriesViewModel : BaseViewModel
 
 	[ObservableProperty]
 	ObservableCollection<StoryDetail> items;
+    private readonly IPopupService _popupService;
 
     public ICommand IncrementCounterCommand { get; }
     public ICommand GoToNovelDetailsCommand { get; }
 
-    public StoriesViewModel(StoryDataService service)
+    public StoriesViewModel(StoryDataService service, IPopupService popupService)
 	{
 		dataService = service;
         IncrementCounterCommand = new AsyncRelayCommand(ChangeElements);
         GoToNovelDetailsCommand = new AsyncRelayCommand<StoryDetail>(GoToDetail);
+		_popupService = popupService;
     }
 
     [RelayCommand]
@@ -68,8 +71,12 @@ public partial class StoriesViewModel : BaseViewModel
 
 	private async Task ChangeElements()
 	{
-        Items = new ObservableCollection<StoryDetail>(await dataService.GetStories(Category));
-	}
+		_popupService.ShowPopup(new LoadingStoriesPopupPage());
+
+		Items = new ObservableCollection<StoryDetail>(await dataService.GetStories(Category));
+
+		_popupService.HidePopup();
+    }
 
 	private async Task GoToDetail(StoryDetail novelDetail)
 	{
