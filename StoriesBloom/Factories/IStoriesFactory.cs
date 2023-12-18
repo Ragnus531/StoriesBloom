@@ -8,6 +8,7 @@ namespace StoriesBloom.Factories
 {
     public interface IStoriesFactory
     {
+        void InitStories();
         byte[] GetStories(string categoryName);
     }
 }

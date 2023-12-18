@@ -52,7 +52,7 @@ public partial class MainViewModel : BaseViewModel
     [RelayCommand]
     public async Task LoadMore()
     {
-        var items = await _dataService.GetStories();
+        var items = _dataService.GetStories();
 
         foreach (var item in items)
         {
@@ -62,7 +62,7 @@ public partial class MainViewModel : BaseViewModel
 
     public async Task LoadDataAsync()
     {
-        Items = new ObservableCollection<StoryDetail>(await _dataService.GetStories());
+        Items = new ObservableCollection<StoryDetail>(_dataService.GetStories());
     }
 
 

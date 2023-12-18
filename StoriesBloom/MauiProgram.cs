@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.DependencyInjection;
 using StoriesBloom.Factories;
 
 namespace StoriesBloom;
@@ -33,8 +34,12 @@ public static class MauiProgram
 
         builder.Services.AddTransient<SampleDataService>();
         builder.Services.AddTransient<StoryDataService>();
-        builder.Services.AddSingleton<IStoriesFactory,StoriesByCategoryFactory>();
-        builder.Services.AddTransient<StoriesDetailViewModel>();
+
+		StoriesByCategoryFactory storiesByCategoryFactory = new StoriesByCategoryFactory();
+		storiesByCategoryFactory.InitStories();
+        builder.Services.AddSingleton<IStoriesFactory>(storiesByCategoryFactory);
+        
+		builder.Services.AddTransient<StoriesDetailViewModel>();
 		builder.Services.AddTransient<StoriesDetailPage>();
 
 		builder.Services.AddSingleton<StoriesViewModel>();

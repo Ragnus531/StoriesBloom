@@ -18,7 +18,7 @@ namespace StoriesBloom.Services
             _storiesFactory = storiesFactory;
         }
 
-        public async Task<IEnumerable<StoryDetail>> GetStories(string category = "Romance")
+        public IEnumerable<StoryDetail> GetStories(string category = "Romance")
         {
             var listToReturn = new List<StoryDetail>();
             var das = _storiesFactory.GetStories(category);

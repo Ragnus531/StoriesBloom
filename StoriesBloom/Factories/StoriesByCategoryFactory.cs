@@ -4,56 +4,33 @@ namespace StoriesBloom.Factories
 {
     public class StoriesByCategoryFactory : IStoriesFactory
     {
+        private static Dictionary<string, byte[]> storiesDict = new Dictionary<string, byte[]>();
+
+        public void InitStories()
+        {
+            if(storiesDict.Count > 0)
+            {
+                return;
+            }
+
+            Console.WriteLine($"Start1 {DateTime.Now}");
+            storiesDict.Add("Romance", StoriesResources.Romance);
+            storiesDict.Add("Thriller", StoriesResources.Thriller);
+            storiesDict.Add("Science Fiction", StoriesResources.ScienceFiction);
+            storiesDict.Add("Fantasy", StoriesResources.Fantasy);
+            storiesDict.Add("Religious", StoriesResources.Religious);
+            storiesDict.Add("Humor", StoriesResources.Humor);
+            storiesDict.Add("Historical Fiction", StoriesResources.HistoricalFiction);
+            storiesDict.Add("Young Adult", StoriesResources.YoungAdult);
+            storiesDict.Add("Adventure", StoriesResources.Adventure);
+            storiesDict.Add("Dystopian", StoriesResources.Dystopian);
+            storiesDict.Add("Horror", StoriesResources.Horror);
+            Console.WriteLine($"Stop1 {DateTime.Now}");
+        }
+
         public byte[] GetStories(string categoryName)
         {
-            byte[] story = null;
-
-            if(categoryName == "Romance")
-            {
-                story = StoriesResources.Romance;
-            }
-            else if (categoryName == "Thriller")
-            {
-                story = StoriesResources.Thriller;
-            }
-            else if (categoryName == "Science Fiction")
-            {
-                story = StoriesResources.ScienceFiction;
-            }
-            else if (categoryName == "Fantasy")
-            {
-                story = StoriesResources.Fantasy;
-            }
-            else if (categoryName == "Religious")
-            {
-                story = StoriesResources.Religious;
-            }
-            else if (categoryName == "Humor")
-            {
-                story = StoriesResources.Humor;
-            }
-            else if (categoryName == "Historical Fiction")
-            {
-                story = StoriesResources.HistoricalFiction;
-            }
-            else if (categoryName == "Young Adult")
-            {
-                story = StoriesResources.YoungAdult;
-            }
-            else if (categoryName == "Adventure")
-            {
-                story = StoriesResources.Adventure;
-            }
-            else if (categoryName == "Dystopian")
-            {
-                story = StoriesResources.Dystopian;
-            }
-            else if (categoryName == "Horror")
-            {
-                story = StoriesResources.Horror;
-            }
-
-            return story;
+            return storiesDict[categoryName];
         }
     }
 }

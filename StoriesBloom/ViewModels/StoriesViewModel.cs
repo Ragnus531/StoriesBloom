@@ -1,15 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 using StoriesBloom.Views.Popups;
+using CommunityToolkit.Maui.Converters;
 
 namespace StoriesBloom.ViewModels;
+
 
 public partial class StoriesViewModel : BaseViewModel
 {
 	readonly StoryDataService dataService;
 
+	[ObservableProperty]
+	bool isLoadingData = true;
+
+	[ObservableProperty]
+	string currState = States.Loading;
+
     [ObservableProperty]
     string category;
+
+	[ObservableProperty]
+	bool canStateChange;
 
     [ObservableProperty]
 	bool isRefreshing;
@@ -47,7 +58,7 @@ public partial class StoriesViewModel : BaseViewModel
 	[RelayCommand]
 	public async Task LoadMore()
 	{
-		var items = await dataService.GetStories();
+		var items = dataService.GetStories();
 
 		foreach (var item in items)
 		{
@@ -57,7 +68,11 @@ public partial class StoriesViewModel : BaseViewModel
 
 	public async Task LoadDataAsync()
 	{
-		Items = new ObservableCollection<StoryDetail>(await dataService.GetStories());
+		var dd = dataService.GetStories();
+        await Task.Run(() =>
+        {
+            Items = new ObservableCollection<StoryDetail>(dataService.GetStories());
+        });
 	}
 
 	[RelayCommand]
@@ -71,18 +86,32 @@ public partial class StoriesViewModel : BaseViewModel
 
 	private async Task ChangeElements()
 	{
-		_popupService.ShowPopup(new LoadingStoriesPopupPage());
-
-		Items = new ObservableCollection<StoryDetail>(await dataService.GetStories(Category));
-
-		_popupService.HidePopup();
+		//_popupService.ShowPopup(new LoadingStoriesPopupPage());
+        //await Task.Delay(5000);
+        //Items = new ObservableCollection<StoryDetail>(dataService.GetStories(Category));
+        var ff = dataService.GetStories(Category);
+        Items.Clear();
+        await Task.Run(() =>
+		{
+			foreach (var item in ff)
+			{
+				Items.Add(item);
+			}
+		});	
+        //Items = new ObservableCollection<StoryDetail>(await dataService.GetStories(Category));
+        //_popupService.HidePopup();
     }
 
-	private async Task GoToDetail(StoryDetail novelDetail)
+    private async Task GoToDetail(StoryDetail novelDetail)
 	{
         await Shell.Current.GoToAsync(nameof(StoriesDetailPage), true, new Dictionary<string, object>
         {
             { "Item", novelDetail }
         });
+    }
+    static class States
+    {
+        public const string Loading = nameof(Loading);
+        public const string Success = nameof(Success);
     }
 }

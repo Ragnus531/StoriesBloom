@@ -81,6 +81,8 @@
 	  <PackageReference Include="AlohaKit" Version="1.0.74" />
 	  <PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
 	  <PackageReference Include="CommunityToolkit.MVVM" Version="8.2.0" />
+	  <PackageReference Include="HorusStudio.Maui.Skeleton" Version="2.0.0" />
+	  <PackageReference Include="Sharpnado.HorusSkeleton.Maui" Version="2.0.0" />
 	  <PackageReference Include="SimpleToolkit.Core" Version="2.0.6" />
 	  <PackageReference Include="UraniumUI" Version="2.4.5" />
 	</ItemGroup>
