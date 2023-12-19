@@ -78,48 +78,41 @@
 
         </Grid>
 
-        <!-- List of Novels -->
-        <ScrollView Grid.Row="1" BackgroundColor="{StaticResource ThirdColor}">
+        <Grid Grid.Row="1" toolkit:StateContainer.CurrentState="{Binding CurrState}">
+            <toolkit:StateContainer.StateViews>
+                <VerticalStackLayout BackgroundColor="{StaticResource ThirdColor}"
+                                     toolkit:StateView.StateKey="Loading"
+                                     >
+                    <ActivityIndicator IsRunning="True" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Label Text="Loading Content..." HorizontalTextAlignment="Center"  VerticalOptions="Center"/>
+                </VerticalStackLayout>
+
+                <ScrollView Grid.Row="1" BackgroundColor="{StaticResource ThirdColor}"
+                            toolkit:StateView.StateKey="Success" >
+                    <CollectionView SelectionMode="None" 
+                    ItemsSource="{Binding Items}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="m:StoryDetail">
+                                <Grid Margin="15,5,15,5" HeightRequest="75" >
+                                    <Border BackgroundColor="{StaticResource SecondaryColor}" Stroke="White" StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2">
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=GoToNovelDetailsCommand}" CommandParameter="{Binding .}" />
+                                        </Border.GestureRecognizers>
+                                        <Label Padding="10" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+              Text="{Binding Title}"/>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+
+                   
+            </toolkit:StateContainer.StateViews>
             
-            <CollectionView SelectionMode="None" ItemsSource="{Binding Items}"
-                            
-                            >
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:StoryDetail">
-                        <Grid Margin="15,5,15,5"
-                      HeightRequest="75" >
-                            <Border BackgroundColor="{StaticResource SecondaryColor}" Stroke="White" StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2">
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=GoToNovelDetailsCommand}" CommandParameter="{Binding .}" />
-                                </Border.GestureRecognizers>
-                                <Label Padding="10" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
-                                    Text="{Binding Title}"/>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-
-            <!--<FlexLayout BackgroundColor="#0D0118" x:Name="flexLayout" Wrap="Wrap" JustifyContent="SpaceAround">
-                
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-                <Image HeightRequest="100" Source="cinderella.jpg"></Image>
-            </FlexLayout>-->
-        </ScrollView>
+        </Grid>
+        <!-- List of Novels -->
     </Grid>
     <!--<RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshingCommand}">
 		<CollectionView ItemsSource="{Binding Items}" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">

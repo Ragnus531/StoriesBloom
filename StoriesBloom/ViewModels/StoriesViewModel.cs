@@ -68,10 +68,12 @@ public partial class StoriesViewModel : BaseViewModel
 
 	public async Task LoadDataAsync()
 	{
+		CurrState = States.Loading;
 		var dd = dataService.GetStories();
         await Task.Run(() =>
         {
             Items = new ObservableCollection<StoryDetail>(dataService.GetStories());
+            CurrState = States.Success;
         });
 	}
 
@@ -86,9 +88,10 @@ public partial class StoriesViewModel : BaseViewModel
 
 	private async Task ChangeElements()
 	{
-		//_popupService.ShowPopup(new LoadingStoriesPopupPage());
+        //_popupService.ShowPopup(new LoadingStoriesPopupPage());
         //await Task.Delay(5000);
         //Items = new ObservableCollection<StoryDetail>(dataService.GetStories(Category));
+        CurrState = States.Loading;
         var ff = dataService.GetStories(Category);
         Items.Clear();
         await Task.Run(() =>
@@ -97,7 +100,8 @@ public partial class StoriesViewModel : BaseViewModel
 			{
 				Items.Add(item);
 			}
-		});	
+            CurrState = States.Success;
+        });	
         //Items = new ObservableCollection<StoryDetail>(await dataService.GetStories(Category));
         //_popupService.HidePopup();
     }
