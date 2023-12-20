@@ -18,17 +18,17 @@ namespace StoriesBloom.Services
         public void InitCategories()
         {
             //TODO: Change logic to init StoriesAmount on application launch
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Romance", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Thriller", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Science Fiction", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Fantasy", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Religious", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Humor", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Historical Fiction", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Young Adult", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Adventure", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Dystopian", StoriesAmount = new Random().Next(1, 100)});
-            Categories.Add(new Category() { ProfileImage = "snow.jpg", Name = "Horror", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "romance.jpg", Name = "Romance", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "thriller.jpg", Name = "Thriller", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "sciencefiction.jpg", Name = "Science Fiction", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "fantasy.jpg", Name = "Fantasy", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "religious.jpg", Name = "Religious", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "humor.jpg", Name = "Humor", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "historicalfiction.jpg", Name = "Historical Fiction", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "youngadult.jpg", Name = "Young Adult", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "adventure.jpg", Name = "Adventure", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "dystopian.jpg", Name = "Dystopian", StoriesAmount = new Random().Next(1, 100)});
+            Categories.Add(new Category() { ProfileImage = "horror.jpg", Name = "Horror", StoriesAmount = new Random().Next(1, 100)});
         }
 
     }

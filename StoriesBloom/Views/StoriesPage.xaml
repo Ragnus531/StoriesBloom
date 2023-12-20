@@ -84,7 +84,7 @@
                                      toolkit:StateView.StateKey="Loading"
                                      >
                     <ActivityIndicator IsRunning="True" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Label Text="Loading Content..." HorizontalTextAlignment="Center"  VerticalOptions="Center"/>
+                    <Label Text="Loading Stories..." HorizontalTextAlignment="Center"  VerticalOptions="Center"/>
                 </VerticalStackLayout>
 
                 <ScrollView Grid.Row="1" BackgroundColor="{StaticResource ThirdColor}"

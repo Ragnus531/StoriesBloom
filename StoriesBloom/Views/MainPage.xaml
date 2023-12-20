@@ -70,19 +70,23 @@
                             IndicatorSize="8" SelectedIndicatorColor="White" VerticalOptions="Center" Margin="25,10,25,0" />
 
             <Label Grid.Row="4" FontSize="16" TextColor="White" Margin="25,10,25,10" VerticalOptions="Center" 
-                   Text="Moze również ci sie spodobaja"/>
+                   Text="Kategorie"/>
 
-            <CollectionView Grid.Row="5" ItemsSource="{Binding StoriesInfo2}">
+            <CollectionView Grid.Row="5" ItemsSource="{Binding StoriesCategories}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="25" Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="m:StoryInfo">
+                    <DataTemplate x:DataType="m:Category">
                         <Grid HeightRequest="200" WidthRequest="200">
                             <Border  HorizontalOptions="Center" Stroke="{StaticResource SecondaryColor}" 
                                     StrokeShape="RoundRectangle 20,20,20,20" StrokeThickness="2" WidthRequest="200" >
 
-                                <Image Aspect="AspectFill" Source="{Binding Image}" />
+                                <Grid>
+                                    <Image Aspect="AspectFill" Source="{Binding ProfileImage}"/>
+                                    <Label Text="{Binding Name}" TextColor="White" FontSize="26.667" VerticalTextAlignment="Center" HeightRequest="210" HorizontalTextAlignment="Center" />
+                                </Grid>
+                               
                             </Border>
 
                         </Grid>

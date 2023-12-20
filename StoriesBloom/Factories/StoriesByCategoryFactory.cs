@@ -13,7 +13,6 @@ namespace StoriesBloom.Factories
                 return;
             }
 
-            Console.WriteLine($"Start1 {DateTime.Now}");
             storiesDict.Add("Romance", StoriesResources.Romance);
             storiesDict.Add("Thriller", StoriesResources.Thriller);
             storiesDict.Add("Science Fiction", StoriesResources.ScienceFiction);
@@ -25,7 +24,6 @@ namespace StoriesBloom.Factories
             storiesDict.Add("Adventure", StoriesResources.Adventure);
             storiesDict.Add("Dystopian", StoriesResources.Dystopian);
             storiesDict.Add("Horror", StoriesResources.Horror);
-            Console.WriteLine($"Stop1 {DateTime.Now}");
         }
 
         public byte[] GetStories(string categoryName)
