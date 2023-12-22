@@ -30,5 +30,15 @@ namespace StoriesBloom.Factories
         {
             return storiesDict[categoryName];
         }
+
+        public IEnumerable<byte[]> GetAllStories()
+        {
+            var listToReturn = new List<byte[]>();
+            foreach (var item in storiesDict)
+            {
+                listToReturn.Add(item.Value);
+            }
+            return listToReturn;
+        }
     }
 }

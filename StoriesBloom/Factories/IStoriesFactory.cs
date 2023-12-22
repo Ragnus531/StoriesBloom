@@ -10,5 +10,6 @@ namespace StoriesBloom.Factories
     {
         void InitStories();
         byte[] GetStories(string categoryName);
+        IEnumerable<byte[]> GetAllStories();
     }
 }

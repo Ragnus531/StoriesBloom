@@ -11,16 +11,13 @@ public partial class MainViewModel : BaseViewModel
     ObservableCollection<StoryInfo> storiesInfo;
 
     [ObservableProperty]
-    ObservableCollection<StoryInfo> storiesInfo2;
-
-    [ObservableProperty]
     ObservableCollection<Category> storiesCategories;
 
     //Add a cache or a await while await we are loading those stories maybe and saving them in cache?
     public MainViewModel(StoryDataService dataService, ICategoriesService categoriesService,
         IPopupService popupService)
     {
-        _dataService= dataService;
+        _dataService = dataService;
         _popupService = popupService;
         InitializeTales();
         StoriesCategories = new ObservableCollection<Category>(categoriesService.Categories);
@@ -28,25 +25,29 @@ public partial class MainViewModel : BaseViewModel
 
     private void InitializeTales()
     {
-        //Collect user activity and propose stories based on activy so if user clicks only on adventure show 5 adventures
+        List<StoryDetail> randomStories = (List<StoryDetail>)_dataService.Get5RandomStories();
+        int minutes1 = CalculateTimeToRead(randomStories[0]); int minutes2 = CalculateTimeToRead(randomStories[1]);
+        int minutes3 = CalculateTimeToRead(randomStories[2]); int minutes4 = CalculateTimeToRead(randomStories[3]);
+        int minutes5 = CalculateTimeToRead(randomStories[4]);
+
+        //Random 5 stories 
         StoriesInfo = new ObservableCollection<StoryInfo>
                {
-                   new StoryInfo { Name = "Kopciuszek", ReadTime = new TimeSpan(0, 30, 0), Image = "cinderella.jpg" },
-                   new StoryInfo { Name = "Królewna Śnieżka", ReadTime = new TimeSpan(0, 25, 0),  Image = "snow.jpg" },
-                   new StoryInfo { Name = "Roszpunka", ReadTime = new TimeSpan(0, 20, 0),  Image = "rapunzel.jpg" },
-                   new StoryInfo { Name = "Czerwony Kapturek", ReadTime = new TimeSpan(0, 15, 0),  Image = "hood.jpg" },
-                   new StoryInfo { Name = "Piękna i Bestia", ReadTime = new TimeSpan(0, 35, 0),  Image = "beauty.jpg" }
-               };
-        //Random 5 stories 
-        StoriesInfo2 = new ObservableCollection<StoryInfo>
-               {
-                   new StoryInfo { Name = "Królewna Śnieżka", ReadTime = new TimeSpan(0, 25, 0),  Image = "snow.jpg" },
-                   new StoryInfo { Name = "Roszpunka", ReadTime = new TimeSpan(0, 20, 0),  Image = "rapunzel.jpg" },
-                   new StoryInfo { Name = "Czerwony Kapturek", ReadTime = new TimeSpan(0, 15, 0),  Image = "hood.jpg" },
-                   new StoryInfo { Name = "Piękna i Bestia", ReadTime = new TimeSpan(0, 35, 0),  Image = "beauty.jpg" },
-                   new StoryInfo { Name = "Kopciuszek", ReadTime = new TimeSpan(0, 30, 0),  Image = "cinderella.jpg" }
+                   new StoryInfo { Name = randomStories[0].Title, ReadTime = new TimeSpan(0, minutes1, 0),  Image = "/stories/cinderella.jpg" },
+                   new StoryInfo { Name = randomStories[1].Title, ReadTime = new TimeSpan(0, minutes2, 0),  Image = "/stories/snow.jpg" },
+                   new StoryInfo { Name = randomStories[2].Title, ReadTime = new TimeSpan(0, minutes3, 0),  Image = "/stories/rapunzel.jpg" },
+                   new StoryInfo { Name = randomStories[3].Title, ReadTime = new TimeSpan(0, minutes4, 0),  Image = "/stories/hood.jpg" },
+                   new StoryInfo { Name = randomStories[4].Title, ReadTime = new TimeSpan(0, minutes5, 0),  Image = "/stories/beauty.jpg" }
                };
 
+        //StoriesInfo = new ObservableCollection<StoryInfo>
+        //       {
+        //           new StoryInfo { Name = "Kopciuszek", ReadTime = new TimeSpan(0, 30, 0), Image = "/stories/cinderella.jpg" },
+        //           new StoryInfo { Name = "Królewna Śnieżka", ReadTime = new TimeSpan(0, 25, 0),  Image = "/stories/snow.jpg" },
+        //           new StoryInfo { Name = "Roszpunka", ReadTime = new TimeSpan(0, 20, 0),  Image = "/stories/rapunzel.jpg" },
+        //           new StoryInfo { Name = "Czerwony Kapturek", ReadTime = new TimeSpan(0, 15, 0),  Image = "/stories/hood.jpg" },
+        //           new StoryInfo { Name = "Piękna i Bestia", ReadTime = new TimeSpan(0, 35, 0),  Image = "/stories/beauty.jpg" }
+        //       };
     }
 
     [RelayCommand]
@@ -73,5 +74,29 @@ public partial class MainViewModel : BaseViewModel
         {
             { "Item", item }
         });
+    }
+
+    private int CalculateTimeToRead(StoryDetail storyDetail)
+    {
+        int number = storyDetail.Title.Count() +
+                     storyDetail.Chapter1.Count() +
+                     storyDetail.Chapter2.Count() +
+                     storyDetail.Chapter3.Count() +
+                     storyDetail.Chapter4.Count() +
+                     storyDetail.Chapter5.Count() +
+                     storyDetail.Epilogue.Count();
+
+        if (storyDetail.UnexpectedTwist != null)
+        {
+            number += storyDetail.UnexpectedTwist.Count();
+        }
+        return ReadTimeFromNumberOfWordsAsMinutes(number);
+    }
+
+    private int ReadTimeFromNumberOfWordsAsMinutes(int numberOfWords)
+    {
+        int averageReadingSpeed = 250;
+        int minutes = numberOfWords / averageReadingSpeed;
+        return minutes;
     }
 }
