@@ -33,11 +33,11 @@ public partial class MainViewModel : BaseViewModel
         //Random 5 stories 
         StoriesInfo = new ObservableCollection<StoryInfo>
                {
-                   new StoryInfo { Name = randomStories[0].Title, ReadTime = new TimeSpan(0, minutes1, 0),  Image = "/stories/cinderella.jpg" },
-                   new StoryInfo { Name = randomStories[1].Title, ReadTime = new TimeSpan(0, minutes2, 0),  Image = "/stories/snow.jpg" },
-                   new StoryInfo { Name = randomStories[2].Title, ReadTime = new TimeSpan(0, minutes3, 0),  Image = "/stories/rapunzel.jpg" },
-                   new StoryInfo { Name = randomStories[3].Title, ReadTime = new TimeSpan(0, minutes4, 0),  Image = "/stories/hood.jpg" },
-                   new StoryInfo { Name = randomStories[4].Title, ReadTime = new TimeSpan(0, minutes5, 0),  Image = "/stories/beauty.jpg" }
+                   new(){ Name = randomStories[0].Title, ReadTime = new TimeSpan(0, minutes1, 0),  Image = "/stories/cinderella.jpg" },
+                   new(){ Name = randomStories[1].Title, ReadTime = new TimeSpan(0, minutes2, 0),  Image = "/stories/snow.jpg" },
+                   new(){ Name = randomStories[2].Title, ReadTime = new TimeSpan(0, minutes3, 0),  Image = "/stories/rapunzel.jpg" },
+                   new(){ Name = randomStories[3].Title, ReadTime = new TimeSpan(0, minutes4, 0),  Image = "/stories/hood.jpg" },
+                   new(){ Name = randomStories[4].Title, ReadTime = new TimeSpan(0, minutes5, 0),  Image = "/stories/beauty.jpg" }
                };
 
         //StoriesInfo = new ObservableCollection<StoryInfo>
@@ -76,24 +76,24 @@ public partial class MainViewModel : BaseViewModel
         });
     }
 
-    private int CalculateTimeToRead(StoryDetail storyDetail)
+    private static int CalculateTimeToRead(StoryDetail storyDetail)
     {
-        int number = storyDetail.Title.Count() +
-                     storyDetail.Chapter1.Count() +
-                     storyDetail.Chapter2.Count() +
-                     storyDetail.Chapter3.Count() +
-                     storyDetail.Chapter4.Count() +
-                     storyDetail.Chapter5.Count() +
-                     storyDetail.Epilogue.Count();
+        int number = storyDetail.Title.Length +
+                     storyDetail.Chapter1.Length +
+                     storyDetail.Chapter2.Length +
+                     storyDetail.Chapter3.Length +
+                     storyDetail.Chapter4.Length +
+                     storyDetail.Chapter5.Length +
+                     storyDetail.Epilogue.Length;
 
         if (storyDetail.UnexpectedTwist != null)
         {
-            number += storyDetail.UnexpectedTwist.Count();
+            number += storyDetail.UnexpectedTwist.Length;
         }
         return ReadTimeFromNumberOfWordsAsMinutes(number);
     }
 
-    private int ReadTimeFromNumberOfWordsAsMinutes(int numberOfWords)
+    private static int ReadTimeFromNumberOfWordsAsMinutes(int numberOfWords)
     {
         int averageReadingSpeed = 250;
         int minutes = numberOfWords / averageReadingSpeed;
