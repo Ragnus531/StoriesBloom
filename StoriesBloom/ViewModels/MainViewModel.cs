@@ -29,15 +29,15 @@ public partial class MainViewModel : BaseViewModel
         int minutes1 = CalculateTimeToRead(randomStories[0]); int minutes2 = CalculateTimeToRead(randomStories[1]);
         int minutes3 = CalculateTimeToRead(randomStories[2]); int minutes4 = CalculateTimeToRead(randomStories[3]);
         int minutes5 = CalculateTimeToRead(randomStories[4]);
-
+       
         //Random 5 stories 
         StoriesInfo = new ObservableCollection<StoryInfo>
                {
-                   new(){ Name = randomStories[0].Title, ReadTime = new TimeSpan(0, minutes1, 0),  Image = "/stories/cinderella.jpg" },
-                   new(){ Name = randomStories[1].Title, ReadTime = new TimeSpan(0, minutes2, 0),  Image = "/stories/snow.jpg" },
-                   new(){ Name = randomStories[2].Title, ReadTime = new TimeSpan(0, minutes3, 0),  Image = "/stories/rapunzel.jpg" },
-                   new(){ Name = randomStories[3].Title, ReadTime = new TimeSpan(0, minutes4, 0),  Image = "/stories/hood.jpg" },
-                   new(){ Name = randomStories[4].Title, ReadTime = new TimeSpan(0, minutes5, 0),  Image = "/stories/beauty.jpg" }
+                   new(){ Name = randomStories[0].Title, ReadTime = new TimeSpan(0, minutes1, 0),  Image = randomStories[0].ImagePath },
+                   new(){ Name = randomStories[1].Title, ReadTime = new TimeSpan(0, minutes2, 0),  Image = randomStories[1].ImagePath },
+                   new(){ Name = randomStories[2].Title, ReadTime = new TimeSpan(0, minutes3, 0),  Image = randomStories[2].ImagePath },
+                   new(){ Name = randomStories[3].Title, ReadTime = new TimeSpan(0, minutes4, 0),  Image = randomStories[3].ImagePath },
+                   new(){ Name = randomStories[4].Title, ReadTime = new TimeSpan(0, minutes5, 0),  Image = randomStories[4].ImagePath }
                };
 
         //StoriesInfo = new ObservableCollection<StoryInfo>

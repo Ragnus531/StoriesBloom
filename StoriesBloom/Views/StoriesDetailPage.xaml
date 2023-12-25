@@ -24,7 +24,7 @@
                         <RoundRectangle CornerRadius="10" />
                     </Border.StrokeShape>
 
-                    <Image Aspect="AspectFill" Source="rapunzel.jpg"  MaximumHeightRequest="300" />
+                    <Image Aspect="AspectFill" Source="{Binding Item.ImagePath}"  MaximumHeightRequest="300" />
                 </Border>
 
                 <VerticalStackLayout Grid.Row="2" Margin="10,15,0,0">
