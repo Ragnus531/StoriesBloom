@@ -9,7 +9,7 @@
 
     <ScrollView>
         <Grid BackgroundColor="{StaticResource ThirdColor}" RowDefinitions="Auto,Auto,Auto,Auto,Auto,*">
-            
+
             <Grid Grid.Row="1" Margin="20,10,25,10">
                 <Label FontSize="20" TextColor="White" Margin="0,5,5,5" VerticalOptions="Center" 
                        Text="Polecane dla ciebie"/>
@@ -21,7 +21,7 @@
                     <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" SnapPointsAlignment="Center"
                                        SnapPointsType="MandatorySingle" />
                 </CarouselView.ItemsLayout>
-                
+
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="m:StoryInfo">
                         <Grid >
@@ -40,7 +40,7 @@
                                             </LinearGradientBrush>
                                         </RoundRectangle.Fill>
                                     </RoundRectangle>
-                                    
+
                                     <VerticalStackLayout Grid.Row="2" Margin="20,0,0,0">
                                         <Label Text="{Binding ReadTime,StringFormat='Czas czytania: {0:%m} min' }"
                                        TextColor="{StaticResource Gray100}"
@@ -56,11 +56,11 @@
                                     <Shadow Brush="#C283FD"
                                             Opacity=".7"
                                             Radius="100"
-                                            Offset="0,0"/> 
+                                            Offset="0,0"/>
                                 </Border.Shadow>
                             </Border>
 
-  
+
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
@@ -86,7 +86,14 @@
                                     <Image Aspect="AspectFill" Source="{Binding ProfileImage}"/>
                                     <Label Text="{Binding Name}" TextColor="White" FontSize="26.667" VerticalTextAlignment="Center" HeightRequest="210" HorizontalTextAlignment="Center" />
                                 </Grid>
-                               
+
+                                <Border.Shadow>
+                                    <Shadow Brush="#C283FD"
+                                        Opacity=".7"
+                                        Radius="100"
+                                        Offset="0,0"/>
+                                </Border.Shadow>
+
                             </Border>
 
                         </Grid>
@@ -94,11 +101,11 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-           
-           
+
+
         </Grid>
 
-      
+
     </ScrollView>
-    
+
 </ContentPage>

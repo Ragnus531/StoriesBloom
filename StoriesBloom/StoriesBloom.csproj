@@ -129,6 +129,7 @@
 	  <None Remove="Resources\Images\stories\a_pirates_adventure_on_the_high_seas.jpg" />
 	  <None Remove="Resources\Images\stories\a_pirates_search_for_treasure_and_trouble.jpg" />
 	  <None Remove="Resources\Images\stories\a_post-apocalyptic_worlds_survival_and_hope.jpg" />
+	  <None Remove="Resources\Images\stories\a_post_apocalyptic_worlds_survival_and_hope.jpg" />
 	  <None Remove="Resources\Images\stories\a_priests_crisis_of_faith_and_redemption.jpg" />
 	  <None Remove="Resources\Images\stories\a_princesss_escape_from_an_evil_empire.jpg" />
 	  <None Remove="Resources\Images\stories\a_princess_falls_in_love_with_a_rebel_leader_who_wants_to_overthrow_her_kingdom.jpg" />
@@ -142,6 +143,7 @@
 	  <None Remove="Resources\Images\stories\a_saints_life_and_miracles_in_history.jpg" />
 	  <None Remove="Resources\Images\stories\a_samurais_honor_and_duty_in_feudal_japan.jpg" />
 	  <None Remove="Resources\Images\stories\a_sci-fi_thrillers_mystery_and_danger.jpg" />
+	  <None Remove="Resources\Images\stories\a_sci_fi_thrillers_mystery_and_danger.jpg" />
 	  <None Remove="Resources\Images\stories\a_serial_killers_hunt_and_victims.jpg" />
 	  <None Remove="Resources\Images\stories\a_shapeshifters_identity_crisis_in_a_modern_world.jpg" />
 	  <None Remove="Resources\Images\stories\a_shy_nerd_and_a_popular_jock_discover_they_have_more_in_common_than_they_thought.jpg" />
@@ -157,6 +159,7 @@
 	  <None Remove="Resources\Images\stories\a_survivalists_ordeal_in_a_deserted_island.jpg" />
 	  <None Remove="Resources\Images\stories\a_thiefs_heist_in_a_magical_city.jpg" />
 	  <None Remove="Resources\Images\stories\a_time-traveler_meets_the_love_of_his_life_in_the_past.jpg" />
+	  <None Remove="Resources\Images\stories\a_time_traveler_meets_the_love_of_his_life_in_the_past.jpg" />
 	  <None Remove="Resources\Images\stories\a_totalitarian_regimes_control_and_resistance.jpg" />
 	  <None Remove="Resources\Images\stories\a_treasure_hunters_quest_for_a_lost_artifact.jpg" />
 	  <None Remove="Resources\Images\stories\a_utopian_societys_flaw_and_rebellion.jpg" />
@@ -193,6 +196,8 @@
 	  <None Remove="Resources\Images\stories\terrifying_presence_haunts_a_seemingly_peaceful_town.jpg" />
 	  <None Remove="Resources\Images\stories\time-traveling_criminals_rewrite_history_for_profit.jpg" />
 	  <None Remove="Resources\Images\stories\time-warping_historians_alter_the_past.jpg" />
+	  <None Remove="Resources\Images\stories\time_traveling_criminals_rewrite_history_for_profit.jpg" />
+	  <None Remove="Resources\Images\stories\time_warping_historians_alter_the_past.jpg" />
 	  <None Remove="Resources\Images\stories\trapped_in_a_deadly_game_of_cat_and_mouse.jpg" />
 	  <None Remove="Resources\Images\stories\trapped_in_a_remote_cabin_with_a_deadly_secret.jpg" />
 	  <None Remove="Resources\Images\stories\two_childhood_friends_reunite_after_years_apart.jpg" />
@@ -254,6 +259,7 @@
 	  <MauiImage Include="Resources\Images\stories\a_pilgrims_encounter_with_miracles_and_dangers.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_pirates_adventure_on_the_high_seas.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_pirates_search_for_treasure_and_trouble.jpg" />
+	  <MauiImage Include="Resources\Images\stories\a_post_apocalyptic_worlds_survival_and_hope.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_priests_crisis_of_faith_and_redemption.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_princesss_escape_from_an_evil_empire.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_princess_falls_in_love_with_a_rebel_leader_who_wants_to_overthrow_her_kingdom.jpg" />
@@ -266,6 +272,7 @@
 	  <MauiImage Include="Resources\Images\stories\a_safaris_encounter_with_wild_animals_and_dangers.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_saints_life_and_miracles_in_history.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_samurais_honor_and_duty_in_feudal_japan.jpg" />
+	  <MauiImage Include="Resources\Images\stories\a_sci_fi_thrillers_mystery_and_danger.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_serial_killers_hunt_and_victims.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_shapeshifters_identity_crisis_in_a_modern_world.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_shy_nerd_and_a_popular_jock_discover_they_have_more_in_common_than_they_thought.jpg" />
@@ -280,6 +287,7 @@
 	  <MauiImage Include="Resources\Images\stories\a_superheros_struggle_with_his_mundane_alter_ego.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_survivalists_ordeal_in_a_deserted_island.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_thiefs_heist_in_a_magical_city.jpg" />
+	  <MauiImage Include="Resources\Images\stories\a_time_traveler_meets_the_love_of_his_life_in_the_past.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_totalitarian_regimes_control_and_resistance.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_treasure_hunters_quest_for_a_lost_artifact.jpg" />
 	  <MauiImage Include="Resources\Images\stories\a_utopian_societys_flaw_and_rebellion.jpg" />
@@ -314,6 +322,8 @@
 	  <MauiImage Include="Resources\Images\stories\telepathic_humans_connect_with_an_alien_intelligence.jpg" />
 	  <MauiImage Include="Resources\Images\stories\terrifying_force_lurks_in_the_shadows.jpg" />
 	  <MauiImage Include="Resources\Images\stories\terrifying_presence_haunts_a_seemingly_peaceful_town.jpg" />
+	  <MauiImage Include="Resources\Images\stories\time_traveling_criminals_rewrite_history_for_profit.jpg" />
+	  <MauiImage Include="Resources\Images\stories\time_warping_historians_alter_the_past.jpg" />
 	  <MauiImage Include="Resources\Images\stories\trapped_in_a_deadly_game_of_cat_and_mouse.jpg" />
 	  <MauiImage Include="Resources\Images\stories\trapped_in_a_remote_cabin_with_a_deadly_secret.jpg" />
 	  <MauiImage Include="Resources\Images\stories\two_childhood_friends_reunite_after_years_apart.jpg" />

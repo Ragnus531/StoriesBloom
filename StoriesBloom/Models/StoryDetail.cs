@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Android.App;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace StoriesBloom.Models
@@ -26,9 +28,15 @@ namespace StoriesBloom.Models
         {
             get
             {
-                string strippedTitle = Title.Trim()
-                    .Replace(" ", "_").Replace("..", ".").Replace(".",string.Empty)
-                    .Replace("’", "").ToLower();
+                var regex = "[^0-9A-Za-z\\-_ ]";
+
+                var strippedTitle = Regex.Replace(Title.Trim(), regex, string.Empty)
+                                   .Replace(" ","_").Replace("-","_");
+
+                //string strippedTitle = Title.Trim()
+                //    .Replace(" ", "_").Replace("..", ".").Replace(".", string.Empty)
+                //    .Replace("’", "").Replace("-", "_")
+                //    .ToLower();
                 return "/stories/" + strippedTitle + ".jpg";
             }
         }
