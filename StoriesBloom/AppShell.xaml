@@ -12,21 +12,25 @@
     Shell.TabBarUnselectedColor="#AC9DB9"
     >
 
-	<TabBar  >
+	<TabBar x:Name="shelltabbar" >
 		<ShellContent
+            x:Name="mainPage"
 			Title="Główna"
 			Icon="iconblank.png"
 			ContentTemplate="{DataTemplate views:MainPage}" />
 		<ShellContent
+             x:Name="stories"
 			Title="Biblioteka"
 			Icon="iconlistdetail.png"
 			ContentTemplate="{DataTemplate views:StoriesPage}" />
 		<ShellContent
+            x:Name="saved"
 			Title="Zapisane"
 			Icon="bookmark_fill_icon"
 			ContentTemplate="{DataTemplate views:LocalizationPage}" />
 
         <ShellContent
+            x:Name="settings"
 			Title="Ustawienia"
 			Icon="iconlocalization.png"
 			ContentTemplate="{DataTemplate views:StoriesCategory}" />

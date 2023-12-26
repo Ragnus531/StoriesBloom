@@ -1,4 +1,6 @@
-﻿namespace StoriesBloom.ViewModels;
+﻿using System.Windows.Input;
+
+namespace StoriesBloom.ViewModels;
 
 public partial class MainViewModel : BaseViewModel
 {
@@ -13,6 +15,11 @@ public partial class MainViewModel : BaseViewModel
     [ObservableProperty]
     ObservableCollection<Category> storiesCategories;
 
+    public ICommand CategoryChoosenCommand { get; }
+    public ICommand StoryChoosenCommand { get; }
+
+    private List<StoryDetail> _storyDetails = new List<StoryDetail>();
+
     //Add a cache or a await while await we are loading those stories maybe and saving them in cache?
     public MainViewModel(StoryDataService dataService, ICategoriesService categoriesService,
         IPopupService popupService)
@@ -21,6 +28,8 @@ public partial class MainViewModel : BaseViewModel
         _popupService = popupService;
         InitializeTales();
         StoriesCategories = new ObservableCollection<Category>(categoriesService.Categories);
+        StoryChoosenCommand = new AsyncRelayCommand<StoryInfo>(GoToStory);
+        CategoryChoosenCommand = new AsyncRelayCommand<Category>(GoToCategory);
     }
 
     private void InitializeTales()
@@ -29,7 +38,9 @@ public partial class MainViewModel : BaseViewModel
         int minutes1 = CalculateTimeToRead(randomStories[0]); int minutes2 = CalculateTimeToRead(randomStories[1]);
         int minutes3 = CalculateTimeToRead(randomStories[2]); int minutes4 = CalculateTimeToRead(randomStories[3]);
         int minutes5 = CalculateTimeToRead(randomStories[4]);
-       
+
+        _storyDetails.AddRange(randomStories);
+
         //Random 5 stories 
         StoriesInfo = new ObservableCollection<StoryInfo>
                {
@@ -98,5 +109,24 @@ public partial class MainViewModel : BaseViewModel
         int averageReadingSpeed = 250;
         int minutes = numberOfWords / averageReadingSpeed;
         return minutes;
+    }
+
+    private async Task GoToStory(StoryInfo storyInfo)
+    {
+        var storyDet = _storyDetails.FirstOrDefault(a => a.Title == storyInfo.Name);
+        await Shell.Current.GoToAsync(nameof(StoriesDetailPage), true, new Dictionary<string, object>
+        {
+            { "Item", storyDet }
+        });
+    }
+
+    private async Task GoToCategory(Category category)
+    {
+        ((AppShell)App.Current.MainPage).SwitchtoTab(1);
+
+        //await Shell.Current.GoToAsync(nameof(StoriesPage), true, new Dictionary<string, object>
+        //{
+        //    { "Category", category }
+        //});
     }
 }

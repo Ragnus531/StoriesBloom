@@ -28,6 +28,11 @@
                             <Border Grid.RowSpan="3" BackgroundColor="{StaticResource MainColor}" HeightRequest="300" 
                                     Stroke="{StaticResource SecondaryColor}"
                                     StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2" WidthRequest="300">
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryChoosenCommand}" CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                
                                 <Grid RowDefinitions=".2*,.6*,.2*">
                                     <Image Aspect="AspectFill" Source="{Binding Image}" Grid.RowSpan="3" />
 
@@ -82,6 +87,10 @@
                             <Border  HorizontalOptions="Center" Stroke="{StaticResource SecondaryColor}" 
                                     StrokeShape="RoundRectangle 20,20,20,20" StrokeThickness="2" WidthRequest="200" >
 
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryChoosenCommand}" CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                
                                 <Grid>
                                     <Image Aspect="AspectFill" Source="{Binding ProfileImage}"/>
                                     <Label Text="{Binding Name}" TextColor="White" FontSize="26.667" VerticalTextAlignment="Center" HeightRequest="210" HorizontalTextAlignment="Center" />

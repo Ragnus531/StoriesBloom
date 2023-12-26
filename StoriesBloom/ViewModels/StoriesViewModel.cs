@@ -5,9 +5,10 @@ using CommunityToolkit.Maui.Converters;
 
 namespace StoriesBloom.ViewModels;
 
-
+[QueryProperty(nameof(Category), "Category")]
 public partial class StoriesViewModel : BaseViewModel
 {
+
 	readonly StoryDataService dataService;
 
 	[ObservableProperty]
