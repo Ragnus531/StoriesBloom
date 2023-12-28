@@ -2,6 +2,8 @@
 using System.Windows.Input;
 using StoriesBloom.Views.Popups;
 using CommunityToolkit.Maui.Converters;
+using CommunityToolkit.Mvvm.Messaging;
+using StoriesBloom.Messages;
 
 namespace StoriesBloom.ViewModels;
 
@@ -27,18 +29,19 @@ public partial class StoriesViewModel : BaseViewModel
 	bool isRefreshing;
 
 	[ObservableProperty]
-	ObservableCollection<StoryDetail> items;
-    private readonly IPopupService _popupService;
+	ObservableCollection<StoryDetail> items = new ObservableCollection<StoryDetail>();
 
     public ICommand IncrementCounterCommand { get; }
     public ICommand GoToNovelDetailsCommand { get; }
 
-    public StoriesViewModel(StoryDataService service, IPopupService popupService)
+	private string _cachedCategory;
+	private bool _viewInitialized;
+
+    public StoriesViewModel(StoryDataService service)
 	{
 		dataService = service;
         IncrementCounterCommand = new AsyncRelayCommand(ChangeElements);
         GoToNovelDetailsCommand = new AsyncRelayCommand<StoryDetail>(GoToDetail);
-		_popupService = popupService;
     }
 
     [RelayCommand]
@@ -78,6 +81,42 @@ public partial class StoriesViewModel : BaseViewModel
         });
 	}
 
+	public void InitListener()
+	{
+        //There is problem with picker and ArgsConverter when we don't go to page and initialize components first
+		//That is why we are using this hack here to postpone initializing items with category.
+        WeakReferenceMessenger.Default.Register<ChangedCategoryMessage>(this, (r, m) =>
+        {
+			if (!_viewInitialized)
+			{
+				_cachedCategory = m.Value;
+			}
+			else
+			{
+				MainThread.BeginInvokeOnMainThread(() =>
+				{
+					Category = m.Value;
+					ChangeElements();
+				});
+			}
+        });	
+    }
+
+	public void InitCategory()
+	{
+		if(!string.IsNullOrEmpty(_cachedCategory))
+		{
+			Category = _cachedCategory;
+			ChangeElements();
+            _cachedCategory = null; //To not trigger again with wrong category
+		}
+	}
+
+	public void InitApp()
+	{
+		_viewInitialized = true;
+	}
+
 	[RelayCommand]
 	private async void GoToDetails(StoryDetail item)
 	{
@@ -89,7 +128,6 @@ public partial class StoriesViewModel : BaseViewModel
 
 	private async Task ChangeElements()
 	{
-        //_popupService.ShowPopup(new LoadingStoriesPopupPage());
         //await Task.Delay(5000);
         //Items = new ObservableCollection<StoryDetail>(dataService.GetStories(Category));
         CurrState = States.Loading;
@@ -104,7 +142,6 @@ public partial class StoriesViewModel : BaseViewModel
             CurrState = States.Success;
         });	
         //Items = new ObservableCollection<StoryDetail>(await dataService.GetStories(Category));
-        //_popupService.HidePopup();
     }
 
     private async Task GoToDetail(StoryDetail novelDetail)

@@ -34,6 +34,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient<SampleDataService>();
         builder.Services.AddTransient<StoryDataService>();
+		
 
 		StoriesByCategoryFactory storiesByCategoryFactory = new StoriesByCategoryFactory();
 		storiesByCategoryFactory.InitStories();
@@ -42,7 +43,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<StoriesDetailViewModel>();
 		builder.Services.AddTransient<StoriesDetailPage>();
 
-		builder.Services.AddSingleton<StoriesViewModel>();
+		
+        builder.Services.AddSingleton<StoriesViewModel>();
 
 		builder.Services.AddSingleton<StoriesPage>();
 
@@ -57,6 +59,11 @@ public static class MauiProgram
 		categoriesService.InitCategories();
 		builder.Services.AddSingleton<ICategoriesService>(categoriesService);
 
-        return builder.Build();
+        var app =  builder.Build();
+
+		var storiesVM = app.Services.GetRequiredService<StoriesViewModel>();
+		storiesVM.InitListener();
+
+		return app;
 	}
 }

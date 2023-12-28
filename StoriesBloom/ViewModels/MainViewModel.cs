@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using StoriesBloom.Messages;
+using System.Windows.Input;
 
 namespace StoriesBloom.ViewModels;
 
@@ -29,7 +31,7 @@ public partial class MainViewModel : BaseViewModel
         InitializeTales();
         StoriesCategories = new ObservableCollection<Category>(categoriesService.Categories);
         StoryChoosenCommand = new AsyncRelayCommand<StoryInfo>(GoToStory);
-        CategoryChoosenCommand = new AsyncRelayCommand<Category>(GoToCategory);
+        CategoryChoosenCommand = new RelayCommand<Category>(GoToCategory);
     }
 
     private void InitializeTales()
@@ -120,9 +122,10 @@ public partial class MainViewModel : BaseViewModel
         });
     }
 
-    private async Task GoToCategory(Category category)
+    private  void GoToCategory(Category category)
     {
         ((AppShell)App.Current.MainPage).SwitchtoTab(1);
+        WeakReferenceMessenger.Default.Send(new ChangedCategoryMessage(category.Name));
 
         //await Shell.Current.GoToAsync(nameof(StoriesPage), true, new Dictionary<string, object>
         //{

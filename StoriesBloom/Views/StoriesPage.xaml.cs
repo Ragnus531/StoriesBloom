@@ -9,13 +9,15 @@ public partial class StoriesPage : ContentPage
 		InitializeComponent();
 
 		BindingContext = ViewModel = viewModel;
+		viewModel.InitCategory();
+		viewModel.InitApp();
     }
 
 	protected override async void OnNavigatedTo(NavigatedToEventArgs args)
 	{
 		base.OnNavigatedTo(args);
 
-		await ViewModel.LoadDataAsync();
+		//await ViewModel.LoadDataAsync();
 	}
 
     private void picker_SelectedIndexChanged(object sender, EventArgs e)
