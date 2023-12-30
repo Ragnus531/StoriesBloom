@@ -20,6 +20,8 @@ public partial class MainViewModel : BaseViewModel
     [ObservableProperty]
     bool storyDetailLoading;
 
+    [ObservableProperty]
+    bool categoryLoading;
 
     public ICommand CategoryChoosenCommand { get; }
     public ICommand StoryChoosenCommand { get; }
@@ -35,7 +37,7 @@ public partial class MainViewModel : BaseViewModel
         InitializeTales();
         StoriesCategories = new ObservableCollection<Category>(categoriesService.Categories);
         StoryChoosenCommand = new AsyncRelayCommand<StoryInfo>(GoToStory);
-        CategoryChoosenCommand = new RelayCommand<Category>(GoToCategory);
+        CategoryChoosenCommand = new AsyncRelayCommand<Category>(GoToCategory);
     }
 
     private void InitializeTales()
@@ -113,31 +115,43 @@ public partial class MainViewModel : BaseViewModel
 
     private async Task GoToStory(StoryInfo storyInfo)
     {
-        StoryDetailLoading = true;
-
+        SwitchLoadingState(true);
         var storyDet = _storyDetails.FirstOrDefault(a => a.Title == storyInfo.Name);
         await Shell.Current.GoToAsync(nameof(StoriesDetailPage), true, new Dictionary<string, object>
         {
             { "Item", storyDet }
         });
 
-        StoryDetailLoading = false;
+        SwitchLoadingState(false);
     }
 
-    private  void GoToCategory(Category category)
+    private async Task GoToCategory(Category category)
     {
+        SwitchLoadingState(true);
+        await Task.Delay(500);
+
         ((AppShell)App.Current.MainPage).SwitchtoTab(1);
         WeakReferenceMessenger.Default.Send(new ChangedCategoryMessage(category.Name));
+        SwitchLoadingState(false);
+    }
 
-        //await Shell.Current.GoToAsync(nameof(StoriesPage), true, new Dictionary<string, object>
-        //{
-        //    { "Category", category }
-        //});
+    private void SwitchLoadingState(bool  state)
+    {
+        if (state)
+        {
+            CategoryLoading = true;
+            StoryDetailLoading = true;
+        }
+        else
+        {
+            CategoryLoading = false;
+            StoryDetailLoading = false;
+        }
     }
 
     public void ResetState()
     {
         StoryDetailLoading = false;
-
+        CategoryLoading = false;
     }
 }

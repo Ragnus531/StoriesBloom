@@ -29,8 +29,6 @@ public partial class MainPage : ContentPage
                     var searchIcon = handler.PlatformView.FindViewById<Android.Widget.ImageView>(searchIconId);
                     searchIcon.SetColorFilter(Android.Graphics.Color.Rgb(172, 157, 185), Android.Graphics.PorterDuff.Mode.SrcIn);
                }
-
-              
 #endif
         });
     }

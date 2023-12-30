@@ -12,6 +12,8 @@
         <ResourceDictionary>
             <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolIndicatorConverter" TrueObject="1" FalseObject="0" />
             <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolElemntsConverter" TrueObject="0,3" FalseObject="1" />
+            <toolkit:BoolToObjectConverter x:Key="CategoryLoadingBoolIndicatorConverter" TrueObject="1" FalseObject="0" />
+            <toolkit:BoolToObjectConverter x:Key="CategoryLoadingBoolElemntsConverter" TrueObject="0,5" FalseObject="1" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -38,7 +40,7 @@
                                     StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2" WidthRequest="300">
 
                                 <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryChoosenCommand}" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryChoosenCommand}" CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
                                 
                                 <Grid RowDefinitions=".2*,.6*,.2*">
@@ -90,6 +92,10 @@
             <Label Grid.Row="4" FontSize="16" TextColor="White" Margin="25,10,25,10" VerticalOptions="Center" 
                    Text="Kategorie"/>
 
+            <Grid Grid.Row="5">
+                
+            </Grid>
+            
             <CollectionView Grid.Row="5" ItemsSource="{Binding StoriesCategories}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="25" Orientation="Horizontal" />
@@ -105,8 +111,15 @@
                                 </Border.GestureRecognizers>
                                 
                                 <Grid>
-                                    <Image Aspect="AspectFill" Source="{Binding ProfileImage}"/>
-                                    <Label Text="{Binding Name}" TextColor="White" FontSize="26.667" VerticalTextAlignment="Center" HeightRequest="210" HorizontalTextAlignment="Center" />
+                                    <ActivityIndicator IsRunning="True" Color="Orange" HorizontalOptions="Center"
+                   VerticalOptions="Center" Grid.RowSpan="3" 
+                   Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading,Converter={StaticResource CategoryLoadingBoolIndicatorConverter}}" />
+                                    <Image Aspect="AspectFill" Source="{Binding ProfileImage}"
+                                           Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading,Converter={StaticResource CategoryLoadingBoolElemntsConverter}}"
+                                           />
+                                    <Label Text="{Binding Name}" TextColor="White" FontSize="26.667" VerticalTextAlignment="Center" HeightRequest="210" HorizontalTextAlignment="Center"
+                                           Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading,Converter={StaticResource CategoryLoadingBoolElemntsConverter}}"
+                                           />
                                 </Grid>
 
                                 <Border.Shadow>
