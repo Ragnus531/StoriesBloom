@@ -5,7 +5,15 @@
 			  xmlns:m="clr-namespace:StoriesBloom.Models"
              x:Class="StoriesBloom.Views.MainPage"
 			 x:DataType="vm:MainViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolIndicatorConverter" TrueObject="1" FalseObject="0" />
+            <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolElemntsConverter" TrueObject="0,3" FalseObject="1" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
         <Grid BackgroundColor="{StaticResource ThirdColor}" RowDefinitions="Auto,Auto,Auto,Auto,Auto,*">
@@ -34,7 +42,12 @@
                                 </Border.GestureRecognizers>
                                 
                                 <Grid RowDefinitions=".2*,.6*,.2*">
-                                    <Image Aspect="AspectFill" Source="{Binding Image}" Grid.RowSpan="3" />
+                                    <ActivityIndicator IsRunning="True" Color="Orange" HorizontalOptions="Center"
+                                                       VerticalOptions="Center" Grid.RowSpan="3" 
+                                                       Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryDetailLoading,Converter={StaticResource StoryDetailLoadingBoolIndicatorConverter}}" />
+
+                                    <Image Aspect="AspectFill" Source="{Binding Image}" Grid.RowSpan="3"
+                                                       Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryDetailLoading,Converter={StaticResource StoryDetailLoadingBoolElemntsConverter}}"/>
 
                                     <RoundRectangle Grid.RowSpan="3" CornerRadius="30" HeightRequest="300" WidthRequest="300"
                                                     Opacity=".7">

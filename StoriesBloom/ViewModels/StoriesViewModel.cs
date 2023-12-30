@@ -11,9 +11,10 @@ namespace StoriesBloom.ViewModels;
 public partial class StoriesViewModel : BaseViewModel
 {
 
-	readonly StoryDataService dataService;
+	private readonly StoryDataService dataService;
+    private readonly ICategoriesService _categoriesService;
 
-	[ObservableProperty]
+    [ObservableProperty]
 	bool isLoadingData = true;
 
 	[ObservableProperty]
@@ -37,9 +38,10 @@ public partial class StoriesViewModel : BaseViewModel
 	private string _cachedCategory;
 	private bool _viewInitialized;
 
-    public StoriesViewModel(StoryDataService service)
+    public StoriesViewModel(StoryDataService service, ICategoriesService categoriesService)
 	{
 		dataService = service;
+        _categoriesService = categoriesService;
         IncrementCounterCommand = new AsyncRelayCommand(ChangeElements);
         GoToNovelDetailsCommand = new AsyncRelayCommand<StoryDetail>(GoToDetail);
     }
@@ -115,6 +117,15 @@ public partial class StoriesViewModel : BaseViewModel
 	public void InitApp()
 	{
 		_viewInitialized = true;
+		if (string.IsNullOrEmpty(Category))
+		{
+            Category = _categoriesService.Categories.FirstOrDefault()?.Name;
+		}
+
+		if(Items.Count == 0)
+		{
+			ChangeElements();
+		}
 	}
 
 	[RelayCommand]

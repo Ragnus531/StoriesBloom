@@ -38,7 +38,7 @@ public partial class MainPage : ContentPage
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-
-        await ViewModel.LoadDataAsync();
+        ViewModel.ResetState();
+       // await ViewModel.LoadDataAsync();
     }
 }

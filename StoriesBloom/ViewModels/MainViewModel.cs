@@ -17,6 +17,10 @@ public partial class MainViewModel : BaseViewModel
     [ObservableProperty]
     ObservableCollection<Category> storiesCategories;
 
+    [ObservableProperty]
+    bool storyDetailLoading;
+
+
     public ICommand CategoryChoosenCommand { get; }
     public ICommand StoryChoosenCommand { get; }
 
@@ -74,12 +78,6 @@ public partial class MainViewModel : BaseViewModel
         }
     }
 
-    public async Task LoadDataAsync()
-    {
-        Items = new ObservableCollection<StoryDetail>(_dataService.GetStories());
-    }
-
-
     [RelayCommand]
     private async void GoToDetails(StoryDetail item)
     {
@@ -115,11 +113,15 @@ public partial class MainViewModel : BaseViewModel
 
     private async Task GoToStory(StoryInfo storyInfo)
     {
+        StoryDetailLoading = true;
+
         var storyDet = _storyDetails.FirstOrDefault(a => a.Title == storyInfo.Name);
         await Shell.Current.GoToAsync(nameof(StoriesDetailPage), true, new Dictionary<string, object>
         {
             { "Item", storyDet }
         });
+
+        StoryDetailLoading = false;
     }
 
     private  void GoToCategory(Category category)
@@ -131,5 +133,11 @@ public partial class MainViewModel : BaseViewModel
         //{
         //    { "Category", category }
         //});
+    }
+
+    public void ResetState()
+    {
+        StoryDetailLoading = false;
+
     }
 }
