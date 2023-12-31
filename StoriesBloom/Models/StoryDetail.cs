@@ -1,5 +1,4 @@
-﻿using Android.App;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ namespace StoriesBloom.Models
     //                          ,string Chapter1,string Chapter2, string Chapter3, string Chapter4, string Chapter5
     //                          ,string Epilogue,string UnexpectedTwist);
 
-    public record StoryDetail
+    public class StoryDetail : ObservableObject
     {
         public string Title { get; set; }
         public string Prologue { get; set; }
@@ -23,6 +22,9 @@ namespace StoriesBloom.Models
         public string Chapter5 { get; set; }
         public string Epilogue { get; set; }
         public string UnexpectedTwist { get; set; }
+
+        public bool Show { get => show; set => SetProperty(ref show, value); }
+        private bool show = true;
 
         public string ImagePath
         {
@@ -52,6 +54,10 @@ namespace StoriesBloom.Models
             Chapter5 = chapter5;
             Epilogue = epilogue;
             UnexpectedTwist = unexpectedTwist;
+        }
+
+        public StoryDetail()
+        {
         }
     }
 }

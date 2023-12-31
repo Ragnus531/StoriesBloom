@@ -10,7 +10,6 @@ namespace StoriesBloom.ViewModels;
 [QueryProperty(nameof(Category), "Category")]
 public partial class StoriesViewModel : BaseViewModel
 {
-
 	private readonly StoryDataService dataService;
     private readonly ICategoriesService _categoriesService;
 
@@ -30,12 +29,41 @@ public partial class StoriesViewModel : BaseViewModel
 	bool isRefreshing;
 
 	[ObservableProperty]
-	ObservableCollection<StoryDetail> items = new ObservableCollection<StoryDetail>();
+    ObservableCollection<StoryDetail> items = new ObservableCollection<StoryDetail>();
+
+	[ObservableProperty]
+	[NotifyPropertyChangedFor(nameof(FilteredStories))]
+	private string filteredText = string.Empty;
+
+	public ObservableCollection<StoryDetail> FilteredStories
+	{
+		get
+		{
+			//FilteredText.Length == 0 ? Items : Items.Where(s => s.Title.Contains(FilteredText)).ToList();
+			if (FilteredText.Length == 0)
+				return Items;
+			else
+			{
+				var tempList = Items;
+				foreach (var tempItem in tempList)
+				{
+					if (tempItem.Title.ToLower().Contains(FilteredText.ToLower()))
+						tempItem.Show = true;
+					else
+						tempItem.Show = false;
+				}
+				return tempList;
+
+            } 
+		}
+	}
 
     public ICommand IncrementCounterCommand { get; }
     public ICommand GoToNovelDetailsCommand { get; }
 
-	private string _cachedCategory;
+	private List<StoryDetail> _cachedList = new List<StoryDetail>();
+
+    private string _cachedCategory;
 	private bool _viewInitialized;
 
     public StoriesViewModel(StoryDataService service, ICategoriesService categoriesService)
@@ -45,43 +73,6 @@ public partial class StoriesViewModel : BaseViewModel
         IncrementCounterCommand = new AsyncRelayCommand(ChangeElements);
         GoToNovelDetailsCommand = new AsyncRelayCommand<StoryDetail>(GoToDetail);
     }
-
-    [RelayCommand]
-	private async void OnRefreshing()
-	{
-		IsRefreshing = true;
-
-		try
-		{
-			await LoadDataAsync();
-		}
-		finally
-		{
-			IsRefreshing = false;
-		}
-	}
-
-	[RelayCommand]
-	public async Task LoadMore()
-	{
-		var items = dataService.GetStories();
-
-		foreach (var item in items)
-		{
-			Items.Add(item);
-		}
-	}
-
-	public async Task LoadDataAsync()
-	{
-		CurrState = States.Loading;
-		var dd = dataService.GetStories();
-        await Task.Run(() =>
-        {
-            Items = new ObservableCollection<StoryDetail>(dataService.GetStories());
-            CurrState = States.Success;
-        });
-	}
 
 	public void InitListener()
 	{
@@ -128,20 +119,12 @@ public partial class StoriesViewModel : BaseViewModel
 		}
 	}
 
-	[RelayCommand]
-	private async void GoToDetails(StoryDetail item)
-	{
-		await Shell.Current.GoToAsync(nameof(StoriesDetailPage), true, new Dictionary<string, object>
-		{
-			{ "Item", item }
-		});
-	}
-
 	private async Task ChangeElements()
 	{
         //await Task.Delay(5000);
         //Items = new ObservableCollection<StoryDetail>(dataService.GetStories(Category));
         CurrState = States.Loading;
+		FilteredText = string.Empty;
         var ff = dataService.GetStories(Category);
         Items.Clear();
         await Task.Run(() =>
@@ -162,6 +145,7 @@ public partial class StoriesViewModel : BaseViewModel
             { "Item", novelDetail }
         });
     }
+
     static class States
     {
         public const string Loading = nameof(Loading);

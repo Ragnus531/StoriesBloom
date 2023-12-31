@@ -23,11 +23,15 @@
          StrokeThickness="1"
          StrokeShape="RoundRectangle 10,10,10,10"
          HeightRequest="45">
-                    <SearchBar  BackgroundColor="{StaticResource MainColor}" CancelButtonColor="White" 
+                    <SearchBar 
+                           
+                        Text="{Binding FilteredText,Mode=TwoWay}"
+                               BackgroundColor="{StaticResource MainColor}" CancelButtonColor="White" 
                            Placeholder="Szukaj..." 
                            PlaceholderColor="#AC9DB9"
                            TextColor="White"
-                           VerticalOptions="Center"/>
+                           VerticalOptions="Center">
+                    </SearchBar>
                 </Border>
 
             </Grid>
@@ -89,11 +93,11 @@
 
                 <ScrollView Grid.Row="1" BackgroundColor="{StaticResource ThirdColor}"
                             toolkit:StateView.StateKey="Success" >
-                    <CollectionView SelectionMode="None" 
-                    ItemsSource="{Binding Items}">
+                    <CollectionView x:Name="StoriesCollection" SelectionMode="None" 
+                    ItemsSource="{Binding FilteredStories}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="m:StoryDetail">
-                                <Grid Margin="15,5,15,5" HeightRequest="75" >
+                                <Grid IsVisible="{Binding Show}"  Margin="15,5,15,5" HeightRequest="75" >
                                     <Border BackgroundColor="{StaticResource SecondaryColor}" Stroke="White" StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2">
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=GoToNovelDetailsCommand}" CommandParameter="{Binding .}" />
@@ -101,10 +105,34 @@
                                         <Label Padding="10" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
               Text="{Binding Title}"/>
                                     </Border>
+                                    <Grid.Triggers>
+                                        <Trigger TargetType="Grid"
+                                                 Property="IsVisible"
+                                                 Value="False">
+                                            <Setter Property="HeightRequest" Value="0" />
+                                            <Setter Property="Margin" Value="0"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                        </Trigger>
+
+                                    </Grid.Triggers>
                                 </Grid>
                             </DataTemplate>
 
                         </CollectionView.ItemTemplate>
+
+                        <CollectionView.EmptyView>
+                            <ContentView>
+                                <StackLayout HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                                    <Label Text="No results matched your filter."
+                           Margin="10,25,10,10"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           HorizontalOptions="Fill"
+                           HorizontalTextAlignment="Center" />
+                                </StackLayout>
+                            </ContentView>
+                        </CollectionView.EmptyView>
                     </CollectionView>
                 </ScrollView>
 
