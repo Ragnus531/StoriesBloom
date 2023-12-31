@@ -35,6 +35,9 @@ public partial class StoriesViewModel : BaseViewModel
 	[NotifyPropertyChangedFor(nameof(FilteredStories))]
 	private string filteredText = string.Empty;
 
+	[ObservableProperty]
+	private bool storyDetailLoading;
+
 	public ObservableCollection<StoryDetail> FilteredStories
 	{
 		get
@@ -140,10 +143,20 @@ public partial class StoriesViewModel : BaseViewModel
 
     private async Task GoToDetail(StoryDetail novelDetail)
 	{
+		StoryDetailLoading = true;
+		await Task.Delay(100);
+
         await Shell.Current.GoToAsync(nameof(StoriesDetailPage), true, new Dictionary<string, object>
         {
             { "Item", novelDetail }
         });
+
+		StoryDetailLoading = false;
+    }
+
+    public void ResetState()
+    {
+        StoryDetailLoading = false;
     }
 
     static class States

@@ -11,9 +11,12 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:SelectedItemEventArgsConverter x:Key="ItemIndexChanged" />
+            <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolIndicatorConverter" TrueObject="1" FalseObject="0" />
+            <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolElemntsConverter" TrueObject="0,3" FalseObject="1" />
+
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <Grid RowDefinitions="Auto,*">
 
         <Grid ColumnDefinitions=".5*,.5*" BackgroundColor="{StaticResource ThirdColor}">
@@ -102,8 +105,13 @@
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=GoToNovelDetailsCommand}" CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
-                                        <Label Padding="10" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
-              Text="{Binding Title}"/>
+                                        <Grid>
+                                            <ActivityIndicator IsRunning="true"  HorizontalOptions="Center" VerticalOptions="Center" 
+                                                               Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=StoryDetailLoading,Converter={StaticResource StoryDetailLoadingBoolIndicatorConverter}}"/>
+                                            <Label  Padding="10" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
+                                                Text="{Binding Title}"  Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=StoryDetailLoading,Converter={StaticResource StoryDetailLoadingBoolElemntsConverter}}"   />
+                                        </Grid>
+                                        
                                     </Border>
                                     <Grid.Triggers>
                                         <Trigger TargetType="Grid"
@@ -136,75 +144,10 @@
                     </CollectionView>
                 </ScrollView>
 
-                   
+
             </toolkit:StateContainer.StateViews>
-            
+
         </Grid>
         <!-- List of Novels -->
     </Grid>
-    <!--<RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshingCommand}">
-		<CollectionView ItemsSource="{Binding Items}" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
-			<CollectionView.ItemTemplate>
-				<DataTemplate x:DataType="m:SampleItem">
-                    <Border StrokeThickness="0.5">
-                        <ContentView Padding="16">
-                            <ContentView.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}" />
-                            </ContentView.GestureRecognizers>
-
-                            <Grid ColumnSpacing="16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                -->
-    <!--<Frame Padding="0"
-                                   Grid.Column="0"
-                                   Grid.RowSpan="3"
-                                   BorderColor="Transparent"
-                                   IsClippedToBounds="True">
-                                    <Image Source="https://aka.ms/campus.jpg"
-                                       Aspect="AspectFill"/>
-                                </Frame>-->
-    <!--
-
-                                <Label Text="{Binding Title}"
-                                   Grid.Row="0"
-                                   Grid.Column="1"
-                                   FontFamily="PoppinsSemibold"
-                                   FontSize="15"></Label>
-
-                                <StackLayout Orientation="Horizontal"
-                                         Spacing="4"
-                                         Grid.Row="2"
-                                         Grid.Column="1"
-                                             >
-                                    <Label Text="Romance"
-                                       TextColor="{StaticResource Primary}"/>
-                                    -->
-    <!--<Label Text="·"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource Gray200}"/>
-                                    <Label Text="01.01.2022 12:48"
-                                   TextColor="{StaticResource Gray200}"/>-->
-    <!--
-                                </StackLayout>
-
-                            </Grid>
-                        </ContentView>
-                    </Border>
-                </DataTemplate>
-			</CollectionView.ItemTemplate>
-            <CollectionView.Footer>
-                -->
-    <!-- For some reason, last item is hidden behind bottom bar. Add blank footer to compensate. -->
-    <!--
-                <BoxView HeightRequest="100" Color="White"/>
-            </CollectionView.Footer>
-        </CollectionView>
-	</RefreshView>-->
 </ContentPage>

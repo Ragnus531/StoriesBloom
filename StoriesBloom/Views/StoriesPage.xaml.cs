@@ -16,9 +16,8 @@ public partial class StoriesPage : ContentPage
 	protected override async void OnNavigatedTo(NavigatedToEventArgs args)
 	{
 		base.OnNavigatedTo(args);
-
-		//await ViewModel.LoadDataAsync();
-	}
+        ViewModel.ResetState();
+    }
 
     private void picker_SelectedIndexChanged(object sender, EventArgs e)
     {
