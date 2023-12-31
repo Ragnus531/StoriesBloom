@@ -61,7 +61,7 @@
             </Grid>
 
             <VerticalStackLayout Grid.Row="1" Margin="0,10,0,0" >
-                <toolkit:Expander IsExpanded="True">
+                <toolkit:Expander x:Name="prologueExpander" IsExpanded="True" ExpandedChanged="Expander_ExpandedChanged">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Prologue"
@@ -70,7 +70,7 @@
                            TextColor="#666"/>
 
 
-                            <Image Source="arrow_down" Margin="3,1,0,0" HeightRequest="25"  />
+                            <Image x:Name="arrowImagePrologue" Source="arrow_down" Margin="3,1,0,0" HeightRequest="25"  />
 
                         </HorizontalStackLayout>
 
@@ -83,7 +83,7 @@
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0">
+                <toolkit:Expander x:Name="chapter1Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Chapter 1"
@@ -92,7 +92,7 @@
                            TextColor="#666"/>
 
 
-                            <Image Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image x:Name="arrowImageChapter1" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
 
                         </HorizontalStackLayout>
 
@@ -105,7 +105,7 @@
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0">
+                <toolkit:Expander x:Name="chapter2Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Chapter 2"
@@ -114,7 +114,7 @@
                            TextColor="#666"/>
 
 
-                            <Image Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image x:Name="arrowImageChapter2" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
 
                         </HorizontalStackLayout>
 
@@ -127,7 +127,7 @@
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0">
+                <toolkit:Expander x:Name="chapter3Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Chapter 3"
@@ -136,7 +136,7 @@
                            TextColor="#666"/>
 
 
-                            <Image Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image x:Name="arrowImageChapter3" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
 
                         </HorizontalStackLayout>
 
@@ -149,7 +149,7 @@
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0">
+                <toolkit:Expander x:Name="chapter4Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Chapter 4"
@@ -158,7 +158,7 @@
                            TextColor="#666"/>
 
 
-                            <Image Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image x:Name="arrowImageChapter4" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
 
                         </HorizontalStackLayout>
 
@@ -171,7 +171,7 @@
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0">
+                <toolkit:Expander x:Name="chapter5Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Chapter 5"
@@ -180,7 +180,7 @@
                            TextColor="#666"/>
 
 
-                            <Image Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image x:Name="arrowImageChapter5" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
 
                         </HorizontalStackLayout>
 
@@ -193,7 +193,7 @@
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0">
+                <toolkit:Expander x:Name="epilogueExpander" IsExpanded="True"  Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged" >
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Epilogue"
@@ -202,7 +202,7 @@
                            TextColor="#666"/>
 
 
-                            <Image Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image x:Name="arrowImageEpilogue" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
 
                         </HorizontalStackLayout>
 
@@ -215,7 +215,8 @@
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander IsExpanded="True" Margin="0,10,0,0" IsVisible="{Binding Item.UnexpectedTwist.Length, Converter={local:IntToBoolConverter}}">
+                <toolkit:Expander x:Name="twistExpander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged"
+                                  IsVisible="{Binding Item.UnexpectedTwist.Length, Converter={local:IntToBoolConverter}}">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
                             <Label Text="Unexpected Twist"
@@ -224,7 +225,7 @@
                            TextColor="#666"/>
 
 
-                            <Image Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image x:Name="arrowImageTwist" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
 
                         </HorizontalStackLayout>
 
