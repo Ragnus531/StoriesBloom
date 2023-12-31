@@ -1,7 +1,11 @@
-﻿using CommunityToolkit.Maui;
+﻿#if ANDROID
+using StoriesBloom.Platforms.Android;
+#endif
+
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using StoriesBloom.Factories;
-
+using Microsoft.Extensions.Logging;
 namespace StoriesBloom;
 
 public static class MauiProgram
@@ -12,6 +16,11 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+             .ConfigureMauiHandlers(handlers => {
+#if ANDROID
+                handlers.AddHandler<Picker, CustomPickerHandler>();
+#endif
+             })
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("FontAwesome6FreeBrands.otf", "FontAwesomeBrands");
@@ -28,7 +37,7 @@ public static class MauiProgram
                 fonts.AddFont("fontello.ttf", "Icons");
             });
 
-		builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<MainViewModel>();
 		builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<IPopupService, PopupService>();
 
