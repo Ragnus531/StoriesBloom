@@ -56,6 +56,8 @@
 	  <None Remove="Resources\Images\about_icon.svg" />
 	  <None Remove="Resources\Images\back_icon.svg" />
 	  <None Remove="Resources\Images\beauty.jpg" />
+	  <None Remove="Resources\Images\bookmarksave.svg" />
+	  <None Remove="Resources\Images\bookmarktosave.svg" />
 	  <None Remove="Resources\Images\bookmark_empty_icon.svg" />
 	  <None Remove="Resources\Images\bookmark_fill_icon.svg" />
 	  <None Remove="Resources\Images\bookmark_icon.svg" />

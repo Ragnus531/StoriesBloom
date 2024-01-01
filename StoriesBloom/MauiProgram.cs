@@ -59,6 +59,8 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<LocalizationViewModel>();
 
+		builder.Services.AddSingleton<ISavedStoryService, SavedStoryService>();
+
 		builder.Services.AddSingleton<LocalizationPage>();
 
 		builder.Services.AddSingleton<StoriesCategory>();

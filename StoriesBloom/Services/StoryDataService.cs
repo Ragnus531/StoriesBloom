@@ -12,10 +12,12 @@ namespace StoriesBloom.Services
     public class StoryDataService
     {
         private IStoriesFactory _storiesFactory;
+        private readonly ISavedStoryService _savedStoryService;
 
-        public StoryDataService(IStoriesFactory storiesFactory)
+        public StoryDataService(IStoriesFactory storiesFactory, ISavedStoryService savedStoryService)
         {
             _storiesFactory = storiesFactory;
+            _savedStoryService = savedStoryService;
         }
 
         public IEnumerable<StoryDetail> GetStories(string category = "Romance")
@@ -23,6 +25,7 @@ namespace StoriesBloom.Services
             var listToReturn = new List<StoryDetail>();
             byte[] das = _storiesFactory.GetStories(category);
             ParseList(listToReturn, das);
+            CheckIfSaved(listToReturn);
             return listToReturn;
         }
 
@@ -58,7 +61,7 @@ namespace StoriesBloom.Services
             }
         }
 
-        private void ParseListWithLimit(List<StoryDetail> listToReturn, byte[] das,int limit)
+        private void ParseListWithLimit(List<StoryDetail> listToReturn, byte[] das, int limit)
         {
             Random rand = new Random();
             JsonParser jsonParser = new JsonParser();
@@ -76,7 +79,7 @@ namespace StoriesBloom.Services
             }
         }
 
-        public StoryDetail SplitTextIntoChapters(string text,string title)
+        private StoryDetail SplitTextIntoChapters(string text, string title)
         {
             string prologue = "", chapter1 = "", chapter2 = "", chapter3 = "", chapter4 = "", chapter5 = "", epilogue = "", twistedEnding = "";
 
@@ -94,11 +97,11 @@ namespace StoriesBloom.Services
             return new StoryDetail(title, prologue, chapter1, chapter2, chapter3, chapter4, chapter5, epilogue, twistedEnding);
         }
 
-        private  StoryDetail ParseText(string inputText,string title)
+        private StoryDetail ParseText(string inputText, string title)
         {
-            string prologue = "", chapter1 = "", chapter2 = "", chapter3 = "", chapter4 = "", chapter5 = "" , epilogue = "", twistedEnding = "";
+            string prologue = "", chapter1 = "", chapter2 = "", chapter3 = "", chapter4 = "", chapter5 = "", epilogue = "", twistedEnding = "";
             string pattern = @"(Prologue|Chapter 1|Chapter 2|Chapter 3|Chapter 4|Chapter 5|Epilogue|Twisted Ending|Unexpected Twist)\s+(.*?)(?=($Prologue$|$Chapter1$|$Chapter2$|$Chapter3$|$Chapter4$|$Chapter5$|$Epilogue$|$Twisted Ending$|$UnexpectedTwist$|$))";
-            
+
             if (inputText == null)
                 return null;
 
@@ -142,6 +145,17 @@ namespace StoriesBloom.Services
             }
 
             return new StoryDetail(title, prologue, chapter1, chapter2, chapter3, chapter4, chapter5, epilogue, twistedEnding);
+        }
+
+        private void CheckIfSaved(List<StoryDetail> storyDetails)
+        {
+            foreach (var story in storyDetails)
+            {
+                if (_savedStoryService.IsSaved(story))
+                {
+                    story.SavedWithoutNotification = true;
+                }
+            }
         }
     }
 }

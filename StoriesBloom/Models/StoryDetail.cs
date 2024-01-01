@@ -23,6 +23,10 @@ namespace StoriesBloom.Models
         public string Epilogue { get; set; }
         public string UnexpectedTwist { get; set; }
 
+        public bool Saved { get => saved; set => SetProperty(ref saved, value); }
+        public bool SavedWithoutNotification { get => saved; set => saved = value; }
+        private bool saved = false;
+
         public bool Show { get => show; set => SetProperty(ref show, value); }
         private bool show = true;
 

@@ -52,21 +52,17 @@ public partial class MainViewModel : BaseViewModel
         //Random 5 stories 
         StoriesInfo = new ObservableCollection<StoryInfo>
                {
-                   new(){ Name = randomStories[0].Title, ReadTime = new TimeSpan(0, minutes1, 0),  Image = randomStories[0].ImagePath },
-                   new(){ Name = randomStories[1].Title, ReadTime = new TimeSpan(0, minutes2, 0),  Image = randomStories[1].ImagePath },
-                   new(){ Name = randomStories[2].Title, ReadTime = new TimeSpan(0, minutes3, 0),  Image = randomStories[2].ImagePath },
-                   new(){ Name = randomStories[3].Title, ReadTime = new TimeSpan(0, minutes4, 0),  Image = randomStories[3].ImagePath },
-                   new(){ Name = randomStories[4].Title, ReadTime = new TimeSpan(0, minutes5, 0),  Image = randomStories[4].ImagePath }
+                   new(){ Name = randomStories[0].Title, ReadTime = new TimeSpan(0, minutes1, 0),
+                                Image = randomStories[0].ImagePath },
+                   new(){ Name = randomStories[1].Title, ReadTime = new TimeSpan(0, minutes2, 0),
+                                Image = randomStories[1].ImagePath },
+                   new(){ Name = randomStories[2].Title, ReadTime = new TimeSpan(0, minutes3, 0),
+                                Image = randomStories[2].ImagePath },
+                   new(){ Name = randomStories[3].Title, ReadTime = new TimeSpan(0, minutes4, 0),
+                                Image = randomStories[3].ImagePath },
+                   new(){ Name = randomStories[4].Title, ReadTime = new TimeSpan(0, minutes5, 0),
+                                Image = randomStories[4].ImagePath }
                };
-
-        //StoriesInfo = new ObservableCollection<StoryInfo>
-        //       {
-        //           new StoryInfo { Name = "Kopciuszek", ReadTime = new TimeSpan(0, 30, 0), Image = "/stories/cinderella.jpg" },
-        //           new StoryInfo { Name = "Królewna Śnieżka", ReadTime = new TimeSpan(0, 25, 0),  Image = "/stories/snow.jpg" },
-        //           new StoryInfo { Name = "Roszpunka", ReadTime = new TimeSpan(0, 20, 0),  Image = "/stories/rapunzel.jpg" },
-        //           new StoryInfo { Name = "Czerwony Kapturek", ReadTime = new TimeSpan(0, 15, 0),  Image = "/stories/hood.jpg" },
-        //           new StoryInfo { Name = "Piękna i Bestia", ReadTime = new TimeSpan(0, 35, 0),  Image = "/stories/beauty.jpg" }
-        //       };
     }
 
     [RelayCommand]

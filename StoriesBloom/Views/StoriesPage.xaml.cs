@@ -21,9 +21,9 @@ public partial class StoriesPage : ContentPage
 
     private void picker_SelectedIndexChanged(object sender, EventArgs e)
     {
-		//flexLayout.Clear();
-		//flexLayout.Add(new Label() { Text = "nnn" }); 
-		//flexLayout.Add(new Label() { Text = "nnn222" });
+        //flexLayout.Clear();
+        //flexLayout.Add(new Label() { Text = "nnn" }); 
+        //flexLayout.Add(new Label() { Text = "nnn222" });
     }
 
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)

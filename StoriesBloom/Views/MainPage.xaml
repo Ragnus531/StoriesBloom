@@ -1,19 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
-			  xmlns:m="clr-namespace:StoriesBloom.Models"
-             x:Class="StoriesBloom.Views.MainPage"
-			 x:DataType="vm:MainViewModel"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             >
+<ContentPage
+    x:Class="StoriesBloom.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:m="clr-namespace:StoriesBloom.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
+    x:DataType="vm:MainViewModel">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolIndicatorConverter" TrueObject="1" FalseObject="0" />
-            <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolElemntsConverter" TrueObject="0,3" FalseObject="1" />
-            <toolkit:BoolToObjectConverter x:Key="CategoryLoadingBoolIndicatorConverter" TrueObject="1" FalseObject="0" />
-            <toolkit:BoolToObjectConverter x:Key="CategoryLoadingBoolElemntsConverter" TrueObject="0,5" FalseObject="1" />
+            <toolkit:BoolToObjectConverter
+                x:Key="StoryDetailLoadingBoolIndicatorConverter"
+                FalseObject="0"
+                TrueObject="1" />
+            <toolkit:BoolToObjectConverter
+                x:Key="StoryDetailLoadingBoolElemntsConverter"
+                FalseObject="1"
+                TrueObject="0,3" />
+            <toolkit:BoolToObjectConverter
+                x:Key="CategoryLoadingBoolIndicatorConverter"
+                FalseObject="0"
+                TrueObject="1" />
+            <toolkit:BoolToObjectConverter
+                x:Key="CategoryLoadingBoolElemntsConverter"
+                FalseObject="1"
+                TrueObject="0,5" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -21,62 +33,88 @@
         <Grid BackgroundColor="{StaticResource ThirdColor}" RowDefinitions="Auto,Auto,Auto,Auto,Auto,*">
 
             <Grid Grid.Row="1" Margin="20,10,25,10">
-                <Label FontSize="20" TextColor="White" Margin="0,5,5,5" VerticalOptions="Center" 
-                       Text="Polecane dla ciebie"/>
+                <Label
+                    Margin="0,5,5,5"
+                    FontSize="20"
+                    Text="Polecane dla ciebie"
+                    TextColor="White"
+                    VerticalOptions="Center" />
             </Grid>
 
-            <CarouselView IndicatorView="indicatorView" Grid.Row="2"  ItemsSource="{Binding StoriesInfo}" PeekAreaInsets="5">
+            <CarouselView
+                Grid.Row="2"
+                IndicatorView="indicatorView"
+                ItemsSource="{Binding StoriesInfo}"
+                PeekAreaInsets="5">
 
                 <CarouselView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" SnapPointsAlignment="Center"
-                                       SnapPointsType="MandatorySingle" />
+                    <LinearItemsLayout
+                        ItemSpacing="0"
+                        Orientation="Horizontal"
+                        SnapPointsAlignment="Center"
+                        SnapPointsType="MandatorySingle" />
                 </CarouselView.ItemsLayout>
 
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="m:StoryInfo">
-                        <Grid >
-                            <Border Grid.RowSpan="3" BackgroundColor="{StaticResource MainColor}" HeightRequest="300" 
-                                    Stroke="{StaticResource SecondaryColor}"
-                                    StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2" WidthRequest="300">
+                        <Grid>
+                            <Border
+                                Grid.RowSpan="3"
+                                BackgroundColor="{StaticResource MainColor}"
+                                HeightRequest="300"
+                                Stroke="{StaticResource SecondaryColor}"
+                                StrokeShape="RoundRectangle 30,30,30,30"
+                                StrokeThickness="2"
+                                WidthRequest="300">
 
                                 <Border.GestureRecognizers>
-                                    <TapGestureRecognizer  Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryChoosenCommand}" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryChoosenCommand}" CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
-                                
+
                                 <Grid RowDefinitions=".2*,.6*,.2*">
-                                    <ActivityIndicator IsRunning="True"  HorizontalOptions="Center"
-                                                       VerticalOptions="Center" Grid.RowSpan="3" 
-                                                       Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryDetailLoading,Converter={StaticResource StoryDetailLoadingBoolIndicatorConverter}}" />
+                                    <ActivityIndicator
+                                        Grid.RowSpan="3"
+                                        HorizontalOptions="Center"
+                                        IsRunning="True"
+                                        Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryDetailLoading, Converter={StaticResource StoryDetailLoadingBoolIndicatorConverter}}"
+                                        VerticalOptions="Center" />
 
-                                    <Image Aspect="AspectFill" Source="{Binding Image}" Grid.RowSpan="3"
-                                                       Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryDetailLoading,Converter={StaticResource StoryDetailLoadingBoolElemntsConverter}}"/>
+                                    <Image
+                                        Grid.RowSpan="3"
+                                        Aspect="AspectFill"
+                                        Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StoryDetailLoading, Converter={StaticResource StoryDetailLoadingBoolElemntsConverter}}"
+                                        Source="{Binding Image}" />
 
-                                    <RoundRectangle Grid.RowSpan="3" CornerRadius="30" HeightRequest="300" WidthRequest="300"
-                                                    Opacity=".7">
+                                    <RoundRectangle
+                                        Grid.RowSpan="3"
+                                        CornerRadius="30"
+                                        HeightRequest="300"
+                                        Opacity=".7"
+                                        WidthRequest="300">
                                         <RoundRectangle.Fill>
                                             <LinearGradientBrush EndPoint="0,1">
-                                                <GradientStop Offset="0" Color="Transparent"></GradientStop>
-                                                <GradientStop Offset="1" Color="#030005"/>
+                                                <GradientStop Offset="0" Color="Transparent" />
+                                                <GradientStop Offset="1" Color="#030005" />
                                             </LinearGradientBrush>
                                         </RoundRectangle.Fill>
                                     </RoundRectangle>
 
                                     <VerticalStackLayout Grid.Row="2" Margin="20,0,0,0">
-                                        <Label Text="{Binding ReadTime,StringFormat='Czas czytania: {0:%m} min' }"
-                                       TextColor="{StaticResource Gray100}"
-                                       />
-                                        <Label FontSize="Small" LineBreakMode="CharacterWrap"  MaxLines="2" Text="{Binding Name}"
-                                       TextColor="White"/>
+                                        <Label Text="{Binding ReadTime, StringFormat='Czas czytania: {0:%m} min'}" TextColor="{StaticResource Gray100}" />
+                                        <Label
+                                            FontSize="Small"
+                                            LineBreakMode="CharacterWrap"
+                                            MaxLines="2"
+                                            Text="{Binding Name}"
+                                            TextColor="White" />
                                     </VerticalStackLayout>
-
-                                    <Label Margin="0,20,20,0" FontFamily="Icons" FontSize="25" HorizontalOptions="End" 
-                                           Text="&#xF097;" TextColor="White"/>
                                 </Grid>
                                 <Border.Shadow>
-                                    <Shadow Brush="#C283FD"
-                                            Opacity=".7"
-                                            Radius="100"
-                                            Offset="0,0"/>
+                                    <Shadow
+                                        Brush="#C283FD"
+                                        Opacity=".7"
+                                        Radius="100"
+                                        Offset="0,0" />
                                 </Border.Shadow>
                             </Border>
 
@@ -86,16 +124,26 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
 
-            <IndicatorView x:Name="indicatorView" Grid.Row="3" HorizontalOptions="Center" IndicatorColor="#616161" 
-                            IndicatorSize="8" SelectedIndicatorColor="White" VerticalOptions="Center" Margin="25,10,25,0" />
+            <IndicatorView
+                x:Name="indicatorView"
+                Grid.Row="3"
+                Margin="25,10,25,0"
+                HorizontalOptions="Center"
+                IndicatorColor="#616161"
+                IndicatorSize="8"
+                SelectedIndicatorColor="White"
+                VerticalOptions="Center" />
 
-            <Label Grid.Row="4" FontSize="16" TextColor="White" Margin="25,10,25,10" VerticalOptions="Center" 
-                   Text="Kategorie"/>
+            <Label
+                Grid.Row="4"
+                Margin="25,10,25,10"
+                FontSize="16"
+                Text="Kategorie"
+                TextColor="White"
+                VerticalOptions="Center" />
 
-            <Grid Grid.Row="5">
-                
-            </Grid>
-            
+            <Grid Grid.Row="5" />
+
             <CollectionView Grid.Row="5" ItemsSource="{Binding StoriesCategories}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="25" Orientation="Horizontal" />
@@ -103,30 +151,44 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="m:Category">
                         <Grid HeightRequest="200" WidthRequest="200">
-                            <Border  HorizontalOptions="Center" Stroke="{StaticResource SecondaryColor}" 
-                                    StrokeShape="RoundRectangle 20,20,20,20" StrokeThickness="2" WidthRequest="200" >
+                            <Border
+                                HorizontalOptions="Center"
+                                Stroke="{StaticResource SecondaryColor}"
+                                StrokeShape="RoundRectangle 20,20,20,20"
+                                StrokeThickness="2"
+                                WidthRequest="200">
 
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryChoosenCommand}" CommandParameter="{Binding .}" />
                                 </Border.GestureRecognizers>
-                                
+
                                 <Grid>
-                                    <ActivityIndicator  IsRunning="True"  HorizontalOptions="Center"
-                   VerticalOptions="Center" Grid.RowSpan="3" 
-                   Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading,Converter={StaticResource CategoryLoadingBoolIndicatorConverter}}" />
-                                    <Image Aspect="AspectFill" Source="{Binding ProfileImage}"
-                                           Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading,Converter={StaticResource CategoryLoadingBoolElemntsConverter}}"
-                                           />
-                                    <Label Text="{Binding Name}" TextColor="White" FontSize="26.667" VerticalTextAlignment="Center" HeightRequest="210" HorizontalTextAlignment="Center"
-                                           Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading,Converter={StaticResource CategoryLoadingBoolElemntsConverter}}"
-                                           />
+                                    <ActivityIndicator
+                                        Grid.RowSpan="3"
+                                        HorizontalOptions="Center"
+                                        IsRunning="True"
+                                        Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading, Converter={StaticResource CategoryLoadingBoolIndicatorConverter}}"
+                                        VerticalOptions="Center" />
+                                    <Image
+                                        Aspect="AspectFill"
+                                        Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading, Converter={StaticResource CategoryLoadingBoolElemntsConverter}}"
+                                        Source="{Binding ProfileImage}" />
+                                    <Label
+                                        FontSize="26.667"
+                                        HeightRequest="210"
+                                        HorizontalTextAlignment="Center"
+                                        Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=CategoryLoading, Converter={StaticResource CategoryLoadingBoolElemntsConverter}}"
+                                        Text="{Binding Name}"
+                                        TextColor="White"
+                                        VerticalTextAlignment="Center" />
                                 </Grid>
 
                                 <Border.Shadow>
-                                    <Shadow Brush="#C283FD"
+                                    <Shadow
+                                        Brush="#C283FD"
                                         Opacity=".7"
                                         Radius="100"
-                                        Offset="0,0"/>
+                                        Offset="0,0" />
                                 </Border.Shadow>
 
                             </Border>

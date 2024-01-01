@@ -1,19 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
-			 x:Class="StoriesBloom.Views.StoriesDetailPage"
-			 x:DataType="vm:StoriesDetailViewModel"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:local="clr-namespace:StoriesBloom"
-             Title=""
-             BackgroundColor="{StaticResource ThirdColor}"
-             >
+<ContentPage
+    x:Class="StoriesBloom.Views.StoriesDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:StoriesBloom"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
+    Title=""
+    x:DataType="vm:StoriesDetailViewModel"
+    BackgroundColor="{StaticResource ThirdColor}">
 
     <ContentPage.Resources>
         <local:IntToBoolConverter x:Key="intToBool" />
+        <toolkit:BoolToObjectConverter
+            x:Key="StorySavedConverter"
+            FalseObject="&#xF097;"
+            TrueObject="&#xF098;" />
     </ContentPage.Resources>
-    
+
     <ScrollView>
 
         <Grid Margin="15" RowDefinitions="Auto,*">
@@ -24,233 +28,338 @@
                         <RoundRectangle CornerRadius="10" />
                     </Border.StrokeShape>
 
-                    <Image Aspect="AspectFill" Source="{Binding Item.ImagePath}"  MaximumHeightRequest="300" />
+                    <Image
+                        Aspect="AspectFill"
+                        MaximumHeightRequest="300"
+                        Source="{Binding Item.ImagePath}" />
                 </Border>
 
                 <VerticalStackLayout Grid.Row="2" Margin="10,15,0,0">
-                    <Label FontSize="Large" Text="{Binding Item.Title}"
-                                       TextColor="White"/>
+                    <Label
+                        FontSize="Large"
+                        Text="{Binding Item.Title}"
+                        TextColor="White" />
                 </VerticalStackLayout>
 
-                <Border Margin="0,20,20,0" BackgroundColor="Black" Opacity="0.80" HeightRequest="50" HorizontalOptions="End"
-                                WidthRequest="50" StrokeThickness="0.5" VerticalOptions="Start">
+                <Border
+                    Margin="0,20,20,0"
+                    BackgroundColor="Black"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    Opacity="0.80"
+                    StrokeThickness="0.5"
+                    VerticalOptions="Start"
+                    WidthRequest="50">
                     <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="10,10,10,10"/>
+                        <RoundRectangle CornerRadius="10,10,10,10" />
                     </Border.StrokeShape>
 
-                    <Label  FontFamily="Icons" FontSize="25" Text="&#xF097;" TextColor="White" HorizontalOptions="Center"
-                            VerticalOptions="Center" />
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesDetailViewModel}}, Path=SaveStoryCommand}" />
+                    </Border.GestureRecognizers>
+
+
+                    <Label
+                        FontFamily="Icons"
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        Text="{Binding Item.Saved, Converter={StaticResource StorySavedConverter}}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
                 </Border>
 
-                <Border Margin="20,20,0,0" BackgroundColor="Black" Opacity="0.80" HeightRequest="50" HorizontalOptions="Start"
-                                WidthRequest="50" StrokeThickness="0.5" VerticalOptions="Start">
+                <Border
+                    Margin="20,20,0,0"
+                    BackgroundColor="Black"
+                    HeightRequest="50"
+                    HorizontalOptions="Start"
+                    Opacity="0.80"
+                    StrokeThickness="0.5"
+                    VerticalOptions="Start"
+                    WidthRequest="50">
                     <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="10,10,10,10"/>
+                        <RoundRectangle CornerRadius="10,10,10,10" />
                     </Border.StrokeShape>
 
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesDetailViewModel}}, Path=GoBackCommand}" />
                     </Border.GestureRecognizers>
 
-                    <Image Aspect="AspectFill" Source="left_arrow_icon.png" WidthRequest="25" HeightRequest="25" 
-                       HorizontalOptions="Center" VerticalOptions="Center"   />
+                    <Image
+                        Aspect="AspectFill"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        Source="left_arrow_icon.png"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
                 </Border>
 
 
 
             </Grid>
 
-            <VerticalStackLayout Grid.Row="1" Margin="0,10,0,0" >
-                <toolkit:Expander x:Name="prologueExpander" IsExpanded="True" ExpandedChanged="Expander_ExpandedChanged">
+            <VerticalStackLayout Grid.Row="1" Margin="0,10,0,0">
+                <toolkit:Expander
+                    x:Name="prologueExpander"
+                    ExpandedChanged="Expander_ExpandedChanged"
+                    IsExpanded="True">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
-                            <Label Text="Prologue"
-               FontAttributes="Bold"
-               FontSize="Medium"
-                           TextColor="#666"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Prologue"
+                                TextColor="#666" />
 
 
-                            <Image x:Name="arrowImagePrologue" Source="arrow_down" Margin="3,1,0,0" HeightRequest="25"  />
+                            <Image
+                                x:Name="arrowImagePrologue"
+                                Margin="3,1,0,0"
+                                HeightRequest="25"
+                                Source="arrow_down" />
 
                         </HorizontalStackLayout>
 
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{Binding Item.Prologue}"
-                   FontSize="16"
-                           TextColor="#AAA" 
-                           />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Item.Prologue}"
+                            TextColor="#AAA" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander x:Name="chapter1Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
+                <toolkit:Expander
+                    x:Name="chapter1Expander"
+                    Margin="0,10,0,0"
+                    ExpandedChanged="Expander_ExpandedChanged"
+                    IsExpanded="True">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
-                            <Label Text="Chapter 1"
-               FontAttributes="Bold"
-               FontSize="Medium"
-                           TextColor="#666"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Chapter 1"
+                                TextColor="#666" />
 
 
-                            <Image x:Name="arrowImageChapter1" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image
+                                x:Name="arrowImageChapter1"
+                                Margin="3,0,0,0"
+                                HeightRequest="25"
+                                Source="arrow_down" />
 
                         </HorizontalStackLayout>
 
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{Binding Item.Chapter1}"
-                   FontSize="16"
-                           TextColor="#AAA" 
-                           />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Item.Chapter1}"
+                            TextColor="#AAA" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander x:Name="chapter2Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
+                <toolkit:Expander
+                    x:Name="chapter2Expander"
+                    Margin="0,10,0,0"
+                    ExpandedChanged="Expander_ExpandedChanged"
+                    IsExpanded="True">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
-                            <Label Text="Chapter 2"
-               FontAttributes="Bold"
-               FontSize="Medium"
-                           TextColor="#666"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Chapter 2"
+                                TextColor="#666" />
 
 
-                            <Image x:Name="arrowImageChapter2" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image
+                                x:Name="arrowImageChapter2"
+                                Margin="3,0,0,0"
+                                HeightRequest="25"
+                                Source="arrow_down" />
 
                         </HorizontalStackLayout>
 
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{Binding Item.Chapter2}"
-                   FontSize="16"
-                           TextColor="#AAA" 
-                           />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Item.Chapter2}"
+                            TextColor="#AAA" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander x:Name="chapter3Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
+                <toolkit:Expander
+                    x:Name="chapter3Expander"
+                    Margin="0,10,0,0"
+                    ExpandedChanged="Expander_ExpandedChanged"
+                    IsExpanded="True">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
-                            <Label Text="Chapter 3"
-               FontAttributes="Bold"
-               FontSize="Medium"
-                           TextColor="#666"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Chapter 3"
+                                TextColor="#666" />
 
 
-                            <Image x:Name="arrowImageChapter3" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image
+                                x:Name="arrowImageChapter3"
+                                Margin="3,0,0,0"
+                                HeightRequest="25"
+                                Source="arrow_down" />
 
                         </HorizontalStackLayout>
 
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{Binding Item.Chapter3}"
-                   FontSize="16"
-                           TextColor="#AAA" 
-                           />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Item.Chapter3}"
+                            TextColor="#AAA" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander x:Name="chapter4Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
+                <toolkit:Expander
+                    x:Name="chapter4Expander"
+                    Margin="0,10,0,0"
+                    ExpandedChanged="Expander_ExpandedChanged"
+                    IsExpanded="True">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
-                            <Label Text="Chapter 4"
-               FontAttributes="Bold"
-               FontSize="Medium"
-                           TextColor="#666"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Chapter 4"
+                                TextColor="#666" />
 
 
-                            <Image x:Name="arrowImageChapter4" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image
+                                x:Name="arrowImageChapter4"
+                                Margin="3,0,0,0"
+                                HeightRequest="25"
+                                Source="arrow_down" />
 
                         </HorizontalStackLayout>
 
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{Binding Item.Chapter4}"
-                   FontSize="16"
-                           TextColor="#AAA" 
-                           />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Item.Chapter4}"
+                            TextColor="#AAA" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander x:Name="chapter5Expander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged">
+                <toolkit:Expander
+                    x:Name="chapter5Expander"
+                    Margin="0,10,0,0"
+                    ExpandedChanged="Expander_ExpandedChanged"
+                    IsExpanded="True">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
-                            <Label Text="Chapter 5"
-               FontAttributes="Bold"
-               FontSize="Medium"
-                           TextColor="#666"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Chapter 5"
+                                TextColor="#666" />
 
 
-                            <Image x:Name="arrowImageChapter5" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image
+                                x:Name="arrowImageChapter5"
+                                Margin="3,0,0,0"
+                                HeightRequest="25"
+                                Source="arrow_down" />
 
                         </HorizontalStackLayout>
 
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{Binding Item.Chapter5}"
-                   FontSize="16"
-                           TextColor="#AAA" 
-                           />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Item.Chapter5}"
+                            TextColor="#AAA" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander x:Name="epilogueExpander" IsExpanded="True"  Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged" >
+                <toolkit:Expander
+                    x:Name="epilogueExpander"
+                    Margin="0,10,0,0"
+                    ExpandedChanged="Expander_ExpandedChanged"
+                    IsExpanded="True">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
-                            <Label Text="Epilogue"
-               FontAttributes="Bold"
-               FontSize="Medium"
-                           TextColor="#666"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Epilogue"
+                                TextColor="#666" />
 
 
-                            <Image x:Name="arrowImageEpilogue" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image
+                                x:Name="arrowImageEpilogue"
+                                Margin="3,0,0,0"
+                                HeightRequest="25"
+                                Source="arrow_down" />
 
                         </HorizontalStackLayout>
 
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{Binding Item.Epilogue}"
-                   FontSize="16"
-                           TextColor="#AAA" 
-                           />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Item.Epilogue}"
+                            TextColor="#AAA" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
 
-                <toolkit:Expander x:Name="twistExpander" IsExpanded="True" Margin="0,10,0,0" ExpandedChanged="Expander_ExpandedChanged"
-                                  IsVisible="{Binding Item.UnexpectedTwist.Length, Converter={local:IntToBoolConverter}}">
+                <toolkit:Expander
+                    x:Name="twistExpander"
+                    Margin="0,10,0,0"
+                    ExpandedChanged="Expander_ExpandedChanged"
+                    IsExpanded="True"
+                    IsVisible="{Binding Item.UnexpectedTwist.Length, Converter={local:IntToBoolConverter}}">
                     <toolkit:Expander.Header>
                         <HorizontalStackLayout>
-                            <Label Text="Unexpected Twist"
-               FontAttributes="Bold"
-               FontSize="Medium"
-                           TextColor="#666"/>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Unexpected Twist"
+                                TextColor="#666" />
 
 
-                            <Image x:Name="arrowImageTwist" Source="arrow_down" Margin="3,0,0,0" HeightRequest="25"  />
+                            <Image
+                                x:Name="arrowImageTwist"
+                                Margin="3,0,0,0"
+                                HeightRequest="25"
+                                Source="arrow_down" />
 
                         </HorizontalStackLayout>
 
                     </toolkit:Expander.Header>
                     <VerticalStackLayout>
-                        <Label Text="{Binding Item.UnexpectedTwist}"
-                   FontSize="16"
-                           TextColor="#AAA" 
-                           />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Item.UnexpectedTwist}"
+                            TextColor="#AAA" />
                     </VerticalStackLayout>
                 </toolkit:Expander>
             </VerticalStackLayout>
 
         </Grid>
         <!--<VerticalStackLayout Margin="10">
-            
+
             <Border >
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20,20,20,20" />
                 </Border.StrokeShape>
-                
+
                 <Image Aspect="AspectFill"  Source="rapunzel.jpg" />
             </Border>
 
-            -->
+        -->
         <!--<Image Source="https://aka.ms/campus.jpg" HeightRequest="300" Aspect="AspectFill"/>-->
         <!--
             <Label Text="{Binding Item.Title}"
@@ -271,13 +380,13 @@
                         <Image Source="arrow_down" HeightRequest="25"  />
 
                     </HorizontalStackLayout>
-                    
+
                 </toolkit:Expander.Header>
                 <VerticalStackLayout>
                     <Label Text="{Binding Item.Prologue}"
                    Margin="20,0"
                    FontSize="16"
-                           TextColor="#666" 
+                           TextColor="#666"
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
@@ -300,7 +409,7 @@
                     <Label Text="{Binding Item.Chapter1}"
                    Margin="20,0"
                    FontSize="16"
-                           TextColor="#666" 
+                           TextColor="#666"
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
@@ -323,7 +432,7 @@
                     <Label Text="{Binding Item.Chapter2}"
                    Margin="20,0"
                    FontSize="16"
-                           TextColor="#666" 
+                           TextColor="#666"
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
@@ -346,7 +455,7 @@
                     <Label Text="{Binding Item.Chapter3}"
                    Margin="20,0"
                    FontSize="16"
-                           TextColor="#666" 
+                           TextColor="#666"
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
@@ -369,7 +478,7 @@
                     <Label Text="{Binding Item.Chapter4}"
                    Margin="20,0"
                    FontSize="16"
-                           TextColor="#666" 
+                           TextColor="#666"
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
@@ -392,7 +501,7 @@
                     <Label Text="{Binding Item.Chapter5}"
                    Margin="20,0"
                    FontSize="16"
-                           TextColor="#666" 
+                           TextColor="#666"
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
@@ -415,7 +524,7 @@
                     <Label Text="{Binding Item.Epilogue}"
                    Margin="20,0"
                    FontSize="16"
-                           TextColor="#666" 
+                           TextColor="#666"
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
@@ -438,7 +547,7 @@
                     <Label Text="{Binding Item.UnexpectedTwist}"
                    Margin="20,0"
                    FontSize="16"
-                           TextColor="#666" 
+                           TextColor="#666"
                            />
                 </VerticalStackLayout>
             </toolkit:Expander>
