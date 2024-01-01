@@ -10,6 +10,28 @@ namespace StoriesBloom.Services
     {
         private List<StoryDetail> _cachedSavedStories = new List<StoryDetail>();
 
+        public void DeleteSavedStory(StoryDetail storyDetail)
+        {
+            var storyDetails = new List<StoryDetail>();
+            string path = GetSavedStoriesPath();
+            if (File.Exists(path))
+            {
+                var json = File.ReadAllText(path);
+                storyDetails = JsonSerializer.Deserialize<List<StoryDetail>>(json);
+            }
+
+            if (!storyDetails.Any())
+            {
+                return;
+            }
+
+            storyDetails.Remove(storyDetail);
+            _cachedSavedStories = storyDetails;
+
+            var newJson = JsonSerializer.Serialize(storyDetails);
+            File.WriteAllText(path, newJson);
+        }
+
         public void SaveStory(StoryDetail storyDetail)
         {
             var storyDetails = new List<StoryDetail>();
@@ -63,5 +85,6 @@ namespace StoriesBloom.Services
         private string GetSavedStoriesPath() =>
             Path.Combine(FileSystem.Current.AppDataDirectory, "saved_stories.json");
 
+      
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 using System.Windows.Input;
 
 namespace StoriesBloom.ViewModels;
@@ -12,12 +13,14 @@ public partial class StoriesDetailViewModel : BaseViewModel
 
     public ICommand GoBackCommand { get; }
     public ICommand SaveStoryCommand { get; }
+    ILogger<StoriesDetailViewModel> _logger;
 
-    public StoriesDetailViewModel(ISavedStoryService savedStoryService)
-	{
+    public StoriesDetailViewModel(ISavedStoryService savedStoryService, ILogger<StoriesDetailViewModel> logger)
+    {
         GoBackCommand = new AsyncRelayCommand(GoBack);
         SaveStoryCommand = new RelayCommand(SaveStory);
         _savedStoryService = savedStoryService;
+        _logger = logger;
     }
 
     private async Task GoBack()
@@ -27,7 +30,18 @@ public partial class StoriesDetailViewModel : BaseViewModel
 
     private void SaveStory()
     {
-        _savedStoryService.SaveStory(Item);
-        Console.WriteLine("Saved item");
+        if (Item.Saved)
+        {
+            _savedStoryService.DeleteSavedStory(Item);
+            Item.Saved = false;
+            _logger.LogInformation("Item {title} deleted from favourites!", Item.Title);
+        }   
+        else
+        {
+            _savedStoryService.SaveStory(Item);
+            Item.Saved = true;
+            _logger.LogInformation("Item {title} saved to favourites!", Item.Title);
+        }
+        
     }
 }
