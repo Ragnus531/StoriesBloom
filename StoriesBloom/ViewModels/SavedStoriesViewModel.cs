@@ -9,7 +9,7 @@ public partial class SavedStoriesViewModel : BaseViewModel
     string currState = States.Loading;
 
     [ObservableProperty]
-    ObservableCollection<StoryDetail> items = new ObservableCollection<StoryDetail>();
+    IList<StoryDetail> items = new List<StoryDetail>();
 
     [ObservableProperty]
 	private bool storyDetailLoading;
@@ -35,27 +35,15 @@ public partial class SavedStoriesViewModel : BaseViewModel
 
     }
 
-    private async Task InitializeAsync()
-    {
-        // Asynchronously initialize this instance.
-        CurrState = States.Loading;
-        var savedStories = _savedStoryService.GetAll();
-        Items.Clear();
-        await Task.Run(() =>
-        {
-            foreach (var item in savedStories)
-            {
-                Console.WriteLine("Adding");
-                Items.Add(item);
-            }
-            CurrState = States.Success;
-        });
-    }
-
     public async Task InitData()
     {
         CurrState = States.Loading;
         var savedStories = _savedStoryService.GetAll();
+        if (!savedStories.Any())
+        {
+            CurrState = States.Empty;
+            return;
+        }
         Items.Clear();
         await Task.Run(() =>
         {

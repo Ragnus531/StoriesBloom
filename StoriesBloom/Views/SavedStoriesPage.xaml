@@ -76,6 +76,16 @@
                 </CollectionView>
             </ScrollView>
 
+            <VerticalStackLayout toolkit:StateView.StateKey="Empty" BackgroundColor="{StaticResource ThirdColor}">
+                <Label
+                    Margin="10,25,10,10"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Center"
+                    Text="Your saved stories list is empty." />
+            </VerticalStackLayout>
+
         </toolkit:StateContainer.StateViews>
 
     </Grid>

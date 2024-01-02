@@ -16,7 +16,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-             .ConfigureMauiHandlers(handlers => {
+            .ConfigureMauiHandlers(handlers => {
 #if ANDROID
                 handlers.AddHandler<Picker, CustomPickerHandler>();
 #endif
@@ -75,11 +75,14 @@ public static class MauiProgram
 		var storiesVM = app.Services.GetRequiredService<StoriesViewModel>();
 		storiesVM.InitListener();
 
-  //      var savedStoriesVM = app.Services.GetRequiredService<SavedStoriesViewModel>();
-		//Task.Run(async () =>
-		//{
-		//	await savedStoriesVM.InitData();
-		//});
+        var savedStoryService = app.Services.GetRequiredService<ISavedStoryService>();
+		savedStoryService.RemoveAll();
+
+        //      var savedStoriesVM = app.Services.GetRequiredService<SavedStoriesViewModel>();
+        //Task.Run(async () =>
+        //{
+        //	await savedStoriesVM.InitData();
+        //});
 
         return app;
 	}
