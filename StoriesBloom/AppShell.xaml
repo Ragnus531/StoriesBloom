@@ -1,38 +1,37 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-	x:Class="StoriesBloom.AppShell"
-	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:views="clr-namespace:StoriesBloom.Views"
-	xmlns:local="clr-namespace:StoriesBloom"
+    x:Class="StoriesBloom.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:StoriesBloom"
+    xmlns:views="clr-namespace:StoriesBloom.Views"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="False"
     Shell.TabBarBackgroundColor="#311B45"
     Shell.TabBarTitleColor="White"
-    Shell.TabBarUnselectedColor="#AC9DB9"
-    >
+    Shell.TabBarUnselectedColor="#AC9DB9">
 
-	<TabBar x:Name="shelltabbar" >
-		<ShellContent
+    <TabBar x:Name="shelltabbar">
+        <ShellContent
             x:Name="mainPage"
-			Title="Główna"
-			Icon="iconblank.png"
-			ContentTemplate="{DataTemplate views:MainPage}" />
-		<ShellContent
-             x:Name="stories"
-			Title="Biblioteka"
-			Icon="iconlistdetail.png"
-			ContentTemplate="{DataTemplate views:StoriesPage}" />
-		<ShellContent
+            Title="Główna"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Icon="iconblank.png" />
+        <ShellContent
+            x:Name="stories"
+            Title="Biblioteka"
+            ContentTemplate="{DataTemplate views:StoriesPage}"
+            Icon="iconlistdetail.png" />
+        <ShellContent
             x:Name="saved"
-			Title="Zapisane"
-			Icon="bookmark_fill_icon"
-			ContentTemplate="{DataTemplate views:LocalizationPage}" />
+            Title="Zapisane"
+            ContentTemplate="{DataTemplate views:SavedStoriesPage}"
+            Icon="bookmark_fill_icon" />
 
         <ShellContent
             x:Name="settings"
-			Title="Ustawienia"
-			Icon="iconlocalization.png"
-			ContentTemplate="{DataTemplate views:StoriesCategory}" />
+            Title="Ustawienia"
+            ContentTemplate="{DataTemplate views:StoriesCategory}"
+            Icon="iconlocalization.png" />
     </TabBar>
 </Shell>

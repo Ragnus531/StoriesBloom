@@ -57,11 +57,11 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<StoriesPage>();
 
-		builder.Services.AddSingleton<LocalizationViewModel>();
+		builder.Services.AddSingleton<SavedStoriesViewModel>();
 
 		builder.Services.AddSingleton<ISavedStoryService, SavedStoryService>();
 
-		builder.Services.AddSingleton<LocalizationPage>();
+		builder.Services.AddSingleton<SavedStoriesPage>();
 
 		builder.Services.AddSingleton<StoriesCategory>();
 		builder.Services.AddSingleton<StoriesCategoryViewModel>();

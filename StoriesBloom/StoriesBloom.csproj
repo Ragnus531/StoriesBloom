@@ -359,6 +359,9 @@
 		  <AutoGen>True</AutoGen>
 		  <DependentUpon>StoriesResources.resx</DependentUpon>
 		</Compile>
+		<Compile Update="Views\SavedStoriesPage.xaml.cs">
+		  <DependentUpon>SavedStoriesPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
