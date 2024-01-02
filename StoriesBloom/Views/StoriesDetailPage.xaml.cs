@@ -49,14 +49,18 @@ public partial class StoriesDetailPage : ContentPage
         }
 
 
-        //var ele = (Image)exp.FindByName("arrowImage");
-        if (exp.IsExpanded)
-		{
-            img.Source = ImageSource.FromFile("arrow_down.svg");
+        if(img != null)
+        {
+            //var ele = (Image)exp.FindByName("arrowImage");
+            if (exp.IsExpanded)
+            {
+                img.Source = ImageSource.FromFile("arrow_down.svg");
+            }
+            else
+            {
+                img.Source = ImageSource.FromFile("arrow_up.svg");
+            }
         }
-		else
-		{
-            img.Source = ImageSource.FromFile("arrow_up.svg");
-        }
+        
     }
 }

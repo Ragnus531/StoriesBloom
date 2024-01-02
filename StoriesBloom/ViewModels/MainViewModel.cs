@@ -38,6 +38,34 @@ public partial class MainViewModel : BaseViewModel
         StoriesCategories = new ObservableCollection<Category>(categoriesService.Categories);
         StoryChoosenCommand = new AsyncRelayCommand<StoryInfo>(GoToStory);
         CategoryChoosenCommand = new AsyncRelayCommand<Category>(GoToCategory);
+        InitListeners();
+    }
+
+    private void InitListeners()
+    {
+        WeakReferenceMessenger.Default.Register<AddedSavedStoryMessage>(this, (r, m) =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                var storyToUpdate = _storyDetails.FirstOrDefault(s => s.Title == m.Value.Title);
+                if (storyToUpdate != null)
+                {
+                    storyToUpdate.Saved = true;
+                }
+            });
+        });
+
+        WeakReferenceMessenger.Default.Register<DeletedSavedStoryMessage>(this, (r, m) =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                var storyToUpdate = _storyDetails.FirstOrDefault(s => s.Title == m.Value.Title);
+                if (storyToUpdate != null)
+                {
+                    storyToUpdate.Saved = false;
+                }
+            });
+        });
     }
 
     private void InitializeTales()

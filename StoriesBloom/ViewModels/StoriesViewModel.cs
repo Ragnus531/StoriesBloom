@@ -98,6 +98,49 @@ public partial class StoriesViewModel : BaseViewModel
                 });
             }
         });
+
+        WeakReferenceMessenger.Default.Register<AddedSavedStoryMessage>(this, (r, m) =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (_viewInitialized)
+                {
+                    var storyToUpdate = Items.FirstOrDefault(s => s.Title == m.Value.Title);
+                    if (storyToUpdate != null)
+                    {
+                        storyToUpdate.Saved = true;
+                    }
+
+                    var filteredStoryToUpdate = FilteredStories.FirstOrDefault(s => s.Title == m.Value.Title);
+                    if (filteredStoryToUpdate != null)
+                    {
+                        filteredStoryToUpdate.Saved = true;
+                    }
+                }
+            });
+        });
+
+        WeakReferenceMessenger.Default.Register<DeletedSavedStoryMessage>(this, (r, m) =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (_viewInitialized)
+                {
+                    var storyToUpdate = Items.FirstOrDefault(s => s.Title == m.Value.Title);
+                    if (storyToUpdate != null)
+                    {
+                        storyToUpdate.Saved = false;
+                    }
+
+                    var filteredStoryToUpdate = FilteredStories.FirstOrDefault(s => s.Title == m.Value.Title);
+                    if (filteredStoryToUpdate != null)
+                    {
+                        filteredStoryToUpdate.Saved = false;
+                    }
+                }
+            });
+        });
+
     }
 
     public void InitCategory()
