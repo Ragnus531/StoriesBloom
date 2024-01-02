@@ -40,6 +40,11 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    <Color x:Key="Purple100Accent">#d6b4fc</Color>
+    <Color x:Key="Purple400Accent">#6808d3</Color>
+    <Color x:Key="Purple500Accent">#5106a4</Color>
+    <Color x:Key="Purple600Accent">#3d057d</Color>
+
     <Color x:Key="MainColor">#311B45</Color>
     <Color x:Key="SecondaryColor">#6E557C</Color>
     <Color x:Key="ThirdColor">#0D0118</Color>

@@ -64,7 +64,7 @@
                         FontSize="25"
                         HorizontalOptions="Center"
                         Text="{Binding Item.Saved, Converter={StaticResource StorySavedConverter}}"
-                        TextColor="{StaticResource SecondaryColor}"
+                        TextColor="{StaticResource Purple500Accent}"
                         VerticalOptions="Center" />
                 </Border>
 

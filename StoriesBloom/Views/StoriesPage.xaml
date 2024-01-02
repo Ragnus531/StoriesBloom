@@ -1,58 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
-			 xmlns:m="clr-namespace:StoriesBloom.Models"
-			 x:Class="StoriesBloom.Views.StoriesPage"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Maui.Skeleton"
-			 x:DataType="vm:StoriesViewModel">
-    
+<ContentPage
+    x:Class="StoriesBloom.Views.StoriesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:m="clr-namespace:StoriesBloom.Models"
+    xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Maui.Skeleton"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
+    x:DataType="vm:StoriesViewModel">
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:SelectedItemEventArgsConverter x:Key="ItemIndexChanged" />
-            <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolIndicatorConverter" TrueObject="1" FalseObject="0" />
-            <toolkit:BoolToObjectConverter x:Key="StoryDetailLoadingBoolElemntsConverter" TrueObject="0,3" FalseObject="1" />
+            <toolkit:BoolToObjectConverter
+                x:Key="StoryDetailLoadingBoolIndicatorConverter"
+                FalseObject="0"
+                TrueObject="1" />
+            <toolkit:BoolToObjectConverter
+                x:Key="StoryDetailLoadingBoolElemntsConverter"
+                FalseObject="1"
+                TrueObject="0,3" />
 
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*">
 
-        <Grid ColumnDefinitions=".5*,.5*" BackgroundColor="{StaticResource ThirdColor}">
+        <Grid BackgroundColor="{StaticResource ThirdColor}" ColumnDefinitions=".5*,.5*">
 
             <Grid Grid.Column="0">
-                <Border Grid.Column="1" Stroke="{StaticResource MainColor}"
-         StrokeThickness="1"
-         StrokeShape="RoundRectangle 10,10,10,10"
-         HeightRequest="45">
-                    <SearchBar 
-                           
-                        Text="{Binding FilteredText,Mode=TwoWay}"
-                               BackgroundColor="{StaticResource MainColor}" CancelButtonColor="White" 
-                           Placeholder="Szukaj..." 
-                           PlaceholderColor="#AC9DB9"
-                           TextColor="White"
-                           VerticalOptions="Center">
-                    </SearchBar>
+                <Border
+                    Grid.Column="1"
+                    HeightRequest="45"
+                    Stroke="{StaticResource MainColor}"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    StrokeThickness="1">
+                    <SearchBar
+                        BackgroundColor="{StaticResource MainColor}"
+                        CancelButtonColor="White"
+                        Placeholder="Szukaj..."
+                        PlaceholderColor="#AC9DB9"
+                        Text="{Binding FilteredText, Mode=TwoWay}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
                 </Border>
 
             </Grid>
 
-            <Border Grid.Column="1" Stroke="{StaticResource MainColor}"
-         StrokeThickness="1"
-         StrokeShape="RoundRectangle 10,10,10,10"
-         HeightRequest="45">
+            <Border
+                Grid.Column="1"
+                HeightRequest="45"
+                Stroke="{StaticResource MainColor}"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                StrokeThickness="1">
 
-                <Picker BackgroundColor="{StaticResource MainColor}"
-                    TitleColor="#FEFEFE"                      
-                    TextColor="White"
+                <Picker
                     x:Name="picker"
+                    Title="Select category:"
+                    BackgroundColor="{StaticResource MainColor}"
+                    FontFamily="Epilogue"
                     HorizontalTextAlignment="Center"
-                     Title="Select category:" FontFamily="Epilogue" 
-                    SelectedItem="{Binding Category}"
                     SelectedIndex="0"
-                     >
+                    SelectedItem="{Binding Category}"
+                    TextColor="White"
+                    TitleColor="#FEFEFE">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Romance</x:String>
@@ -71,11 +82,10 @@
 
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior
-                            EventName="SelectedIndexChanged"
                             Command="{Binding IncrementCounterCommand}"
+                            CommandParameter="{Binding .}"
                             EventArgsConverter="{StaticResource ItemIndexChanged}"
-                            CommandParameter="{ Binding .}"
-                            />
+                            EventName="SelectedIndexChanged" />
                     </Picker.Behaviors>
                 </Picker>
 
@@ -87,39 +97,62 @@
 
         <Grid Grid.Row="1" toolkit:StateContainer.CurrentState="{Binding CurrState}">
             <toolkit:StateContainer.StateViews>
-                <VerticalStackLayout BackgroundColor="{StaticResource ThirdColor}"
-                                     toolkit:StateView.StateKey="Loading"
-                                     >
-                    <ActivityIndicator IsRunning="True" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Label Text="Loading Stories..." HorizontalTextAlignment="Center"  VerticalOptions="Center"/>
+                <VerticalStackLayout toolkit:StateView.StateKey="Loading" BackgroundColor="{StaticResource ThirdColor}">
+                    <ActivityIndicator
+                        HorizontalOptions="Center"
+                        IsRunning="True"
+                        VerticalOptions="Center" />
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        Text="Loading Stories..."
+                        VerticalOptions="Center" />
                 </VerticalStackLayout>
 
-                <ScrollView Grid.Row="1" BackgroundColor="{StaticResource ThirdColor}"
-                            toolkit:StateView.StateKey="Success" >
-                    <CollectionView x:Name="StoriesCollection" SelectionMode="None" 
-                    ItemsSource="{Binding FilteredStories}">
+                <ScrollView
+                    Grid.Row="1"
+                    toolkit:StateView.StateKey="Success"
+                    BackgroundColor="{StaticResource ThirdColor}">
+                    <CollectionView
+                        x:Name="StoriesCollection"
+                        ItemsSource="{Binding FilteredStories}"
+                        SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="m:StoryDetail">
-                                <Grid IsVisible="{Binding Show}"  Margin="15,5,15,5" HeightRequest="75" >
-                                    <Border BackgroundColor="{StaticResource SecondaryColor}" Stroke="White" StrokeShape="RoundRectangle 30,30,30,30" StrokeThickness="2">
+                                <Grid
+                                    Margin="15,5,15,5"
+                                    HeightRequest="75"
+                                    IsVisible="{Binding Show}">
+                                    <Border
+                                        BackgroundColor="{StaticResource SecondaryColor}"
+                                        Stroke="White"
+                                        StrokeShape="RoundRectangle 30,30,30,30"
+                                        StrokeThickness="2">
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=GoToNovelDetailsCommand}" CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
                                         <Grid>
-                                            <ActivityIndicator IsRunning="true"  HorizontalOptions="Center" VerticalOptions="Center" 
-                                                               Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=StoryDetailLoading,Converter={StaticResource StoryDetailLoadingBoolIndicatorConverter}}"/>
-                                            <Label  Padding="10" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
-                                                Text="{Binding Title}"  Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=StoryDetailLoading,Converter={StaticResource StoryDetailLoadingBoolElemntsConverter}}"   />
+                                            <ActivityIndicator
+                                                HorizontalOptions="Center"
+                                                IsRunning="true"
+                                                Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=StoryDetailLoading, Converter={StaticResource StoryDetailLoadingBoolIndicatorConverter}}"
+                                                VerticalOptions="Center"
+                                                Color="White" />
+                                            <Label
+                                                Padding="10"
+                                                FontAttributes="Bold"
+                                                HorizontalTextAlignment="Center"
+                                                Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:StoriesViewModel}}, Path=StoryDetailLoading, Converter={StaticResource StoryDetailLoadingBoolElemntsConverter}}"
+                                                Text="{Binding Title}"
+                                                TextColor="White"
+                                                VerticalTextAlignment="Center" />
                                         </Grid>
-                                        
+
                                     </Border>
                                     <Grid.Triggers>
-                                        <Trigger TargetType="Grid"
-                                                 Property="IsVisible"
-                                                 Value="False">
+                                        <Trigger TargetType="Grid" Property="IsVisible" Value="False">
                                             <Setter Property="HeightRequest" Value="0" />
-                                            <Setter Property="Margin" Value="0"/>
-                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="Margin" Value="0" />
+                                            <Setter Property="Padding" Value="0" />
                                         </Trigger>
 
                                     </Grid.Triggers>
@@ -130,14 +163,14 @@
 
                         <CollectionView.EmptyView>
                             <ContentView>
-                                <StackLayout HorizontalOptions="CenterAndExpand"
-                             VerticalOptions="CenterAndExpand">
-                                    <Label Text="No results matched your filter."
-                           Margin="10,25,10,10"
-                           FontAttributes="Bold"
-                           FontSize="18"
-                           HorizontalOptions="Fill"
-                           HorizontalTextAlignment="Center" />
+                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <Label
+                                        Margin="10,25,10,10"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        HorizontalOptions="Fill"
+                                        HorizontalTextAlignment="Center"
+                                        Text="No results matched your filter." />
                                 </StackLayout>
                             </ContentView>
                         </CollectionView.EmptyView>
@@ -148,6 +181,6 @@
             </toolkit:StateContainer.StateViews>
 
         </Grid>
-        <!-- List of Novels -->
+        <!--  List of Novels  -->
     </Grid>
 </ContentPage>
