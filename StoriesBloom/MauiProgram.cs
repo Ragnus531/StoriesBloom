@@ -75,6 +75,12 @@ public static class MauiProgram
 		var storiesVM = app.Services.GetRequiredService<StoriesViewModel>();
 		storiesVM.InitListener();
 
-		return app;
+  //      var savedStoriesVM = app.Services.GetRequiredService<SavedStoriesViewModel>();
+		//Task.Run(async () =>
+		//{
+		//	await savedStoriesVM.InitData();
+		//});
+
+        return app;
 	}
 }

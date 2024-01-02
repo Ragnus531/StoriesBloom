@@ -4,6 +4,7 @@ using StoriesBloom.Views.Popups;
 using CommunityToolkit.Maui.Converters;
 using CommunityToolkit.Mvvm.Messaging;
 using StoriesBloom.Messages;
+using StoriesBloom.Helpers;
 
 namespace StoriesBloom.ViewModels;
 
@@ -159,9 +160,5 @@ public partial class StoriesViewModel : BaseViewModel
         StoryDetailLoading = false;
     }
 
-    static class States
-    {
-        public const string Loading = nameof(Loading);
-        public const string Success = nameof(Success);
-    }
+   
 }

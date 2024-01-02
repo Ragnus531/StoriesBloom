@@ -3,18 +3,80 @@
     x:Class="StoriesBloom.Views.SavedStoriesPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:m="clr-namespace:StoriesBloom.Models"
     xmlns:mex="clr-namespace:StoriesBloom.MarkupExtensions"
     xmlns:strings="clr-namespace:StoriesBloom.Resources.Strings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
     x:DataType="vm:SavedStoriesViewModel">
 
-    <VerticalStackLayout Margin="20">
-        <Label>Here are some common ways to use localized text.</Label>
-        <Label>1. As a static resource.</Label>
-        <Label Text="{x:Static strings:AppResources.HelloMessage}" />
-        <Label>2. With a custom MarkupExtension.</Label>
-        <Label Text="{mex:LocString HelloMessage}" />
-        <Label>3. From the ViewModel.</Label>
-        <Label Text="{Binding LocalizedText}" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:SelectedItemEventArgsConverter x:Key="ItemIndexChanged" />
+            <toolkit:BoolToObjectConverter
+                x:Key="StoryDetailLoadingBoolIndicatorConverter"
+                FalseObject="0"
+                TrueObject="1" />
+            <toolkit:BoolToObjectConverter
+                x:Key="StoryDetailLoadingBoolElemntsConverter"
+                FalseObject="1"
+                TrueObject="0,3" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid toolkit:StateContainer.CurrentState="{Binding CurrState}">
+        <toolkit:StateContainer.StateViews>
+            <VerticalStackLayout toolkit:StateView.StateKey="Loading" BackgroundColor="{StaticResource ThirdColor}">
+                <ActivityIndicator
+                    HorizontalOptions="Center"
+                    IsRunning="True"
+                    VerticalOptions="Center" />
+                <Label
+                    HorizontalTextAlignment="Center"
+                    Text="Loading saved stories..."
+                    VerticalOptions="Center" />
+            </VerticalStackLayout>
+
+            <ScrollView toolkit:StateView.StateKey="Success" BackgroundColor="{StaticResource ThirdColor}">
+                <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:StoryDetail">
+                            <Grid Margin="15,5,15,5" HeightRequest="75">
+                                <Border
+                                    BackgroundColor="{StaticResource SecondaryColor}"
+                                    Stroke="White"
+                                    StrokeShape="RoundRectangle 30,30,30,30"
+                                    StrokeThickness="2">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SavedStoriesViewModel}}, Path=GoToNovelDetailsCommand}" CommandParameter="{Binding .}" />
+                                    </Border.GestureRecognizers>
+                                    <Grid>
+                                        <ActivityIndicator
+                                            HorizontalOptions="Center"
+                                            IsRunning="true"
+                                            Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:SavedStoriesViewModel}}, Path=StoryDetailLoading, Converter={StaticResource StoryDetailLoadingBoolIndicatorConverter}}"
+                                            VerticalOptions="Center"
+                                            Color="White" />
+                                        <Label
+                                            Padding="10"
+                                            FontAttributes="Bold"
+                                            HorizontalTextAlignment="Center"
+                                            Opacity="{Binding Source={RelativeSource AncestorType={x:Type vm:SavedStoriesViewModel}}, Path=StoryDetailLoading, Converter={StaticResource StoryDetailLoadingBoolElemntsConverter}}"
+                                            Text="{Binding Title}"
+                                            TextColor="White"
+                                            VerticalTextAlignment="Center" />
+                                    </Grid>
+
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+
+        </toolkit:StateContainer.StateViews>
+
+    </Grid>
 </ContentPage>
