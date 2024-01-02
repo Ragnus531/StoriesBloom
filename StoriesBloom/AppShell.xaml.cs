@@ -20,7 +20,7 @@ public partial class AppShell : Shell
                 case 0: shelltabbar.CurrentItem = mainPage; break;
                 case 1: shelltabbar.CurrentItem = stories; break;
                 case 2: shelltabbar.CurrentItem = saved; break;
-                case 3: shelltabbar.CurrentItem = settings; break;
+                //case 3: shelltabbar.CurrentItem = settings; break;
             };
         });
     }

@@ -38,7 +38,7 @@
                     <SearchBar
                         BackgroundColor="{StaticResource MainColor}"
                         CancelButtonColor="White"
-                        Placeholder="Szukaj..."
+                        Placeholder="Search..."
                         PlaceholderColor="#AC9DB9"
                         Text="{Binding FilteredText, Mode=TwoWay}"
                         TextColor="White"

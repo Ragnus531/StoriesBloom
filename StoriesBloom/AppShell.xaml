@@ -14,24 +14,24 @@
     <TabBar x:Name="shelltabbar">
         <ShellContent
             x:Name="mainPage"
-            Title="Główna"
+            Title="Main Page"
             ContentTemplate="{DataTemplate views:MainPage}"
             Icon="iconblank.png" />
         <ShellContent
             x:Name="stories"
-            Title="Biblioteka"
+            Title="Stories"
             ContentTemplate="{DataTemplate views:StoriesPage}"
             Icon="iconlistdetail.png" />
         <ShellContent
             x:Name="saved"
-            Title="Zapisane"
+            Title="Saved"
             ContentTemplate="{DataTemplate views:SavedStoriesPage}"
             Icon="bookmark_fill_icon" />
 
-        <ShellContent
+        <!--<ShellContent
             x:Name="settings"
-            Title="Ustawienia"
+            Title="Settings"
             ContentTemplate="{DataTemplate views:StoriesCategory}"
-            Icon="iconlocalization.png" />
+            Icon="iconlocalization.png" />-->
     </TabBar>
 </Shell>

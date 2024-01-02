@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
-			 xmlns:m="clr-namespace:StoriesBloom.Models"
-             xmlns:local="clr-namespace:StoriesBloom.ViewModels"
-             x:Class="StoriesBloom.Views.StoriesCategory"
-             Title="StoriesCategory">
+<ContentPage
+    x:Class="StoriesBloom.Views.StoriesCategory"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:StoriesBloom.ViewModels"
+    xmlns:m="clr-namespace:StoriesBloom.Models"
+    xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
+    Title="StoriesCategory">
 
     <ContentPage.BindingContext>
         <local:StoriesCategoryViewModel />
     </ContentPage.BindingContext>
-    
+
     <CollectionView ItemsSource="{Binding Categories}">
         <CollectionView.ItemTemplate>
             <DataTemplate>
@@ -22,11 +23,11 @@
 
                         <Grid ColumnSpacing="16">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <!--<Frame Padding="0"
@@ -38,19 +39,19 @@
                                        Aspect="AspectFill"/>
                                 </Frame>-->
 
-                            <Label Text="{Binding .}"
-                                   Grid.Row="0"
-                                   Grid.Column="1"
-                                   FontFamily="PoppinsSemibold"
-                                   FontSize="15"></Label>
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                FontFamily="PoppinsSemibold"
+                                FontSize="15"
+                                Text="{Binding .}" />
 
-                            <StackLayout Orientation="Horizontal"
-                                         Spacing="4"
-                                         Grid.Row="2"
-                                         Grid.Column="1"
-                                             >
-                                <Label Text="Romance"
-                                       TextColor="{StaticResource Primary}"/>
+                            <StackLayout
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Orientation="Horizontal"
+                                Spacing="4">
+                                <Label Text="Romance" TextColor="{StaticResource Primary}" />
                             </StackLayout>
 
                         </Grid>
@@ -59,8 +60,8 @@
             </DataTemplate>
         </CollectionView.ItemTemplate>
         <CollectionView.Footer>
-            <!-- For some reason, last item is hidden behind bottom bar. Add blank footer to compensate. -->
-            <BoxView HeightRequest="100" Color="White"/>
+            <!--  For some reason, last item is hidden behind bottom bar. Add blank footer to compensate.  -->
+            <BoxView HeightRequest="100" Color="White" />
         </CollectionView.Footer>
     </CollectionView>
 </ContentPage>
