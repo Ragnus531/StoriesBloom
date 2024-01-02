@@ -49,8 +49,8 @@ public static class MauiProgram
 		storiesByCategoryFactory.InitStories();
         builder.Services.AddSingleton<IStoriesFactory>(storiesByCategoryFactory);
         
-		builder.Services.AddTransient<StoriesDetailViewModel>();
-		builder.Services.AddTransient<StoriesDetailPage>();
+		builder.Services.AddSingleton<StoriesDetailViewModel>();
+		builder.Services.AddSingleton<StoriesDetailPage>();
 
 		
         builder.Services.AddSingleton<StoriesViewModel>();
@@ -74,6 +74,9 @@ public static class MauiProgram
 
 		var storiesVM = app.Services.GetRequiredService<StoriesViewModel>();
 		storiesVM.InitListener();
+
+        var savedStoriesVM = app.Services.GetRequiredService<SavedStoriesViewModel>();
+        savedStoriesVM.InitListener();
 
         var savedStoryService = app.Services.GetRequiredService<ISavedStoryService>();
 		savedStoryService.RemoveAll();

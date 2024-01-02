@@ -6,6 +6,8 @@ public partial class SavedStoriesPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-	}
+		viewModel.InitData();
+
+    }
 
 }

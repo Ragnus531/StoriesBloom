@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
+using StoriesBloom.Messages;
 using System.Windows.Input;
 
 namespace StoriesBloom.ViewModels;
@@ -21,6 +23,36 @@ public partial class StoriesDetailViewModel : BaseViewModel
         SaveStoryCommand = new RelayCommand(SaveStory);
         _savedStoryService = savedStoryService;
         _logger = logger;
+
+        //WeakReferenceMessenger.Default.Register<AddedSavedStoryMessage>(this, (r, m) =>
+        //{
+        //    MainThread.BeginInvokeOnMainThread(() =>
+        //    {
+        //        if (Item != null)
+        //        {
+        //            if (Item.Title == m.Value.Title)
+        //            {
+        //                Item.Show = true;
+        //            }
+        //        }
+        //    });
+           
+        //});
+
+        //WeakReferenceMessenger.Default.Register<DeletedSavedStoryMessage>(this, (r, m) =>
+        //{
+        //    MainThread.BeginInvokeOnMainThread(() =>
+        //    {
+        //        if (Item != null)
+        //        {
+        //            if (Item.Title == m.Value.Title)
+        //            {
+        //                Item.Show = false;
+        //            }
+        //        }
+        //    });
+           
+        //});
     }
 
     private async Task GoBack()
@@ -34,12 +66,14 @@ public partial class StoriesDetailViewModel : BaseViewModel
         {
             _savedStoryService.DeleteSavedStory(Item);
             Item.Saved = false;
+            WeakReferenceMessenger.Default.Send(new DeletedSavedStoryMessage(Item));
             _logger.LogInformation("Item {title} deleted from favourites!", Item.Title);
         }   
         else
         {
             _savedStoryService.SaveStory(Item);
             Item.Saved = true;
+            WeakReferenceMessenger.Default.Send(new AddedSavedStoryMessage(Item));
             _logger.LogInformation("Item {title} saved to favourites!", Item.Title);
         }
         

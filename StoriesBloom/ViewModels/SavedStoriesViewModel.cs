@@ -1,4 +1,6 @@
-﻿using StoriesBloom.Helpers;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using StoriesBloom.Helpers;
+using StoriesBloom.Messages;
 using System.Windows.Input;
 
 namespace StoriesBloom.ViewModels;
@@ -9,7 +11,7 @@ public partial class SavedStoriesViewModel : BaseViewModel
     string currState = States.Loading;
 
     [ObservableProperty]
-    IList<StoryDetail> items = new List<StoryDetail>();
+    ObservableCollection<StoryDetail> items = new ObservableCollection<StoryDetail>();
 
     [ObservableProperty]
 	private bool storyDetailLoading;
@@ -20,6 +22,7 @@ public partial class SavedStoriesViewModel : BaseViewModel
 
     public string LocalizedText => StoriesBloom.Resources.Strings.AppResources.HelloMessage;
     public Task Initialization { get; private set; }
+    private bool _viewInitialized;
 
     public SavedStoriesViewModel(ISavedStoryService savedStoryService)
     {
@@ -27,11 +30,12 @@ public partial class SavedStoriesViewModel : BaseViewModel
         _savedStoryService = savedStoryService;
 
         // Initialization = InitializeAsync();
+        _viewInitialized = true;
 
-        Task.Run(async () =>
-        {
-            await InitData();
-        });
+        //Task.Run(async () =>
+        //{
+        //    await InitData();
+        //});
 
     }
 
@@ -58,6 +62,16 @@ public partial class SavedStoriesViewModel : BaseViewModel
 
     private async Task GoToDetail(StoryDetail novelDetail)
     {
+        //if(novelDetail.Saved == false)
+        //{
+        //    for (int i = 0; i < Items.Count; i++)
+        //    {
+        //        Items[i].Saved = true;
+        //    }
+        //    novelDetail.Saved = true;
+        //}
+
+        novelDetail.Saved = true;
         StoryDetailLoading = true;
         await Task.Delay(100);
 
@@ -68,4 +82,47 @@ public partial class SavedStoriesViewModel : BaseViewModel
 
         StoryDetailLoading = false;
     }
+
+    public void InitListener()
+    {
+        WeakReferenceMessenger.Default.Register<AddedSavedStoryMessage>(this, (r, m) =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (_viewInitialized)
+                {
+                    m.Value.Saved = true;
+                    Items.Add(m.Value);
+                    if(Items.Count > 0)
+                    {
+                        CurrState = States.Success;
+                    }
+                }                
+            });
+        });
+
+        WeakReferenceMessenger.Default.Register<DeletedSavedStoryMessage>(this, (r, m) =>
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                if (_viewInitialized)
+                {
+                    for(int i = 0;i<Items.Count; i++)
+                    {
+                        if (Items[i].Title == m.Value.Title)
+                        {
+                            Items.RemoveAt(i);
+                            break;
+                        }
+                    }
+
+                    if (Items.Count == 0)
+                    {
+                        CurrState = States.Empty;
+                    }
+                }
+            });
+        });
+    }
+
 }

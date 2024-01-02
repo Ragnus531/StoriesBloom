@@ -123,6 +123,8 @@ namespace StoriesBloom.Services
             try
             {
                 File.WriteAllText(GetSavedStoriesPath(), text);
+                var kk = File.ReadAllText(GetSavedStoriesPath());
+                Console.WriteLine("dasda");
             }
             catch (Exception ex)
             {
