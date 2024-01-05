@@ -45,7 +45,14 @@ public partial class StoriesViewModel : BaseViewModel
         {
             //FilteredText.Length == 0 ? Items : Items.Where(s => s.Title.Contains(FilteredText)).ToList();
             if (FilteredText.Length == 0)
-                return Items;
+            {
+                var tempList = Items;
+                foreach (var tempItem in tempList)
+                {
+                    tempItem.Show = true;
+                }
+                return tempList;
+            }
             else
             {
                 var tempList = Items;
