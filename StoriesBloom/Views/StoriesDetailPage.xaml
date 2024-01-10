@@ -8,7 +8,9 @@
     xmlns:vm="clr-namespace:StoriesBloom.ViewModels"
     Title=""
     x:DataType="vm:StoriesDetailViewModel"
-    BackgroundColor="{StaticResource ThirdColor}">
+    BackgroundColor="{StaticResource ThirdColor}"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
 
     <ContentPage.Resources>
         <local:IntToBoolConverter x:Key="intToBool" />

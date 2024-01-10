@@ -4,11 +4,14 @@ namespace StoriesBloom.Views;
 
 public partial class StoriesDetailPage : ContentPage
 {
-	public StoriesDetailPage(StoriesDetailViewModel viewModel)
+    StoriesDetailViewModel _viewModel;
+
+    public StoriesDetailPage(StoriesDetailViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-	}
+        _viewModel = viewModel;
+    }
 
     private void Expander_ExpandedChanged(object sender, CommunityToolkit.Maui.Core.ExpandedChangedEventArgs e)
     {
