@@ -78,8 +78,8 @@ public static class MauiProgram
         var savedStoriesVM = app.Services.GetRequiredService<SavedStoriesViewModel>();
         savedStoriesVM.InitListener();
 
-        var savedStoryService = app.Services.GetRequiredService<ISavedStoryService>();
-		savedStoryService.RemoveAll();
+  //      var savedStoryService = app.Services.GetRequiredService<ISavedStoryService>();
+		//savedStoryService.RemoveAll();
 
         //      var savedStoriesVM = app.Services.GetRequiredService<SavedStoriesViewModel>();
         //Task.Run(async () =>
